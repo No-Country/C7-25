@@ -4,3 +4,29 @@
     background-repeat: no-repeat;
     background-size: cover;
 } 
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.darkPalette{
+    --fondo-color: rgb(23, 23, 25);
+    --medio-color: rgb(50, 50, 54);
+    --frente-color: rgb(93, 92, 98);
+    --text-fondo-color: rgb(190, 188, 199);
+    --text-medio-color: rgb(217, 215, 227);
+    --text-frente-color: rgb(243, 241, 253);
+}
+
+.flexColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flexRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

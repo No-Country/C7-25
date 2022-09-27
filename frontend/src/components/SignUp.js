@@ -7,7 +7,7 @@ function SignUp (){
 
     let redirect= useNavigate();
 
-    let handleSubmit = (e) =>{
+    let handleSubmit = async (e) =>{
         e.preventDefault();
         const inputName = e.target.userName.value;
         const inputLastName = e.target.userLastName.value;
@@ -15,10 +15,25 @@ function SignUp (){
         const inputEmail = e.target.userEmail.value;
         const inputPassword= e.target.userPassword.value;
 
-        let validEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        //let validEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        let validEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        
+        let isEmailNotAvailable = async () => {
+            try {
+                const UserusedUrlAPI='http://localhost:8080/auth/useravailability/'+inputEmail;
+                const resp = await axios.get(UserusedUrlAPI);
+                return resp.data;
+            } catch (error) {
+                console.log('Error: '+ error);
+            }
+        }
+        //const emailNotAvailable = await isEmailNotAvailable();
 
         if( !validEmail.test(inputEmail)){
             alert('La direccion de correo electrónico no es válida');
+        }
+        else if( await isEmailNotAvailable() ){
+            alert('El email no esta disponible');
         }
         else if(inputName.length >35){
             alert('El nombre no puede contener más de 35 caracteres');
@@ -33,10 +48,17 @@ function SignUp (){
             alert('La contraseña debe contener cinco o más caracteres');
         }
         else{
-            let urlAPI= '';
+            const urlAPI= 'http://localhost:8080/auth/singup';
+            const bodyAPI={
+                name:inputName, 
+                last:inputLastName, 
+                identification:inputId, 
+                email:inputEmail,
+                password:inputPassword
+            }
             
             axios
-            .post(urlAPI, {inputName, inputLastName, inputId, inputEmail,inputPassword})
+            .post(urlAPI, bodyAPI)
             
             .then( resolve =>{
                 console.log(resolve.data);
