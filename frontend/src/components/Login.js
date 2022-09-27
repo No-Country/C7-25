@@ -1,17 +1,21 @@
 import axios from 'axios';
-import React from 'react';
-
-export default function Login() {
+import '../styles/LogIn.css'
 
 
-  let handleSignUp = (e) =>{
+function LogIn() {
+
+  let handleLogin = (e) =>{
     e.preventDefault();
+
+    const inputEmail= e.target.userEmail.value;
+    const inputPassword = e.target.userPassword;
 
     const urlAPI= 'http://localhost:8080/auth/login';
 
     const bodyAPI = new URLSearchParams();
-    bodyAPI.append('email', 'email@email.com');
-    bodyAPI.append('password', 12345);
+    bodyAPI.append('email', inputEmail);
+    bodyAPI.append('password', inputPassword);
+
     const config = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -41,6 +45,20 @@ export default function Login() {
   }
 
   return (
-    <div onClick={handleSignUp}>Login</div>
+    <div>
+      <form onSubmit={handleLogin}>
+
+        <label className='labelsInputsLogIn'>Correo Electrónico</label><br/>
+        <input type='email' name='userEmail'/><br/>
+
+        <label className='labelsInputsLogIn'>Contraseña</label><br/>
+        <input type='password' name='userPassword'/><br/>
+
+        <button type='submit'>Iniciar Sesión</button>
+
+      </form>
+    </div>
   )
 }
+
+export default LogIn;

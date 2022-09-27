@@ -23,7 +23,9 @@ function SignUp (){
                 const UserusedUrlAPI='http://localhost:8080/auth/useravailability/'+inputEmail;
                 const resp = await axios.get(UserusedUrlAPI);
                 return resp.data;
-            } catch (error) {
+            }
+            
+            catch (error) {
                 console.log('Error: '+ error);
             }
         }
@@ -47,6 +49,7 @@ function SignUp (){
         else if(inputPassword.length < 5){
             alert('La contraseña debe contener cinco o más caracteres');
         }
+
         else{
             const urlAPI= 'http://localhost:8080/auth/singup';
             const bodyAPI={
@@ -88,19 +91,19 @@ function SignUp (){
 
             <form onSubmit={handleSubmit} className='signUpForm'>
 
-                <label className='labelsInputs'>Nombre</label><br/>
+                <label className='labelsInputsSingUp'>Nombre</label><br/>
                 <input type='text' name='userName' required="required" className='inputs'/><br/>
 
-                <label className='labelsInputs'>Apellido</label><br/>
+                <label className='labelsInputsSingUp'>Apellido</label><br/>
                 <input type='text' name='userLastName' required="required" className='inputs'/><br/>
 
-                <label className='labelsInputs'>Documento de Identidad</label><br/>
+                <label className='labelsInputsSingUp'>Documento de Identidad</label><br/>
                 <input type='number' name='userId' required="required" className='inputs'/><br/>
 
-                <label className='labelsInputs'>Correo Electrónico</label><br/>
+                <label className='labelsInputsSingUp'>Correo Electrónico</label><br/>
                 <input type='email' name='userEmail' required="required" className='inputs'/><br/>
 
-                <label className='labelsInputs'>Crear contraseña</label><br/>
+                <label className='labelsInputsSingUp'>Crear contraseña</label><br/>
                 <input type='password' name='userPassword' required="required" className='inputs'/><br/>
 
                 <button type='submit' className='btnSignUp'>Registrarse</button>
