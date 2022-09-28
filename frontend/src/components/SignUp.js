@@ -85,43 +85,13 @@ function SignUp (){
 
 
     return(
-<<<<<<< Updated upstream
-        <div className='divContainerSignUp'>
-
-            <h1 className='signUpTitle'>Registrate</h1>
-=======
         <div className='divContainer'>
-            <div className='diffuse'>
                 <h1>Registrate</h1>
-
                 <form onSubmit={handleSubmit} className='signUpForm'>
->>>>>>> Stashed changes
 
                     <label className='labelsInputs'>Nombre</label><br/>
                     <input type='text' name='userName' required="required" className='inputs'/><br/>
 
-<<<<<<< Updated upstream
-                <label className='labelsInputsSingUp'>Nombre</label><br/>
-                <input type='text' name='userName' required="required" className='inputs'/><br/>
-
-                <label className='labelsInputsSingUp'>Apellido</label><br/>
-                <input type='text' name='userLastName' required="required" className='inputs'/><br/>
-
-                <label className='labelsInputsSingUp'>Documento de Identidad</label><br/>
-                <input type='number' name='userId' required="required" className='inputs'/><br/>
-
-                <label className='labelsInputsSingUp'>Correo Electrónico</label><br/>
-                <input type='email' name='userEmail' required="required" className='inputs'/><br/>
-
-                <label className='labelsInputsSingUp'>Crear contraseña</label><br/>
-                <input type='password' name='userPassword' required="required" className='inputs'/><br/>
-
-                <div className='divBtnSignUp'>
-                    <button type='submit' className='btnSignUp'>Registrarse</button>
-                </div>
-                
-            </form>
-=======
                     <label className='labelsInputs'>Apellido</label><br/>
                     <input type='text' name='userLastName' required="required" className='inputs'/><br/>
 
@@ -135,10 +105,7 @@ function SignUp (){
                     <input type='password' name='userPassword' required="required" className='inputs'/><br/>
 
                     <button type='submit' className='btnSignUp'>Registrarse</button>
->>>>>>> Stashed changes
-
                 </form>
-            </div>
         </div>
     )
 }
