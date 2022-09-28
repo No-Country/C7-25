@@ -10,7 +10,7 @@ import BookAppointment from './components/BookAppointment';
 import MyAppointments from './components/MyAppointments';
 import LogOut from './components/LogOut'
 
-document.body.classList.add('darkPalette');
+document.body.classList.add('pinkPalette');
 console.log('App se esta renderizando');
 
 

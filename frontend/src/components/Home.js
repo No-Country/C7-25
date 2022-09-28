@@ -8,6 +8,7 @@ export default function Home() {
     servicesArray:[
       {
         category:'Tratamientos faciales',
+        img:'',
         listServices:[
           'Hiperpigmentación',
           'Dermoabración',
@@ -16,11 +17,13 @@ export default function Home() {
         ]
       },{
         category:'Depilación definitiva',
+        img:'',
         listServices:[
           'Cuerpo completo'
         ]
       },{
         category:'Manicura y pedicura',
+        img:'',
         listServices:[
           'Semipermanente',
           'Kapping',
@@ -28,6 +31,7 @@ export default function Home() {
         ]
       },{
         category:'Cejas y pestañas',
+        img:'',
         listServices:[
           'Perfilado',
           'Lifting',
