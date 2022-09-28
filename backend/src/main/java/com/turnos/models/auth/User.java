@@ -1,4 +1,4 @@
-package com.turnos.models.entities;
+package com.turnos.models.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,9 +16,10 @@ public class User {
 	private String email;
 	private String username;
 	private String password;
-	private String nombre;
-	private String apellido;
-	private Long dni;
+	private String name;
+	private String lastname;
+	private Long identification;
+	private String photo;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<Role> roles = new ArrayList<>();

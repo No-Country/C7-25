@@ -1,4 +1,4 @@
-package com.turnos.services.Impl;
+package com.turnos.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 
 import com.turnos.repositories.RoleRepository;
 import com.turnos.repositories.UserRepository;
-import com.turnos.models.entities.Role;
-import com.turnos.models.entities.User;
+import com.turnos.models.auth.Role;
+import com.turnos.models.auth.User;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -89,11 +89,6 @@ public class UserService implements IUserService, UserDetailsService {
 	@Override
 	public boolean existeEmail(String email) {
 		return userRepo.existsByEmail(email);
-	}
-
-	@Override
-	public String traerFotobyUsername(String username) {
-		return userRepo.getFotobyUsername(username);
 	}
 
 	@Override

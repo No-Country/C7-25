@@ -1,14 +1,14 @@
 package com.turnos;
 
-import com.turnos.models.entities.User;
-import com.turnos.services.Impl.UserService;
+import com.turnos.models.auth.User;
+import com.turnos.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.turnos.models.entities.Role;
+import com.turnos.models.auth.Role;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,19 @@ public class TurnosApplication {
 				userService.saveRole(new Role(null, "ROLE_ADMIN"));
 				userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 
-				userService.saveUser(new User(null, "admin@gmail.com", "admin@gmail.com",masterPass,"Nombre","Apellido", 12345678L, new ArrayList<>()));
+				userService.saveUser(
+					new User(
+						null,
+						"admin@gmail.com",
+						"admin@gmail.com",
+						masterPass,
+						"Nombre",
+						"Apellido",
+						12345678L,
+						"",
+						new ArrayList<>()
+					)
+				);
 
 				userService.addRoleToUser("admin@gmail.com","ROLE_USER");
 				userService.addRoleToUser("admin@gmail.com","ROLE_MANAGER");

@@ -2,8 +2,8 @@ package com.turnos.services;
 
 import java.util.List;
 
-import com.turnos.models.entities.Role;
-import com.turnos.models.entities.User;
+import com.turnos.models.auth.Role;
+import com.turnos.models.auth.User;
 
 public interface IUserService {
 	
@@ -20,9 +20,6 @@ public interface IUserService {
 	boolean existeUsername(String username);
 
 	boolean existeEmail(String email);
-	
-	//String getUsernameById(Long id);
-	String traerFotobyUsername(String username);
 
 	String traerUsernamebyEmail(String email);
 }

@@ -1,4 +1,4 @@
-package com.turnos.models.entities;
+package com.turnos.models.auth;
 
 public enum RolesEnum {
     Experiencias,
