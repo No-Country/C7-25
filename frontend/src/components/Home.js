@@ -24,6 +24,15 @@ export default function Home() {
         ]
       },
       {
+        category:'Tratamientos corporales',
+        listServices:[
+          'Hiperpigmentación',
+          'Dermoabración',
+          'Peeling',
+          'Luz pulsada'
+        ]
+      },
+      {
         category:'Cejas y pestañas',
         listServices:[
           'Perfilado',

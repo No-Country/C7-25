@@ -8,7 +8,7 @@ import Home from './components/Home';
 import LogIn from './components/LogIn';
 import BookAppointment from './components/BookAppointment';
 import MyAppointments from './components/MyAppointments';
-import LogOut from './components/LogOut'
+import LogOut from './components/LogOut';
 
 document.body.classList.add('darkPalette');
 console.log('App se esta renderizando');
