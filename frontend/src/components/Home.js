@@ -7,6 +7,14 @@ export default function Home() {
   const jsonHome={
     servicesArray:[
       {
+        category:'Manicura y pedicura',
+        listServices:[
+          'Semipermanente',
+          'Kapping',
+          'Uñas acrilicas'
+        ]
+      },
+      {
         category:'Tratamientos faciales',
         listServices:[
           'Hiperpigmentación',
@@ -14,19 +22,23 @@ export default function Home() {
           'Peeling',
           'Luz pulsada'
         ]
-      },{
+      },
+      {
+        category:'Cejas y pestañas',
+        listServices:[
+          'Perfilado',
+          'Lifting',
+          'Microblanding',
+          'Microshading'
+        ]
+      },
+      {
         category:'Depilación definitiva',
         listServices:[
           'Cuerpo completo'
         ]
-      },{
-        category:'Manicura y pedicura',
-        listServices:[
-          'Semipermanente',
-          'Kapping',
-          'Uñas acrilicas'
-        ]
-      },{
+      },
+      {
         category:'Cejas y pestañas',
         listServices:[
           'Perfilado',

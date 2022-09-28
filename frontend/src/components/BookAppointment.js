@@ -4,8 +4,6 @@ import '../styles/BookAppointment.css'
 
 export default function BookAppointment() {
 
-
-
   const workday={
     init:'2022-09-27T08:00', //inicio de la jornada
     workdayDuration:720, //duracion de la jornada en minutos
