@@ -43,20 +43,22 @@ function LogIn() {
     })
     .catch( error => console.log('Error: '+ error));
   }
-
+  
   return (
-    <div>
-      <form onSubmit={handleLogin}>
+    <div className='divContainerLogIn'>
+        <h1 className='LogInTitle'>Inicia Sesión</h1>
+        <form onSubmit={handleLogin} className='logInForm'>
+            <label className='labelsInputsLogIn'>Correo Electrónico</label><br/>
+            <input type='email' name='userEmail' required='required' className='inputsLogIn'/><br/>
 
-        <label className='labelsInputsLogIn'>Correo Electrónico</label><br/>
-        <input type='email' name='userEmail'/><br/>
+            <label className='labelsInputsLogIn'>Contraseña</label><br/>
+            <input type='password' name='userPassword' required='required' className='inputsLogIn'/><br/>
 
-        <label className='labelsInputsLogIn'>Contraseña</label><br/>
-        <input type='password' name='userPassword'/><br/>
-
-        <button type='submit'>Iniciar Sesión</button>
-
-      </form>
+            <div className='divBtnLogIn'>
+                <button type='submit' className='btnLogIn'>Iniciar Sesión</button>
+            </div>
+            
+        </form>
     </div>
   )
 }

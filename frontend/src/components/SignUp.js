@@ -85,9 +85,9 @@ function SignUp (){
 
 
     return(
-        <div className='divContainer'>
+        <div className='divContainerSignUp'>
 
-            <h1>Registrate</h1>
+            <h1 className='signUpTitle'>Registrate</h1>
 
             <form onSubmit={handleSubmit} className='signUpForm'>
 
@@ -106,8 +106,10 @@ function SignUp (){
                 <label className='labelsInputsSingUp'>Crear contraseña</label><br/>
                 <input type='password' name='userPassword' required="required" className='inputs'/><br/>
 
-                <button type='submit' className='btnSignUp'>Registrarse</button>
-
+                <div className='divBtnSignUp'>
+                    <button type='submit' className='btnSignUp'>Registrarse</button>
+                </div>
+                
             </form>
 
         </div>

@@ -5,10 +5,10 @@ import perfilDefault from '../multimedia/profile-picture.png'
 export default function Home() {
 
   const jsonHome={
-    categories:[
+    servicesArray:[
       {
         category:'Tratamientos faciales',
-        servicios:[
+        listServices:[
           'Hiperpigmentación',
           'Dermoabración',
           'Peeling',
@@ -16,19 +16,19 @@ export default function Home() {
         ]
       },{
         category:'Depilación definitiva',
-        servicios:[
+        listServices:[
           'Cuerpo completo'
         ]
       },{
         category:'Manicura y pedicura',
-        servicios:[
+        listServices:[
           'Semipermanente',
           'Kapping',
           'Uñas acrilicas'
         ]
       },{
         category:'Cejas y pestañas',
-        servicios:[
+        listServices:[
           'Perfilado',
           'Lifting',
           'Microblanding',
@@ -36,7 +36,7 @@ export default function Home() {
         ]
       }
     ],
-    profesionales:[
+    professionalsArray:[
       {
         name:'Nombre 1',
         lastname:'Apellido 1',
@@ -51,46 +51,49 @@ export default function Home() {
 
   return (
     <div>
-      <div>
-        <div className='flexRow'><h1>Nuestros servicios</h1></div>
-
-        <div  className='categories'>
-
-          {jsonHome.categories.map( (prof,index) =>
-            <div key={index} className='category'>
-              <div>
-                <h3>
-                  {prof.category}
-                </h3>
-              </div>
-
-              {prof.servicios.map( (serv,index2)=>
-                <div className='servicio' key={index2}>
-                  {serv}
-                </div>
-              )}
+        <div>
+            <div className='flexRow'>
+                <h1>Nuestros servicios</h1>
             </div>
-          )}
 
-        </div>
-      </div>
+            <div  className='categories'>
+                
+                {jsonHome.servicesArray.map( (eachService,index) =>
+                    <div key={index} className='category'>
+                        <div>
+                            <h3>
+                            {eachService.category}
+                            </h3>
+                        </div>
 
-      <div>
-        <div className='flexRow'><h1>Nuestros profesionales</h1></div>
-        
-        <div className='flexRow'>
-
-          {jsonHome.profesionales.map( (prof,index) =>
-            <div className='profCard flexColumn' key={index}>
-              <div className='fotoPerfil'>
-                <img src={ prof.photo? prof.photo : perfilDefault } alt=""/> 
-              </div>
-              <p>{prof.lastname+' '+prof.name}</p>
+                        {eachService.listServices.map( (service,index2)=>
+                            <div className='servicio' key={index2}>
+                            {service}
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
-          )}
-        
         </div>
-      </div>
+
+        <div>
+            <div className='flexRow'>
+                <h2>Nuestros profesionales</h2>
+            </div>
+            
+            <div className='flexRow'>
+
+                {jsonHome.professionalsArray.map( (eachProfessional,index) =>
+                    <div className='profCard flexColumn' key={index}>
+                        <div className='fotoPerfil'>
+                            <img src={ eachProfessional.photo? eachProfessional.photo : perfilDefault } alt=""/> 
+                        </div>
+                        <p>{eachProfessional.lastname+' '+eachProfessional.name}</p>
+                    </div>
+                )}
+            
+            </div>
+        </div>
     </div>
   )
 }

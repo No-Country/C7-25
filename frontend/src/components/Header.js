@@ -1,28 +1,53 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import '../styles/Header.css';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { useState } from 'react';
 
 function Header() {
+    
+    const [menuOpened, setMenuOpened] = useState(false);
+
+    let openMenu = ()=>{
+        setMenuOpened(!menuOpened)
+    }
   
-  return (
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <Link to='/home'>Home</Link>
+    console.log(menuOpened)
+    return (
+        <header className='header'>
+            <nav className='navHeader'>
+                
+                <h1 className='brandName'>Carola</h1>
+
+                <ul className='ulHeader'>
+                    <AiOutlineMenu onClick={openMenu} className='hamburgerMenu'/>
+                
+                    <div className='divLiHeader'>
+                        <li className='liHeader'> 
+                            <Link to='/home'>Home</Link>
+                        </li>
+                        <li className='liHeader'>
+                            <Link to='/reservarturno'>Reservar turno</Link>
+                        </li>
+                        <li className='liHeader'>
+                            <Link to='/misturnos'>Mis turnos</Link>
+                        </li>
+                    </div>
+                </ul>
+            </nav>
+            
+            <div className={`divLiHeader2 ${menuOpened && 'menuIsOpened'}`}>
+                <li className={`liHeader`}> 
+                    <Link to='/home'>Home</Link><hr/>
                 </li>
-                <li>
-                    <Link to='/reservarturno'>Reservar turno</Link>
+                <li className='liHeader'>
+                    <Link to='/reservarturno'>Reservar turno</Link><hr/>
                 </li>
-                <li>
+                <li className='liHeader'>
                     <Link to='/misturnos'>Mis turnos</Link>
                 </li>
-                <li>
-                    <Link to='/logout'>Cerrar Sesión</Link>
-                </li>
-            </ul>
-        </nav>
-    </header>
-  )
+            </div>
+        </header>
+    )
   
 }
 export default Header;

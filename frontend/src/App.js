@@ -13,6 +13,8 @@ import LogOut from './components/LogOut'
 document.body.classList.add('darkPalette');
 console.log('App se esta renderizando');
 
+
+
 function App() {
   return (
     <div className='background'>

@@ -1,21 +1,32 @@
 /* SIGN UP STYLES */
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Poppins:wght@300;400&display=swap');
 
 /* SMALL */
 @media (min-width:0px) and (max-width:500.99px){
-    .divContainer{
-        margin: 0px 20px 0px 20px ;
-        padding: 30px;
+    .divContainerSignUp{
+        margin: 0px;
+        padding-bottom: 30px;
+    }
+    .signUpTitle{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        color: rgba(168, 132, 118, 1);
+        text-align: center;
+        font-size: 22px;
+
     }
     .signUpForm{
         background-color: rgba(22, 22, 22, 0.348);
         border-radius: 50px;
-        margin-top: 30px;
+        margin: 0px 10%;
         padding: 40px 30px;
+
     }
     .labelsInputsSingUp{
-        font-size: 13px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 14px;
         color: white;
-        font-weight: bold;
     }
     .inputs{
         border: 0.8px;
@@ -24,11 +35,18 @@
         width: 100%;
         margin: 15px 0px  50px 0px;
     }
+    .divBtnSignUp{
+        text-align: center;
+    }
     .btnSignUp{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
         border-radius: 10px;
         border: none;
         height: 30px;
         background-color: rgba(247, 211, 197, 1);
+        color: rgb(102, 77, 67);
     }
     .btnSignUp:hover{
         cursor: pointer;
@@ -36,9 +54,55 @@
 }
 
 /* MEDIUM */
-@media (min-width:501px) and (max-width:1007.99px){
+@media (min-width:501px) and (max-width:900.99px){
+    .divContainerSignUp{
+        margin: 0px;
+        padding-bottom: 30px;
+    }
+    .signUpTitle{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        color: rgba(168, 132, 118, 1);
+        text-align: center;
+        font-size: 22px;
+    }
+    .signUpForm{
+        background-color: rgba(22, 22, 22, 0.348);
+        border-radius: 50px;
+        margin: 0px 15%;
+        padding: 40px 30px;
+    }
+    .labelsInputsSingUp{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        color: white;
+    }
+    .inputs{
+        border: 0.8px;
+        background: none;
+        border-bottom: 1px solid black;
+        width: 100%;
+        margin: 15px 0px  50px 0px;
+    }
+    .divBtnSignUp{
+        text-align: center;
+    }
+    .btnSignUp{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        border-radius: 10px;
+        border: none;
+        height: 30px;
+        background-color: rgba(247, 211, 197, 1);
+        color: rgb(102, 77, 67);
+    }
+    .btnSignUp:hover{
+        cursor: pointer;
+    }
 }
 
 /* LARGE */
-@media (min-width:1008px) and (max-width:2500px){
+@media (min-width:901px) and (max-width:2500px){
 }
