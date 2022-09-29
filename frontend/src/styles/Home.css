@@ -5,12 +5,23 @@
 
 /* SMALL */
 @media (min-width:0px) and (max-width:500.99px){
+    
+    /*  SERVICES  */
+    .divContainerHome{
+        margin: 0px;
+        background-image: url('../multimedia/background_estetica.jpg');
+        background-repeat: repeat-x;
+    }
+    .homeTitle{
+        margin: 0px;
+        text-align: center;
+
+    }
     .categories{
         display: flex;
         align-items: top;
         justify-content: center;
         flex-wrap: wrap;
-        
         font-family: 'Poppins', sans-serif;
         font-weight: 300;
         font-size: 12.5px;
@@ -21,14 +32,31 @@
         align-items: top;
         margin: 0px 20px;
     }
-    .servicio{
-        padding-left: 20px;
+    .serviceImg{
+        width: 60%;
+        margin: 0px auto;
+        cursor: pointer;
     }
-    
+    .divListServices{
+        padding: 0px;
+        margin: 0px;
+        width: 60%;
+        background-color: rgba(20, 20, 20, 0.33);
+    }
+    .eachServiceList{
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        padding: 0px;
+        margin: 0px;
+        
+    }
+
+
+    /* PROFESSIONALS */
     .profCard{
         margin: 20px;
     }
-    .fotoPerfil{
+    .profilePhoto{
         width: 80px;
         height: 80px;
         border-radius: 50%;
@@ -37,7 +65,7 @@
         justify-content: center;
         
     }
-    .fotoPerfil>img{
+    .profilePhoto>img{
         width: 80px;
         height: 80px;
         object-fit: cover;
