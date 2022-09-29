@@ -11,7 +11,7 @@ import MyAppointments from './components/MyAppointments';
 import LogOut from './components/LogOut';
 import NotFound from './components/NotFound';
 
-document.body.classList.add('darkPalette');
+document.body.classList.add('pinkPalette');
 console.log('App se esta renderizando');
 
 

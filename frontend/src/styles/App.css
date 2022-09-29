@@ -18,6 +18,14 @@ a, a:hover, a:focus, a:active {
     --text-medio-color: rgb(217, 215, 227);
     --text-frente-color: rgb(243, 241, 253);
 }
+.pinkPalette{
+    --fondo-color: #FFE3D9;
+    --medio-color: #B68F8F;
+    --frente-color: #A88476;
+    --text-fondo-color: #8E746A;
+    --text-medio-color: rgb(217, 215, 227);
+    --text-frente-color: rgb(243, 241, 253);
+}
 
 .flexColumn{
     display: flex;
