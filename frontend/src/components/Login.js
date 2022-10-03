@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../styles/LogIn.css'
 
 
@@ -36,10 +37,16 @@ function LogIn() {
     .catch( error => console.log('Error: '+ error));
   }
   
+  let navigate = useNavigate();
+
+  let goToSignUp = ()=>{
+    navigate('/signup');
+  }
+
   return (
     <div className='divContainerLogIn'>
         <h1 className='LogInTitle'>Inicia Sesión</h1>
-        <form onSubmit={handleLogin} className='logInForm'>
+        <form  className='logInForm'>
             <label className='labelsInputsLogIn'>Correo Electrónico</label><br/>
             <input type='email' name='userEmail' required='required' className='inputsLogIn'/><br/>
 
@@ -47,10 +54,14 @@ function LogIn() {
             <input type='password' name='userPassword' required='required' className='inputsLogIn'/><br/>
 
             <div className='divBtnLogIn'>
-                <button type='submit' className='btnLogIn'>Iniciar Sesión</button>
+              <button onSubmit={handleLogin} type='submit' className='btnLogIn'>Iniciar Sesión</button>
+              <button onClick={goToSignUp} className='btnGoToSignUp'>Registrarse</button>
             </div>
-            
+
         </form>
+
+        
+        
     </div>
   )
 }

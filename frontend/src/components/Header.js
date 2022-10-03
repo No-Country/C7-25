@@ -23,7 +23,7 @@ function Header() {
                 
                     <div className='divLiHeader'>
                         <li className='liHeader'> 
-                            <Link to='/home'>Home</Link>
+                            <Link to='/'>Home</Link>
                         </li>
                         <li className='liHeader'>
                             <Link to='/reservarturno'>Reservar turno</Link>

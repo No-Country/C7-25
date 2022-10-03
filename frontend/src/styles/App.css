@@ -38,3 +38,15 @@ a, a:hover, a:focus, a:active {
     justify-content: center;
     align-items: center;
 }
+
+.diffuse{
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    max-width: 300px;
+    height: 100%;
+    margin: 30px;
+    background-color: #8883;
+    backdrop-filter: blur(5px);
+    box-sizing: border-box;
+}
