@@ -14,8 +14,13 @@
     }
     .homeTitle{
         margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: rgba(128, 92, 78, 1);
         text-align: center;
-
+        font-size: 26px;
+        padding: 30px;
     }
     .categories{
         display: flex;

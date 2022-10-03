@@ -8,12 +8,14 @@
         padding-bottom: 30px;
     }
     .signUpTitle{
+        margin: 0px;
         font-family: 'Poppins', sans-serif;
-        font-weight: 300;
-        color: rgba(168, 132, 118, 1);
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: rgba(128, 92, 78, 1);
         text-align: center;
-        font-size: 22px;
-
+        font-size: 26px;
+        padding: 30px;
     }
     .signUpForm{
         background-color: rgba(22, 22, 22, 0.348);
@@ -35,7 +37,7 @@
         width: 100%;
         margin: 15px 0px  50px 0px;
     }
-    .divBtnSignUp{
+    .divSignUpBtn{
         text-align: center;
     }
     .btnSignUp{
@@ -50,6 +52,7 @@
     }
     .btnSignUp:hover{
         cursor: pointer;
+        font-weight: bold;
     }
 }
 

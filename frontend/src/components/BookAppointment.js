@@ -29,6 +29,7 @@ export default function BookAppointment() {
 
 
   let time=new Date(workday.init);
+  
   //Para obtener la fecha en texto
   console.log(time);//Tue Sep 27 2022 08:00:00 GMT-0300 (hora estándar de Argentina)
   const months={

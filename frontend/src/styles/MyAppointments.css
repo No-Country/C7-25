@@ -1,14 +1,13 @@
-/* NOT FOUND STYLES */
+/* MY APPONTMENTS STYLES */
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Poppins:wght@300;400&display=swap');
 
 /* SMALL */
 @media (min-width:0px) and (max-width:500.99px){
-    .divContainerNotFound{
+    .divContainerMyAppointments{
         margin: 0px;
-        height: 100vh;
-        text-align: center;
+        padding-bottom: 30px;
     }
-    .notFoundTitle{
+    .myAppointmentsTitle{
         margin: 0px;
         font-family: 'Poppins', sans-serif;
         font-weight: bold;
@@ -18,19 +17,21 @@
         font-size: 26px;
         padding: 30px;
     }
-    #pNotFound{
-        font-family: 'Poppins', sans-serif;
-    }
-    #goToHomeBtn{
-        font-family: 'Poppins', sans-serif;
-        background-color: #fff;
-        cursor: pointer;
-    }
 }
 
 /* MEDIUM */
 @media (min-width:501px) and (max-width:900.99px){
-    
+    .divContainerMyAppointments{
+        margin: 0px;
+        padding-bottom: 30px;
+    }
+    .myAppointmentsTitle{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        color: rgba(168, 132, 118, 1);
+        text-align: center;
+        font-size: 22px;
+    }
 }
 
 /* LARGE */
