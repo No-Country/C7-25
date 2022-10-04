@@ -1,37 +1,45 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import '../styles/BookAppointment.css';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
-//import {BookAppointmentSaveAppt} from '../services/API'
+import {BookAppointmentSaveAppt, BookAppointmentGetReserved} from '../services/API'
+import {jsDateToHsMin, jsDateToText} from '../services/dateTime'
 
 export default function BookAppointment() {
 
-  const date = new Date();
+  ////////////////////////Calendario////////////////////////
+  const [days, setDays] = useState([]);
+  const [currentView, setCurrentView] = useState((new Date()).getTime());
+
   const renderCalendar = () => {
-    date.setDate(1);
+    const date = new Date(currentView);//Fecha y hora actual
+    date.setDate(1);//Setea la fecha al dia uno del mes
   
-    const monthDays = document.querySelector(".days");
-  
+    //Trae el numero del ultimo dia del mes actual
     const lastDay = new Date(
       date.getFullYear(),
       date.getMonth() + 1,
-      0
+      0 //si se le da el dia 0 trae el ultimo dia del mes anterior
     ).getDate();
   
+    //Trae el numero del ultimo dia del mes anterior
     const prevLastDay = new Date(
       date.getFullYear(),
       date.getMonth(),
       0
     ).getDate();
   
+    //Dia de la semana del primer dia del mes 
+    //segun su orden en el calendario domingo=0, lunes=1...
     const firstDayIndex = date.getDay();
   
+    //Dia de la semana del ultimo dia del mes 
     const lastDayIndex = new Date(
       date.getFullYear(),
       date.getMonth() + 1,
       0
     ).getDay();
   
+    //Dias de la ultima semana que son del mes siguiente
     const nextDays = 7 - lastDayIndex - 1;
   
     const months = [
@@ -50,105 +58,98 @@ export default function BookAppointment() {
     ];
   
     document.querySelector(".date h1").innerHTML = months[date.getMonth()];
-  
     document.querySelector(".date p").innerHTML = new Date().toDateString();
-  
-    let days = "";
-  
+    
+    //Se agregan los divs correspondiente al mes pasado
+    let daysCalendar=[];
     for (let x = firstDayIndex; x > 0; x--) {
-      days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
+      daysCalendar.push(<div className='prev-date' key={x - 1 - prevLastDay}>{prevLastDay - x + 1}</div>);
     }
   
+    //Se agregan los divs correspondiente al mes actual
     for (let i = 1; i <= lastDay; i++) {
       if (
         i === new Date().getDate() &&
         date.getMonth() === new Date().getMonth()
       ) {
-        days += `<div class="today">${i}</div>`;
+        daysCalendar.push(<div onClick={()=>apptModal(i)} className='today' key={i}>{i}</div>);
       } else {
-        days += `<div>${i}</div>`;
+        daysCalendar.push(<div onClick={()=>apptModal(i)} key={i}>{i}</div>);
       }
     }
   
+    //Se agregan los divs correspondiente al mes siguiente
     for (let j = 1; j <= nextDays; j++) {
-      days += `<div class="next-date">${j}</div>`;
-      monthDays.innerHTML = days;
+      daysCalendar.push(<div onClick={()=>apptModal(-j)} className='next-date' key={-j}>{j}</div>);
     }
+    setDays(daysCalendar);
   };
 
+  //Cambia el mes del calendario
+  function changeMonth(add) {
+    console.log('asda1',currentView)
+    const date = new Date(currentView);
+    date.setMonth(date.getMonth() + add);
+    console.log('asdasd2',date.getTime())
+    setCurrentView(date.getTime());
+  }
   /////////////////////////////////////////////////////
-
+  function apptModal(modalDate) {
+    let aux = new Date(currentView);
+    if(modalDate<0){
+      aux.setMonth(aux.getMonth()+1);
+      setCurrentView(aux.getTime());
+    }
+    aux.setDate(Math.abs(modalDate));//Cambio el dia en valor absoluto par si es del mes siguiente
+    console.log('aux',aux);
+    setApptDay(aux.getTime());
+  }
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
 
   const [apptDisp, setApptDisp] = useState([]);
+  const [apptDay, setApptDay] = useState((new Date()).getTime());
+  const [apptReserved, setApptReserved] = useState([]);
 
   const workday={
-    init:'2022-11-24T08:00', //inicio de la jornada
+    workdayInit:'08:00', //inicio de la jornada
     workdayDuration:720, //duracion de la jornada en minutos
     apptDuration:18, //duracion del turno en minutos
-    daysAvailable:[], //Por lo genral de lunes a viernes []
-    daysNotAvailable:[]
+    daysAvailable:[], //Por lo general de lunes a viernes [1,2,3,4,5]
+    daysAHead:14, //Numeros de dias con turnos habilitados
+    daysNotAvailable:[] //Feriados, licencia etc
   }
 
-  let time=new Date(workday.init);//Tue Sep 27 2022 08:00:00 GMT-0300 (hora estándar de Argentina)
 
-  function dateToText(isoDate){
-    //isoDate tiene este formato 2022-09-29T08:18:00
-    const months=[
-      'Enero',
-      'Febrero',
-      'Marzo',
-      'Abril',
-      'Mayo',
-      'Junio',
-      'Julio',
-      'Agosto',
-      'Septiembre',
-      'Octubre',
-      'Noviembre',
-      'Diciembre'
-    ];
-    const days=[
-      'Domingo',
-      'Lunes',
-      'Martes',
-      'Miercoles',
-      'Jueves',
-      'Viernes',
-      'Sabado'
-    ]
-    const day=days[isoDate.getDay()];
-    const dayNumber=parseInt(isoDate.getDate());
-    const month=months[isoDate.getMonth()];
-
-    return `${day} ${dayNumber} de ${month}`;
-  }
-  const dateString = dateToText(time);
-  
-  //Trae la lista de turnos reservados en el dia
-  async function getReserved() {
-    try {
-      const urlAPI1='http://192.168.0.7:8080/appt/getapptday/2022-09-29T08:00/2022-09-29T20:00';
-      const resp = await axios.get(urlAPI1);
-      return resp.data;
-    } catch (error) {
-        //Tarea: en caso de error hay que evitar que salga la ventana porque vana a estar todos los turnos disponibles
-        console.log('Error: '+ error);
-    }
-  }
-
+  //usar usestate para la fecha
   //Para crear el rango de hs de cada turno
-  function appt(reserved){
+  function appt(reserved){ 
+    let time=new Date(apptDay);//Tue Sep 27 2022 08:00:00 GMT-0300 (hora estándar de Argentina)
+    console.log('time',time);
+    //Mejorar esto
+    time.setHours(workday.workdayInit.slice(0,2),workday.workdayInit.slice(3,5),0,0);
+    console.log('time',time);
+    console.log('timereserv',reserved);
     let appts=[];
     let ini='';
     let end='';
-    ini=('0'+time.getHours()).slice(-2)+':'+('0'+time.getMinutes()).slice(-2);//convierto el date al formato hora minuto 00:00
+    ini=time.getTime();//time es un objeto por lo que el = crea una referencia, gettime es un literal
     for (let index = 1; index <= (workday.workdayDuration/workday.apptDuration); index++) {
-      
-      time.setTime(time.getTime() + workday.apptDuration*60*1000);//Sumo el tiempo del turno
-      end=('0'+time.getHours()).slice(-2)+':'+('0'+time.getMinutes()).slice(-2);//hr min para el fin del turno
+  
+      const disp = !reserved.some(obj=> obj.getTime()===time.getTime());//Devuelvo true si el turno no se encuentra reservado
 
-      const aux=ini;//Me tira warning si pongo la variable ini en el Array.some
-      const disp = !reserved.some(obj=> aux===obj.init.slice(11,16)); //comparo los turnos reservados con los turnos del dia
+      time.setTime(time.getTime() + workday.apptDuration*60*1000);//Sumo el tiempo de un turno
+      end=time.getTime();//hr min para el fin del turno
+
+      //const disp = !reserved.some(obj=> aux===obj.init.slice(11,16)); //comparo los turnos reservados con los turnos del dia
 
       appts.push({ini,end,disp});//Vector con todos los turnos
       ini=end;//El fin del turno actual es el inicio del turno siguiente
@@ -157,13 +158,30 @@ export default function BookAppointment() {
   }
 
   async function main() {
+    /*renderCalendar();
+    ///////////////////////////////////
+    setApptReserved(await BookAppointmentGetReserved(workday));
+    console.log('setFirstRender',apptReserved);
+    setApptDisp(appt(apptReserved));
+    */
     renderCalendar();
     ///////////////////////////////////
-    let reserved = await getReserved();
-    console.log('respresp',reserved);
-    console.log('setFirstRender');
+    let reserved = await BookAppointmentGetReserved(workday);
     setApptDisp(appt(reserved));
+    setApptReserved(reserved);
+    console.log('setFirstRender');
   }
+
+  ///setApptDisp(appt(apptReserved));
+  useEffect(()=>
+    setApptDisp(appt(apptReserved))
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  ,[apptDay])
+
+  useEffect(()=>
+    renderCalendar()
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  ,[currentView])
 
   useEffect(() => {
     main();
@@ -172,29 +190,11 @@ export default function BookAppointment() {
 
   //Guarda el turno en la db
   async function saveAppt(apptm,index) {
-    /*let resp = await BookAppointmentSaveAppt(apptm,index,workday);
-    console.log(resp);*/
-    const today=workday.init.split('T');//Separa la fecha y hora
-    const turn={
-      init:today[0]+'T'+apptm.ini+':00',//Une la fecha y hora del turno
-      end:today[0]+'T'+apptm.end+':00'
-    }
-    try {
-        const token = localStorage.getItem('token');
-        const config = {
-          headers: {
-            Authorization : `Bearer ${token}`
-          } 
-        }
-        const UserusedUrlAPI='http://localhost:8080/appt/save';
-        //const resp = 
-        await axios.post(UserusedUrlAPI,turn,config);
-        let aux = [...apptDisp];
-        aux[index].disp=false;
-        setApptDisp(aux);
-        //return resp.data;
-    } catch (error) {
-        console.log('Error: '+ error);
+    let resp = await BookAppointmentSaveAppt(apptm,workday);
+    if(resp.status===201){ //Si la operacion se realizo con exito
+      let aux = [...apptDisp];
+      aux[index].disp=false;
+      setApptDisp(aux);
     }
   }
   
@@ -204,12 +204,12 @@ export default function BookAppointment() {
       <div>
         <div className="calendar">
           <div className="month">
-            <AiFillCaretLeft className="fas fa-angle-left prev"/>
+            <AiFillCaretLeft onClick={()=>changeMonth(-1)} className="fas fa-angle-left prev"/>
             <div className="date">
-              <h1></h1>
+              <h1> </h1>
               <p></p>
             </div>
-            <AiFillCaretRight className="fas fa-angle-right next"/>
+            <AiFillCaretRight onClick={()=>changeMonth(1)} className="fas fa-angle-right next"/>
           </div>
           <div className="weekdays">
             <div>Dom</div>
@@ -220,19 +220,23 @@ export default function BookAppointment() {
             <div>Vie</div>
             <div>Sáb</div>
           </div>
-          <div className="days"></div>
+          <div className="days">
+            {days.map((day)=>
+              day
+            )}
+          </div>
         </div>
       </div>
 
       {/*Poner en un modal y componente*/}
       <div className='dayCalendarContainer'>
         <div className='head flexRow'>Elije un horario</div>
-        <div className='date flexRow'>{dateString}</div>
+        <div className='date flexRow'>{jsDateToText(apptDay)}</div>
         <div className='apptsContainer'>
         {
             apptDisp.map((turn,index)=>
               <div  className='appt  flexRow' key={index}>
-                <div className='time'>{turn.ini+ ' a ' +turn.end}</div>
+                <div className='time'>{jsDateToHsMin(turn.ini)+ ' a ' +jsDateToHsMin(turn.end)}</div>
                 {
                   turn.disp?
                     <div className='apptBtn' onClick={()=>saveAppt(turn, index)}>Reservar</div>

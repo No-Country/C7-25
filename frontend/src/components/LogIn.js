@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/LogIn.css'
+import '../styles/LogIn.css';
+import {logIn} from '../services/API'
 
 
 function LogIn() {
@@ -11,30 +11,11 @@ function LogIn() {
     const inputEmail= e.target.userEmail.value;
     const inputPassword = e.target.userPassword.value;
 
-    console.log('pass', inputPassword);
-
-    const urlAPI= 'http://localhost:8080/auth/login';
-
     const bodyAPI = new URLSearchParams();
     bodyAPI.append('email', inputEmail);
     bodyAPI.append('password', inputPassword);
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }
-    
-    axios
-    .post(urlAPI, bodyAPI, config)
-    
-    .then( resolve =>{
-        console.log(resolve);
-        console.log(resolve.data);
-        localStorage.setItem('token',resolve.data.token)
-        return resolve.data;
-    })
-    .catch( error => console.log('Error: '+ error));
+    logIn(bodyAPI); //Ejecuto la API
   }
   
   let navigate = useNavigate();
@@ -46,7 +27,7 @@ function LogIn() {
   return (
     <div className='divContainerLogIn'>
         <h1 className='LogInTitle'>Inicia Sesión</h1>
-        <form  className='logInForm'>
+        <form onSubmit={handleLogin} className='logInForm'>
             <label className='labelsInputsLogIn'>Correo Electrónico</label><br/>
             <input type='email' name='userEmail' required='required' className='inputsLogIn'/><br/>
 
@@ -54,14 +35,11 @@ function LogIn() {
             <input type='password' name='userPassword' required='required' className='inputsLogIn'/><br/>
 
             <div className='divBtnLogIn'>
-              <button onSubmit={handleLogin} type='submit' className='btnLogIn'>Iniciar Sesión</button>
+              <button  type='submit' className='btnLogIn'>Iniciar Sesión</button>
               <button onClick={goToSignUp} className='btnGoToSignUp'>Registrarse</button>
             </div>
 
         </form>
-
-        
-        
     </div>
   )
 }

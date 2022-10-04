@@ -1,7 +1,6 @@
-import axios from 'axios';
-import { useEffect } from 'react';
 import {useNavigate } from 'react-router-dom';
-import '../styles/SignUp.css'
+import '../styles/SignUp.css';
+import {signUp, SignUpIsEmailNotAvailable} from '../services/API'
 
 function SignUp (){
 
@@ -18,23 +17,11 @@ function SignUp (){
         //let validEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         let validEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
         
-        let isEmailNotAvailable = async () => {
-            try {
-                const UserusedUrlAPI='http://localhost:8080/auth/useravailability/'+inputEmail;
-                const resp = await axios.get(UserusedUrlAPI);
-                return resp.data;
-            }
-            
-            catch (error) {
-                console.log('Error: '+ error);
-            }
-        }
-        //const emailNotAvailable = await isEmailNotAvailable();
 
         if( !validEmail.test(inputEmail)){
             alert('La direccion de correo electrónico no es válida');
         }
-        else if( await isEmailNotAvailable() ){
+        else if( await SignUpIsEmailNotAvailable(inputEmail) ){
             alert('El email no esta disponible');
         }
         else if(inputName.length >35){
@@ -51,35 +38,17 @@ function SignUp (){
         }
 
         else{
-            const urlAPI= 'http://localhost:8080/auth/singup';
             const bodyAPI={
                 name:inputName, 
-                last:inputLastName, 
+                lastname:inputLastName, 
                 identification:inputId, 
                 email:inputEmail,
                 password:inputPassword
             }
-            
-            axios
-            .post(urlAPI, bodyAPI)
-            
-            .then( resolve =>{
-                console.log(resolve.data);
-                console.log(resolve);
-                return resolve.data;
-            })
-
-            .then( resolve =>{
-
-                if(resolve.length > 0){
-                    alert('Ya existe una cuneta con este correo electrónico')
-                }
-                else{
-                    redirect('/home');
-                    alert('Registrado exitosamente');
-                };     
-            })
-            .catch( error => console.log('Error: '+ error));
+            let resp = signUp(bodyAPI); //Lama a la api
+            if (resp==='home') { //El redirect no funciona en la api por eso se usa esto
+                redirect('/home');
+            }
         };
     }
 
