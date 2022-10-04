@@ -1,9 +1,8 @@
-package com.turnos.repositories;
+package com.turnos.turno.repositories;
 
+import com.turnos.turno.models.auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import com.turnos.models.auth.User;
 
 public interface UserRepository extends JpaRepository<User,Long>{
 	

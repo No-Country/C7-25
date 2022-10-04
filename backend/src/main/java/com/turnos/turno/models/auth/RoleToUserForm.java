@@ -1,4 +1,4 @@
-package com.turnos.models.auth;
+package com.turnos.turno.models.auth;
 
 import lombok.Data;
 

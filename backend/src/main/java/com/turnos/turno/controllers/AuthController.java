@@ -1,13 +1,13 @@
-package com.turnos.controllers;
+package com.turnos.turno.controllers;
 
 import java.net.URI;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import com.turnos.models.auth.Role;
-import com.turnos.models.auth.RoleToUserForm;
-import com.turnos.models.auth.User;
-import com.turnos.security.CreateJWT;
+import com.turnos.turno.models.auth.Role;
+import com.turnos.turno.models.auth.RoleToUserForm;
+import com.turnos.turno.models.auth.User;
+import com.turnos.turno.security.CreateJWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.turnos.services.IUserService;
+import com.turnos.turno.services.IUserService;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,8 +1,7 @@
-package com.turnos.repositories;
+package com.turnos.turno.repositories;
 
+import com.turnos.turno.models.auth.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.turnos.models.auth.Role;
 
 public interface RoleRepository extends JpaRepository<Role,Long>{
 	Role findByName(String name);

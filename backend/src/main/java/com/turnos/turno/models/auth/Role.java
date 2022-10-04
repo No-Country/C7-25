@@ -1,4 +1,4 @@
-package com.turnos.models.auth;
+package com.turnos.turno.models.auth;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

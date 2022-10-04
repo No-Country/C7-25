@@ -1,6 +1,6 @@
-package com.turnos.services;
+package com.turnos.turno.services;
 
-import com.turnos.models.appt.Appointment;
+import com.turnos.turno.models.appt.Appointment;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,7 +9,7 @@ public interface IApptService {
 
     List<Appointment> getAppt();
 
-    List<Appointment> getApptDay();
+    List<Appointment> getApptTime(LocalDateTime ini,LocalDateTime end);
 
     Appointment saveAppt(Appointment appointment);
 

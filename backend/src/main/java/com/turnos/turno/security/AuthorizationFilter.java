@@ -1,4 +1,4 @@
-package com.turnos.security;
+package com.turnos.turno.security;
 
 import java.io.IOException;
 import java.util.ArrayList;

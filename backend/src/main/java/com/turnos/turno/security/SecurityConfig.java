@@ -1,8 +1,8 @@
-package com.turnos.security;
+package com.turnos.turno.security;
 
 import java.util.List;
 
-import com.turnos.repositories.UserRepository;
+import com.turnos.turno.repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -58,8 +58,6 @@ public class SecurityConfig {//Para sobreescribir el usuario a loguear
 		).hasAnyAuthority("ROLE_USER");*/
 		//http.authorizeRequests().anyRequest().authenticated();
 		http.authorizeRequests().anyRequest().permitAll();//permite todo
-		//Si no se cambia la url del login
-		//http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
 		//Si se cambia la url del login
 		http.addFilter(customAuthenticationFilter);
 		http.addFilterBefore(new AuthorizationFilter(createJWT), UsernamePasswordAuthenticationFilter.class);

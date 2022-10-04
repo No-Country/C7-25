@@ -1,28 +1,35 @@
-package com.turnos;
+package com.turnos.turno;
 
-import com.turnos.models.auth.User;
-import com.turnos.services.UserService;
+import com.turnos.turno.models.auth.User;
+import com.turnos.turno.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.turnos.models.auth.Role;
+import com.turnos.turno.models.auth.Role;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 @SpringBootApplication
-public class TurnosApplication {
+public class TurnoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TurnosApplication.class, args);
+		SpringApplication.run(TurnoApplication.class, args);
 	}
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
+	//Tanto el front como el back transforman el tiempo segun su timezone pero solo
+	@PostConstruct
+	public void init(){
+		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+	}
 
 	@Bean
 	CommandLineRunner run(UserService userService) {

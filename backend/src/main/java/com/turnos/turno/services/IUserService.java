@@ -1,9 +1,9 @@
-package com.turnos.services;
+package com.turnos.turno.services;
 
 import java.util.List;
 
-import com.turnos.models.auth.Role;
-import com.turnos.models.auth.User;
+import com.turnos.turno.models.auth.Role;
+import com.turnos.turno.models.auth.User;
 
 public interface IUserService {
 	

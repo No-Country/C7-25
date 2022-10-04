@@ -1,4 +1,4 @@
-package com.turnos.services;
+package com.turnos.turno.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,7 +6,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.turnos.services.IUserService;
+import com.turnos.turno.models.auth.Role;
+import com.turnos.turno.models.auth.User;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,10 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.turnos.repositories.RoleRepository;
-import com.turnos.repositories.UserRepository;
-import com.turnos.models.auth.Role;
-import com.turnos.models.auth.User;
+import com.turnos.turno.repositories.RoleRepository;
+import com.turnos.turno.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -95,6 +94,5 @@ public class UserService implements IUserService, UserDetailsService {
 	public String traerUsernamebyEmail(String email) {
 		return userRepo.getUsernamebyEmail(email);
 	}
-
 
 }

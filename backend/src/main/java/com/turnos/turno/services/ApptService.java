@@ -1,7 +1,7 @@
-package com.turnos.services;
+package com.turnos.turno.services;
 
-import com.turnos.models.appt.Appointment;
-import com.turnos.repositories.ApptRepository;
+import com.turnos.turno.models.appt.Appointment;
+import com.turnos.turno.repositories.ApptRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +27,8 @@ public class ApptService implements IApptService {
     }
 
     @Override
-
-    public List<Appointment> getApptDay() {
-        return null;
+    public List<Appointment> getApptTime(LocalDateTime ini, LocalDateTime end) {
+        return apptRepository.findAllByIniBetween(ini, end);
     }
 
     @Override
