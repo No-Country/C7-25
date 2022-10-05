@@ -1,14 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/BookAppointment.css';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
-import {BookAppointmentSaveAppt, BookAppointmentGetReserved} from '../services/API'
-import {jsDateToHsMin, jsDateToText} from '../services/dateTime'
+import { BookAppointmentGetReserved} from '../services/API'
+import { jsDateToText, jsDateToYearMonth} from '../services/DateTime'
+import ModalAppt from './ModalAppt';
 
 export default function BookAppointment() {
 
   ////////////////////////Calendario////////////////////////
-  const [days, setDays] = useState([]);
-  const [currentView, setCurrentView] = useState((new Date()).getTime());
+  const [days, setDays] = useState([]);//Lista con los divs de los dias del calendario
+  const [currentView, setCurrentView] = useState((new Date()).getTime());//Mes actual en el calendario
+  const [apptDay, setApptDay] = useState((new Date()).getTime());//Dia seleccionado en el calendario
+  const [apptReserved, setApptReserved] = useState([]); //Lista de turnos reservados
+
+  //Los pedidos al back solo se realizan en la primera carga
+  useEffect(() => {
+    main();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
+  //Esto se debe traer del back
+  const workday={
+    workdayInit:'08:00', //inicio de la jornada
+    workdayDuration:720, //duracion de la jornada en minutos
+    apptDuration:18, //duracion del turno en minutos
+    daysAvailable:[], //Por lo general de lunes a viernes [1,2,3,4,5]
+    daysAHead:14, //Numeros de dias con turnos habilitados
+    daysNotAvailable:[] //Feriados, licencia etc
+  }
+
+  //Trae la informacion del back y la almacena
+  async function main() {
+    renderCalendar();
+    let reserved = await BookAppointmentGetReserved(workday);
+    //setApptDisp(appt(reserved));
+    setApptReserved(reserved);
+    console.log('setFirstRender');
+  }
 
   const renderCalendar = () => {
     const date = new Date(currentView);//Fecha y hora actual
@@ -42,23 +70,6 @@ export default function BookAppointment() {
     //Dias de la ultima semana que son del mes siguiente
     const nextDays = 7 - lastDayIndex - 1;
   
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-  
-    document.querySelector(".date h1").innerHTML = months[date.getMonth()];
-    document.querySelector(".date p").innerHTML = new Date().toDateString();
     
     //Se agregan los divs correspondiente al mes pasado
     let daysCalendar=[];
@@ -115,88 +126,24 @@ export default function BookAppointment() {
 //////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////
 
-  const [apptDisp, setApptDisp] = useState([]);
-  const [apptDay, setApptDay] = useState((new Date()).getTime());
-  const [apptReserved, setApptReserved] = useState([]);
-
-  const workday={
-    workdayInit:'08:00', //inicio de la jornada
-    workdayDuration:720, //duracion de la jornada en minutos
-    apptDuration:18, //duracion del turno en minutos
-    daysAvailable:[], //Por lo general de lunes a viernes [1,2,3,4,5]
-    daysAHead:14, //Numeros de dias con turnos habilitados
-    daysNotAvailable:[] //Feriados, licencia etc
-  }
 
 
-  //usar usestate para la fecha
-  //Para crear el rango de hs de cada turno
-  function appt(reserved){ 
-    let time=new Date(apptDay);//Tue Sep 27 2022 08:00:00 GMT-0300 (hora estándar de Argentina)
-    console.log('time',time);
-    //Mejorar esto
-    time.setHours(workday.workdayInit.slice(0,2),workday.workdayInit.slice(3,5),0,0);
-    console.log('time',time);
-    console.log('timereserv',reserved);
-    let appts=[];
-    let ini='';
-    let end='';
-    ini=time.getTime();//time es un objeto por lo que el = crea una referencia, gettime es un literal
-    for (let index = 1; index <= (workday.workdayDuration/workday.apptDuration); index++) {
-  
-      const disp = !reserved.some(obj=> obj.getTime()===time.getTime());//Devuelvo true si el turno no se encuentra reservado
 
-      time.setTime(time.getTime() + workday.apptDuration*60*1000);//Sumo el tiempo de un turno
-      end=time.getTime();//hr min para el fin del turno
-
-      //const disp = !reserved.some(obj=> aux===obj.init.slice(11,16)); //comparo los turnos reservados con los turnos del dia
-
-      appts.push({ini,end,disp});//Vector con todos los turnos
-      ini=end;//El fin del turno actual es el inicio del turno siguiente
-    }   
-    return appts;  
-  }
-
-  async function main() {
-    /*renderCalendar();
-    ///////////////////////////////////
-    setApptReserved(await BookAppointmentGetReserved(workday));
-    console.log('setFirstRender',apptReserved);
-    setApptDisp(appt(apptReserved));
-    */
-    renderCalendar();
-    ///////////////////////////////////
-    let reserved = await BookAppointmentGetReserved(workday);
-    setApptDisp(appt(reserved));
-    setApptReserved(reserved);
-    console.log('setFirstRender');
-  }
-
-  ///setApptDisp(appt(apptReserved));
+  //Fijate como actualizar la vista
+  /*///setApptDisp(appt(apptReserved));
   useEffect(()=>
     setApptDisp(appt(apptReserved))
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  ,[apptDay])
+  ,[apptDay])*/
 
+  //Cambia el calendario cuando currentview cambia
   useEffect(()=>
     renderCalendar()
     //eslint-disable-next-line react-hooks/exhaustive-deps
   ,[currentView])
 
-  useEffect(() => {
-    main();
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
 
-  //Guarda el turno en la db
-  async function saveAppt(apptm,index) {
-    let resp = await BookAppointmentSaveAppt(apptm,workday);
-    if(resp.status===201){ //Si la operacion se realizo con exito
-      let aux = [...apptDisp];
-      aux[index].disp=false;
-      setApptDisp(aux);
-    }
-  }
+
   
   console.log('BookAppointment se esta renderizando')
   return (
@@ -205,9 +152,9 @@ export default function BookAppointment() {
         <div className="calendar">
           <div className="month">
             <AiFillCaretLeft onClick={()=>changeMonth(-1)} className="fas fa-angle-left prev"/>
-            <div className="date">
-              <h1> </h1>
-              <p></p>
+            <div>
+              <h1>{jsDateToYearMonth(currentView)}</h1>
+              <p>{jsDateToText((new Date()).getTime())}</p>
             </div>
             <AiFillCaretRight onClick={()=>changeMonth(1)} className="fas fa-angle-right next"/>
           </div>
@@ -228,26 +175,7 @@ export default function BookAppointment() {
         </div>
       </div>
 
-      {/*Poner en un modal y componente*/}
-      <div className='dayCalendarContainer'>
-        <div className='head flexRow'>Elije un horario</div>
-        <div className='date flexRow'>{jsDateToText(apptDay)}</div>
-        <div className='apptsContainer'>
-        {
-            apptDisp.map((turn,index)=>
-              <div  className='appt  flexRow' key={index}>
-                <div className='time'>{jsDateToHsMin(turn.ini)+ ' a ' +jsDateToHsMin(turn.end)}</div>
-                {
-                  turn.disp?
-                    <div className='apptBtn' onClick={()=>saveAppt(turn, index)}>Reservar</div>
-                    :
-                    <div className='ghostBtn'></div>
-                }
-              </div>
-            )
-          }
-        </div>
-      </div>
+      <ModalAppt workday={workday} apptDay={apptDay} apptReserved={apptReserved}/>
 
     </div>
   )

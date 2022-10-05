@@ -31,7 +31,7 @@ export default function Home() {
         category:'Tratamientos Corporales',
         photo:'',
         listServices:[
-          'Tratamientos reafirmantes',,
+          'Tratamientos reafirmantes',
           'Termoterapia',
           'Presoterapia',
           'Zionic',
@@ -43,7 +43,7 @@ export default function Home() {
         photo: '',
         listServices:[
           'Axilas',
-          'Bozo',
+          'Brazo',
           'Dedos',
           'Espalda',
           'Pecho',
@@ -107,7 +107,7 @@ export default function Home() {
                         <div>  
                             <img 
                             src={require(`../multimedia/cejas_y_pestanias.jpg`)} 
-                            alt='Service Image'
+                            alt='Service'
                             className='serviceImg'
                             />  
                             <div className='divListServices'>

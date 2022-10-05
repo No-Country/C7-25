@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0.3rem 1rem;
   text-align: center;
   text-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.5);
   box-sizing: border-box;
@@ -18,8 +18,8 @@
 
 .month h1 {
   color: var(--text-frente-color);
-  font-size: 2rem;
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   margin: 6px 0;
@@ -28,7 +28,7 @@
 .month p {
   color: var(--text-frente-color);
   font-size: 1.4rem;
-  margin: 6px 0;
+  margin: 6px 0px;
 }
 .month svg{
   width: 2rem;
@@ -80,9 +80,9 @@
   box-sizing: border-box;
 }
 
-.days div:hover:not(.today) {
-  background-color: #262626;
-  border: 0.2rem solid #777;
+.days div:hover {/*:not(.today)*/
+  background-color: var(--fondo-color);
+  border: 1vw solid var(--frente-color);
   cursor: pointer;
 }
 
@@ -92,7 +92,7 @@
 }
 
 .today {
-  background-color: #167e56;
+  background-color: #b0cfc3 !important;
   font-weight: 800;
 }
 
@@ -141,13 +141,8 @@
   margin-left: 20px;
 }
 
-.time{
+/*.time{
   
-}
-
-/*.button-36:hover {
-  box-shadow: rgba(80, 63, 205, 0.5) 0 1px 30px;
-  transition-duration: .1s;
 }*/
 
 /*@media (min-width: 768px) {

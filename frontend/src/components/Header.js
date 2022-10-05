@@ -37,7 +37,7 @@ function Header() {
             
             <div className={`divLiHeader2 ${menuOpened && 'menuIsOpened'}`}>
                 <li className={`liHeader`}> 
-                    <Link to='/home'>Home</Link><hr/>
+                    <Link to='/'>Home</Link><hr/>
                 </li>
                 <li className='liHeader'>
                     <Link to='/reservarturno'>Reservar turno</Link><hr/>

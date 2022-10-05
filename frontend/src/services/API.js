@@ -1,11 +1,12 @@
 import axios from 'axios';
+//import {domain} from './Domain';
 
 let aux = new Date();
 aux.toISOString()
 
 const domain = 'http://localhost:8080';
 
-//Agregar a la lista de turnos tomados
+//Falta agregar a la lista de turnos tomados
 export async function BookAppointmentSaveAppt(apptm,workday) {
 
   //Devido a que Springboot 
