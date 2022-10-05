@@ -26,7 +26,7 @@ function Header() {
                             <Link to='/'>Home</Link>
                         </li>
                         <li className='liHeader'>
-                            <Link to='/reservarturno'>Reservar turno</Link>
+                            <Link to='/elegirservicio'>Reservar turno</Link>
                         </li>
                         <li className='liHeader'>
                             <Link to='/misturnos'>Mis turnos</Link>
@@ -40,7 +40,7 @@ function Header() {
                     <Link to='/'>Home</Link><hr/>
                 </li>
                 <li className='liHeader'>
-                    <Link to='/reservarturno'>Reservar turno</Link><hr/>
+                    <Link to='/elegirservicio'>Reservar turno</Link><hr/>
                 </li>
                 <li className='liHeader'>
                     <Link to='/misturnos'>Mis turnos</Link>

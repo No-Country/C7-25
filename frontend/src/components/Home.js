@@ -1,8 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/Home.css';
 import perfilDefault from '../multimedia/profile-picture.png';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
+
+  const [servicesArray, setServicesArray] = useState([]);
+
+  useEffect(()=>{
+    const urlAPI= 'http://190.244.201.188:8080/home/categories';
+    axios.get(urlAPI)
+    .then(resolve =>{
+      console.log(resolve.data)
+      setServicesArray(resolve.data)
+    })
+    .catch (error =>{
+      console.log('Error: ' + error)
+    })
+  },[])
 
   const jsonHome={
     servicesArray:[
@@ -14,46 +30,6 @@ export default function Home() {
           'Kapping',
           'Uñas acrilicas',
           'Esculpido'
-        ]
-      },
-      {
-        category:'Tratamientos Faciales',
-        photo:'',
-        listServices:[
-          'Hiperpigmentación',
-          'Dermoabración',
-          'Peeling',
-          'Luz pulsada',
-          'Exfoliación'
-        ]
-      },
-      {
-        category:'Tratamientos Corporales',
-        photo:'',
-        listServices:[
-          'Tratamientos reafirmantes',
-          'Termoterapia',
-          'Presoterapia',
-          'Zionic',
-          'Exfoliación'
-        ]
-      },
-      {
-        category:'Depilación Definitiva',
-        photo: '',
-        listServices:[
-          'Axilas',
-          'Brazo',
-          'Dedos',
-          'Espalda',
-          'Pecho',
-          'Semi Cavado',
-          'Cavado Completo',
-          'Media Pierna',
-          'Piernas completas',
-          'Dos zonas',
-          'Tres Zonas',
-          'Cuatro zonas'
         ]
       },
       {
@@ -96,33 +72,37 @@ export default function Home() {
 
         <div  className='categories'>
             
-            {jsonHome.servicesArray.map( (eachService,index) =>{
-                
+            {servicesArray.map( ( eachCategory, key) =>{
+
                 return(
-
-                    <div key={index} className='category'>
                     
-                        <h3> {eachService.category} </h3>
-
-                        <div>  
-                            <img 
-                            src={require(`../multimedia/cejas_y_pestanias.jpg`)} 
-                            alt='Service'
-                            className='serviceImg'
-                            />  
-                            <div className='divListServices'>
-                                {eachService.listServices.map( (service,index2)=>{
-                                    return(
-                                        <ul className='servicesList' key={index2}>
-                                            <li className='eachServiceList'>{service}</li>
-                                        </ul>
-                                    )
-                                })}
-                            </div>
+                    
+                    <div key={key} className='category'>
+                        
+                        <div>
+                            <h3>{eachCategory.category}</h3>
+                            <img src={``} alt='Service' className='serviceImg'/>
                         </div>
+                        
+                        <div className='divListServices'>
+                            
+                            {eachCategory.services.map( (service,index2)=>{
+                                return(
+                                    <ul className='servicesList' key={index2}>
+                                      <Link to={`/detalles?idCategory=${key}&idServicio=${index2}`}>
+                                        <li className='eachServiceList'> • {service.name}</li>
+                                      </Link>
+                                    </ul>
+                                )
+                            })}
+
+                        </div>
+
                     </div>
                 )
             })}
+            
+            
         </div>
 
         <div>

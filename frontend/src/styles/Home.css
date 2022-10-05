@@ -43,17 +43,26 @@
         cursor: pointer;
     }
     .divListServices{
-        padding: 0px;
+        padding: 1px;
         margin: 0px;
-        width: 60%;
+        width: auto;
+        min-width: 200px;
         background-color: rgba(20, 20, 20, 0.33);
+    }
+    .servicesList{
+        padding: 1px;
+        margin: 3px;
     }
     .eachServiceList{
         font-family: 'Poppins', sans-serif;
         color: white;
         padding: 0px;
-        margin: 0px;
-        
+        cursor: pointer;
+        padding: 0px;
+        list-style: none;
+    }
+    .eachServiceList:hover{
+        font-weight: 400;
     }
 
 
