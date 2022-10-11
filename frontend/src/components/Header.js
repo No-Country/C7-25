@@ -11,6 +11,18 @@ function Header() {
         setMenuOpened(!menuOpened)
     }
   
+    let HeaderLi = () => <>
+        <li className='liHeader'> 
+            <Link to='/'>Home</Link><hr/>
+        </li>
+        <li className='liHeader'>
+            <Link to='/elegirservicio'>Reservar turno</Link><hr/>
+        </li>
+        <li className='liHeader'>
+            <Link to='/misturnos'>Mis turnos</Link>
+        </li>
+    </>;
+
     console.log(menuOpened)
     return (
         <header className='header'>
@@ -22,29 +34,13 @@ function Header() {
                     <AiOutlineMenu onClick={openMenu} className='hamburgerMenu'/>
                 
                     <div className='divLiHeader'>
-                        <li className='liHeader'> 
-                            <Link to='/'>Home</Link>
-                        </li>
-                        <li className='liHeader'>
-                            <Link to='/elegirservicio'>Reservar turno</Link>
-                        </li>
-                        <li className='liHeader'>
-                            <Link to='/misturnos'>Mis turnos</Link>
-                        </li>
+                        <HeaderLi/>
                     </div>
                 </ul>
             </nav>
             
             <div className={`divLiHeader2 ${menuOpened && 'menuIsOpened'}`}>
-                <li className={`liHeader`}> 
-                    <Link to='/'>Home</Link><hr/>
-                </li>
-                <li className='liHeader'>
-                    <Link to='/elegirservicio'>Reservar turno</Link><hr/>
-                </li>
-                <li className='liHeader'>
-                    <Link to='/misturnos'>Mis turnos</Link>
-                </li>
+                <HeaderLi/>
             </div>
         </header>
     )

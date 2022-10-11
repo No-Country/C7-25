@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import '../styles/Home.css';
 import perfilDefault from '../multimedia/profile-picture.png';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import UseHomeContext from '../services/UseHomeContext';
 
 export default function Home() {
 
-  const [servicesArray, setServicesArray] = useState([]);
-
-  useEffect(()=>{
-    const urlAPI= 'http://190.244.201.188:8080/home/categories';
-    axios.get(urlAPI)
-    .then(resolve =>{
-      console.log(resolve.data)
-      setServicesArray(resolve.data)
-    })
-    .catch (error =>{
-      console.log('Error: ' + error)
-    })
-  },[])
+  const {home} = UseHomeContext();
+  let servicesArray=home.categories || [];
 
   const jsonHome={
     servicesArray:[

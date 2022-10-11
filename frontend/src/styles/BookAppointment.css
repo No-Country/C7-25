@@ -41,7 +41,7 @@
   width: 100%;
   height: 5rem;
   /*padding: 0 0.4rem;*/
-  padding-right: 2vw;
+  padding-right: 2%;
   display: flex;
   align-items: center;
   box-sizing: border-box;
@@ -51,8 +51,8 @@
   font-size: 1.3rem;
   font-weight: 400;
   letter-spacing: 0.1rem;
-  width: calc(84vw/7);
-  margin-left: 2vw;
+  width: calc(84%/7);
+  margin-left: 2%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,17 +62,18 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  padding-right: 2vw;
+  padding-right: 2%;
   box-sizing: border-box;
 }
 
 .days div {
   background-color: white;
   font-size: 1.4rem;
-  margin-left: 2vw;
-  margin-bottom: 2vw;
-  width: calc(84vw/7);
-  height: calc(84vw/7);
+  /*padding: 2rem;*/
+  margin-left: 2%;
+  margin-bottom: 2%;
+  width: calc(84%/7);
+  height: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,70 +81,28 @@
   box-sizing: border-box;
 }
 
-.days div:hover {/*:not(.today)*/
-  background-color: var(--fondo-color);
-  border: 1vw solid var(--frente-color);
-  cursor: pointer;
-}
 
-.prev-date,
-.next-date {
+
+.out-month {
   opacity: 0.5;
 }
 
 .today {
-  background-color: #b0cfc3 !important;
-  font-weight: 800;
-}
-
-
-
-/*//////////////////////////////*/
-.dayCalendarContainer{
-  width: 300px;
-  margin: 50px;
-  background-color: var(--fondo-color);
-}
-.head{
-  background-color: var(--medio-color);
-  padding: 3px;
-  color: var(--text-frente-color);
-  font-size: 1.5em;
-  font-weight: 700;
-}
-.date{
-  font-weight: 700;
-  color: var(--text-fondo-color);
-  padding: 8px;
-}
-.apptsContainer{
-  height: 375px;
-  overflow-y: scroll;
-}
-.appt{
-  padding: 10px;
-  height: 45px;
-  box-sizing: border-box;
-}
-.apptBtn{
-  width: 71px;
-  background-color: var(--frente-color);
-  padding: 3px 10px 5px 10px;
-  font-size: 0.83em;
-  color: var(--text-frente-color);
-  margin-left: 20px;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-.ghostBtn{
-  width: 71px;
-  height: 24px;
-  margin-left: 20px;
-}
-
-/*.time{
   
-}*/
+  background-color: var(--fondo-color) !important;
+  font-weight: 1000;
+}
+
+.on{
+  border: 0.25rem solid #0f05;
+}
+.on:hover {/*:not(.today)*/
+  background-color: var(--fondo-color);
+  border: 0.25rem solid var(--frente-color);
+  cursor: pointer;
+}
+
+
 
 /*@media (min-width: 768px) {
   .button-36 {

@@ -145,6 +145,9 @@ nav > div > a:hover{
         padding-left: 2px;
         margin-left: 3px;
     }
+    .liHeader > hr{
+        display: none;
+    }
 }
 
 /* LARGE */

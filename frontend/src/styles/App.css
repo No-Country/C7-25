@@ -10,6 +10,21 @@ a, a:hover, a:focus, a:active {
     color: inherit;
 }
 
+.masterContainer{
+    width: 100%;
+    margin: 0px auto;
+}
+
+@media (max-width:300px){
+    .masterContainer{
+        width: 300px;
+    }
+}
+@media (min-width:901px){
+    .masterContainer{
+        width: 901px;
+    }
+}
 .darkPalette{
     --fondo-color: rgb(23, 23, 25);
     --medio-color: rgb(50, 50, 54);
@@ -25,6 +40,8 @@ a, a:hover, a:focus, a:active {
     --text-fondo-color: #8E746A;
     --text-medio-color: rgb(217, 215, 227);
     --text-frente-color: rgb(243, 241, 253);
+    --black-white-main: #FFF;
+    --black-white-oposite: #000;
 }
 
 .flexColumn{

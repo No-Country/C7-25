@@ -35,7 +35,7 @@ function ServiceDetails (){
             <p>Duración:</p>
             <p>Precio:</p>
             <div className='divReservarBtn'>
-                <button className='btnReservar'><Link to='/reservarturno'>Reservar</Link></button>
+                <button className='btnReservar'><Link to={`/reservarturno?indexCategory=${paramCategoryValue}&indexService=${paramServiceValue}`}>Reservar</Link></button>
             </div>
             
         </div>

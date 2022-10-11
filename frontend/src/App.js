@@ -1,5 +1,6 @@
 import './styles/App.css'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 //components
 import SignUp from "./components/SignUp";
@@ -13,30 +14,43 @@ import MyAppointments from './components/MyAppointments';
 import LogOut from './components/LogOut';
 import NotFound from './components/NotFound';
 
+//Services
+import {getHome} from './services/API';
+import HomeContext from './services/HomeContext';
+
 document.body.classList.add('pinkPalette');
 console.log('App se esta renderizando');
 
 
 
 function App() {
+  const [home, setHome] = useState({});
+  useEffect(()=>{
+    async function getHomeJson() {
+      let homeJson = await getHome();
+      setHome(homeJson);
+    }
+    getHomeJson();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
   return (
     <div className='background'>
-
-      <BrowserRouter>
-        <Header/>
-        <Routes>
-          <Route path='/signup' element={<SignUp/>}/>
-          <Route path='/login' element={<LogIn/>}/>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/elegirservicio' element={<ChooseService/>}/>
-          <Route path='/detalles' element={<ServiceDetails/>}/>
-          <Route path='/reservarturno' element={<BookAppointment/>}/>
-          <Route path='/misturnos' element={<MyAppointments/>}/>
-          <Route path='/logout' element={<LogOut/>}/>
-          <Route path='*' element={<NotFound/>}/>
-        </Routes>
-      </BrowserRouter>
-
+      <HomeContext.Provider value={{ home, setHome }}>
+        <BrowserRouter>
+          <Header/>
+          <Routes>
+            <Route path='/signup' element={<SignUp/>}/>
+            <Route path='/login' element={<LogIn/>}/>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/elegirservicio' element={<ChooseService/>}/>
+            <Route path='/detalles' element={<ServiceDetails/>}/>
+            <Route path='/reservarturno' element={<BookAppointment/>}/>
+            <Route path='/misturnos' element={<MyAppointments/>}/>
+            <Route path='/logout' element={<LogOut/>}/>
+            <Route path='*' element={<NotFound/>}/>
+          </Routes>
+        </BrowserRouter>
+      </HomeContext.Provider>
     </div>
   );
 }

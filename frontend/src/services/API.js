@@ -4,18 +4,31 @@ import axios from 'axios';
 let aux = new Date();
 aux.toISOString()
 
-const domain = 'http://localhost:8080';
+//const domain = 'http://localhost:8080';
+const domain = 'http://192.168.0.7:8080';
+
+export async function getHome() {
+  try {
+    const urlAPI=`${domain}/home/`;
+    const resp = await axios.get(urlAPI);
+    return resp.data;
+  } catch (error) {
+      console.log('Error: '+ error);
+  }
+}
 
 //Falta agregar a la lista de turnos tomados
-export async function BookAppointmentSaveAppt(apptm,workday) {
-
+export async function BookAppointmentSaveAppt(apptm,apptSettings,serviceId,professionalId) {
+  let apptSettingsId=apptSettings.id;
+  /////////////HARDCODEO//////////////////
+  let userId;
+  ////////////////////////////////////////
   //Devido a que Springboot 
   const jsDate= new Date(apptm.ini);
-  console.log(apptm,jsDate,jsDate.getTimezoneOffset())
   let ini = jsDate.toISOString();
-  jsDate.setTime(jsDate.getTime() + workday.apptDuration*60*1000);
+  jsDate.setTime(jsDate.getTime() + apptSettings.apptDuration*60*1000);
   let end = jsDate.toISOString();
-  const turn={ ini,end}
+  const turn={ ini,end,serviceId,apptSettingsId,professionalId,userId}
 
   try {
       const token = localStorage.getItem('token');
@@ -32,22 +45,47 @@ export async function BookAppointmentSaveAppt(apptm,workday) {
   }
 }
 
-export async function BookAppointmentGetReserved(workday) {
+export async function BookAppointmentGetReserved(maxDays) {
+  //Obtengo cuantos dias tienen turnos
+  //let daysAhead=settings.reduce((acc,cur)=>Math.max(acc.daysAhead?acc.daysAhead:acc,cur.daysAhead));//cur.daysAhead>acc?cur.daysAhead:acc)
+  //***//console.log('acc',daysAhead,settings[0].daysAhead);
   //Obtengo el periodo de turnos activos
+  console.log('maxDays',maxDays);
   const day=new Date();
   day.setHours(0,0,0,0);
   const T1=day.toISOString();
-  day.setDate(day.getDate()+workday.daysAHead);
-  //day.setHours(23,59,59,0);
+  //***//console.log('In BookAppointmentGetReserved',settings);
+  day.setDate(day.getDate()+maxDays);
   const T2=day.toISOString();
   try {
     const urlAPI=`${domain}/appt/getapptday/${T1}/${T2}`;
-    console.log(urlAPI)
     const resp = await axios.get(urlAPI);
-    console.log('resp.data',resp.data)
     return resp.data.map(elem=>new Date(`${elem.ini}Z`));//La Z es para decirle que los datos estan en el timezone 0UTC
   } catch (error) {
-      //Tarea: en caso de error hay que evitar que salga la ventana porque vana a estar todos los turnos disponibles
+      //Tarea: en caso de error hay que evitar que salga la ventana porque van a a estar todos los turnos disponibles
+      console.log('Error: '+ error);
+  }
+}
+
+export async function BookAppointmentGetApptSettings(idService) {
+  try {
+    const urlAPI=`${domain}/appt/apptsettings/${idService}`;
+    const resp = await axios.get(urlAPI);
+    return resp.data;//Necesitara la z?
+  } catch (error) {
+      //Tarea: en caso de error hay que evitar que salga la ventana porque van a a estar todos los turnos disponibles
+      console.log('Error: '+ error);
+  }
+}
+
+export async function userAppt() {
+  try {
+    const urlAPI=`${domain}/appt/userappt`;
+    const resp = await axios.get(urlAPI);
+    return resp.data;
+  }
+
+  catch (error) {
       console.log('Error: '+ error);
   }
 }
@@ -65,27 +103,14 @@ export function logIn(bodyAPI){
   .post(urlAPI, bodyAPI, config)
   
   .then( resolve =>{
-      console.log(resolve);
-      console.log(resolve.data);
-      localStorage.setItem('token',resolve.data.token)
+      localStorage.setItem('token',resolve.data.token);
+      localStorage.setItem('email',resolve.data.email);
       return resolve.data;
   })
   .catch( error => {
     console.log('Error: '+ error)
     alert('El email o la contraseña es incorrecta');
   } );
-}
-
-export async function SignUpIsEmailNotAvailable(inputEmail) {
-  try {
-    const urlAPI=`${domain}/auth/useravailability/${inputEmail}`;
-    const resp = await axios.get(urlAPI);
-    return resp.data;
-  }
-
-  catch (error) {
-      console.log('Error: '+ error);
-  }
 }
 
 export async function signUp(bodyAPI) {
@@ -95,8 +120,6 @@ export async function signUp(bodyAPI) {
   .post(urlAPI, bodyAPI)
   
   .then( resolve =>{
-      console.log(resolve.data);
-      console.log(resolve);
       return resolve.data;
   })
 
@@ -113,3 +136,36 @@ export async function signUp(bodyAPI) {
   })
   .catch( error => console.log('Error: '+ error));
 }
+
+export async function MyAppointmentsCancelAppt(id) {
+  try {
+    const email = await localStorage.getItem('email');
+    const urlAPI=`${domain}/appt/apptstate/${id}/${email}`;
+    const resp = await axios.put(urlAPI);
+    return resp.data;
+  }
+
+  catch (error) {
+      console.log('Error: '+ error);
+  }
+}
+
+export async function SignUpIsEmailNotAvailable(inputEmail) {
+  try {
+    const urlAPI=`${domain}/auth/useravailability/${inputEmail}`;
+    const resp = await axios.get(urlAPI);
+    return resp.data;
+  }
+
+  catch (error) {
+      console.log('Error: '+ error);
+  }
+}
+
+
+
+/*const val2=273;
+//Convierte un numero en un vector por el metodo de los numeros primos
+const prime=[2,3,5,7,11,13,17];
+let decod = (val) => prime.map(num=>val%num===0);
+let open=decod(val2);*/

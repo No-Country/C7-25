@@ -1,73 +1,92 @@
+import { useEffect, useState } from 'react';
+import { MyAppointmentsCancelAppt, userAppt } from '../services/API';
 import '../styles/MyAppointments.css';
+import UseHomeContext from '../services/UseHomeContext';
+import { jsISODateToTextAndDate } from '../services/DateTime';
+
 
 function MyAppointments(){
+    const {home} = UseHomeContext();
+    const [myAppointmentsBooked, setMyAppointmentsBooked] = useState([])
 
-    let myAppointmentsBooked =[
-        {
-            "id":13,
-            "init":"2022-09-29T08:18:00",
-            "end":"2022-09-29T08:36:00"
-        },
-        {
-            "id":14,
-            "init":"2022-09-29T09:48:00",
-            "end":"2022-09-29T10:06:00"},
-        {
-            "id":15,
-            "init":"2022-09-29T13:24:00",
-            "end":"2022-09-29T13:42:00"
-        }
-    ];
+    useEffect(() => {
+      getAppt();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [home])
+    
+    async function getAppt() {
+        let apptsRaw = await userAppt();
+        let appt = apptsRaw.map(ap=>{
+            const id = ap.id;
+            const date = jsISODateToTextAndDate(ap.ini);
+            const time = ap.ini.slice(11,16);
+            const state = ap.state;
+            //El servicio esta anidado en Home por lo que busco primero la categoria
+            const category = home.categories.find(cat=>
+                cat.services.find(serv=>serv.id===ap.serviceId)
+            );
+            //Luego el servicio
+            const servi = category.services.find(serv=>serv.id===ap.serviceId);
+            const service = servi.name;
+            //Busco el profesional en Home
+            const prof = home.professionals.find(prof=>prof.id===ap.professionalId);
+            const professional = prof.lastname+' '+prof.name;
+            return {id,date,time,state,service,professional};
+        });
+        setMyAppointmentsBooked(appt);
+    }
 
-    function dateISOToText(isoDate){
-        const months={
-          Jan:'Enero',
-          Feb:'Febrero',
-          Mar:'Marzo',
-          Apr:'Abril',
-          May:'Mayo',
-          Jun:'Junio',
-          Jul:'Julio',
-          Aug:'Agosto',
-          Sep:'Septiembre',
-          Oct:'Octubre',
-          Nov:'Noviembre',
-          Dec:'Diciembre'
-        };
-        const days={
-          Mon:'Lunes',
-          Tue:'Martes',
-          Wed:'Miercoles',
-          Thu:'Jueves',
-          Fri:'Viernes',
-          Sat:'Sabado',
-          Sun:'Domingo'
-        }
-        
-        return (
-            days[isoDate.slice(0,3)]+' 29'+' de '+months[isoDate.slice(4,7)]
-        );
+    function cancelAppt(id){
+        MyAppointmentsCancelAppt(id);
+        console.log('cancelando',id);
     }
 
     return(
-        <div className='divContainerMyAppointments'>
+        <div className='masterContainer flexColumn'>
             <h1 className='myAppointmentsTitle'>Turnos Reservados</h1>
-            <form>
-                <ul>
-                    {
-                        myAppointmentsBooked.map((eachAppontment, index) =>{
-                            return(
-                                <div key={index}>
-                                    <li>
-                                        <p>{eachAppontment.init}</p>
-                                    </li>
-                                </div>
-                            )
-                        })
-                    
-                    }
-                </ul>
-            </form>
+            {
+                myAppointmentsBooked.map((appt, index) =>
+                    <div className='grid' key={index}>
+                        <div className='h1'>
+                            Dia
+                        </div>
+                        <div className='d1'>
+                            {appt.date}
+                        </div>
+                        <div className='h2'>
+                            Hora
+                        </div>
+                        <div className='d2'>
+                            {appt.time}
+                        </div>
+                        <div className='h3'>
+                            Servicio
+                        </div>
+                        <div className='d3'>
+                            {appt.service}
+                        </div>
+                        <div className='h4'>
+                            Profesional
+                        </div>
+                        <div className='d4'>
+                            {appt.professional}
+                        </div>
+                        <div  className='b flexRow'></div>
+                        <div className='c flexRow'>
+                            {
+                                appt.state?
+                                    appt.state===1?
+                                        'Cancelado por el usuario'
+                                    :
+                                        'Cancelado por el professional'
+                                :
+                                    <div className='cBtn' onClick={()=>cancelAppt(appt.id)}>Cancelar</div>
+                            }
+                        </div>
+                    </div>
+                )
+            }
+
         </div>
     )
 }
