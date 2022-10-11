@@ -2,82 +2,49 @@ import '../styles/Home.css';
 import perfilDefault from '../multimedia/profile-picture.png';
 import { Link } from 'react-router-dom';
 import UseHomeContext from '../services/UseHomeContext';
+import img from '../multimedia/manicuria_y_pedicura.jpg'; // borrar
+import { MdLocationOn } from 'react-icons/md';
+import { AiOutlineWhatsApp } from 'react-icons/ai';
 
 export default function Home() {
 
   const {home} = UseHomeContext();
   let servicesArray=home.categories || [];
+  let professionalsArray=home.professionals || [];
 
-  const jsonHome={
-    servicesArray:[
-      {
-        category:'Manicura y Pedicura',
-        photo:'',
-        listServices:[
-          'Semipermanente',
-          'Kapping',
-          'Uñas acrilicas',
-          'Esculpido'
-        ]
-      },
-      {
-        category:'Cejas y Pestañas',
-        photo: '',
-        listServices:[
-          'Perfilado',
-          'Lifting',
-          'Microblanding',
-          'Microshading'
-        ]
-      }
-    ],
-
-    professionalsArray:[
-      {
-        name:'Noelia',
-        lastname:'Barrionuevo',
-        photo:'https://scontent.fsla4-1.fna.fbcdn.net/v/t1.18169-9/10401972_472787482918821_4958068379902033714_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=apCnGm0dF4QAX-RePPq&_nc_ht=scontent.fsla4-1.fna&oh=00_AT_TlF4FmZT2JtkWv41ftgvbRJ2B6GlXXkb3-abnz-Dt2Q&oe=63570F7A'
-      },{
-        name:'Sofía',
-        lastname:'Malestrini',
-        photo:''
-      },{
-        name:'Marcela',
-        lastname:'Oliva',
-        photo:''
-      },{
-        name:'Julieta',
-        lastname:'Vega',
-        photo:''
-      }
-    ]
-  }
 
   return (
     <div className='divContainerHome'>
+
+        <h1 className='homeTitle'>{home.name} Estética</h1>
+        <aside className='asideData'> 
+            <p><MdLocationOn/>{home.adress}</p>
+            <p><AiOutlineWhatsApp/>{home.telephone}</p>
+        </aside>
         
-        <h1 className='homeTitle'>Nuestros servicios</h1>
+        <p> {home.description} </p>
 
-        <div  className='categories'>
+       
+        
+        <h2 className='homeSubtitles'>Nuestros servicios</h2>
+
+        <div  className='categoriesNames'>
             
-            {servicesArray.map( ( eachCategory, key) =>{
-
+            {servicesArray.map( (eachCategory, indexCategory) =>{
                 return(
-                    
-                    
-                    <div key={key} className='category'>
+                    <div key={indexCategory} className='category'>
                         
                         <div>
                             <h3>{eachCategory.category}</h3>
-                            <img src={``} alt='Service' className='serviceImg'/>
+                            <img src={img} alt='Service' className='serviceImg'/>
                         </div>
                         
                         <div className='divListServices'>
                             
-                            {eachCategory.services.map( (service,index2)=>{
+                            {eachCategory.services.map( (service,indexService)=>{
                                 return(
-                                    <ul className='servicesList' key={index2}>
-                                      <Link to={`/detalles?idCategory=${key}&idServicio=${index2}`}>
+                                    <ul className='servicesList' key={indexService}>
+                                      <Link to={`/detalles?idCategory=${indexCategory}&idServicio=${indexService}`}>
                                         <li className='eachServiceList'> • {service.name}</li>
                                       </Link>
                                     </ul>
@@ -89,25 +56,24 @@ export default function Home() {
                     </div>
                 )
             })}
-            
-            
         </div>
-
-        <div>
-            <div className='flexRow'>
-                <h2>Nuestros profesionales</h2>
-            </div>
+        
+        <h2 className='homeSubtitles'>Nuestros profesionales</h2>
+        
+        <div className='flexRow'>
             
-            <div className='flexRow'>
-                {jsonHome.professionalsArray.map( (eachProfessional,index) =>
-                    <div className='profCard flexColumn' key={index}>
-                        <div className='profilePhoto'>
-                            <img src={ eachProfessional.photo? eachProfessional.photo : perfilDefault } alt=""/> 
-                        </div>
-                        <p>{eachProfessional.lastname+' '+eachProfessional.name}</p>
+            {professionalsArray.map( (eachProfessional, indexProfessionals)=>{
+                return(
+                    <div key={indexProfessionals}>
+                        <aside className='profilePhoto'>
+                            <img src={ eachProfessional.photo? eachProfessional.photo : perfilDefault } alt=""/>   
+                        </aside>
+                        <p>{eachProfessional.name}</p>
+                        <p>{eachProfessional.lastname}</p>
                     </div>
-                )}
-            </div>
+                )
+            })}
+
         </div>
     </div>
   )

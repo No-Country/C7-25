@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import '../styles/ServiceDetails.css';
 
+import img from '../multimedia/manicuria_y_pedicura.jpg'
+
 function ServiceDetails (){
 
     const [serviceDetail, setServiceDetail] = useState ('');
@@ -30,10 +32,15 @@ function ServiceDetails (){
     return(
         <div>
             <h1 className='serviceDetailsTitle'>{serviceDetail.name}</h1>
-            <img src={''} alt='Service img'/>
-            <p>{serviceDetail.description}</p>
-            <p>Duración:</p>
-            <p>Precio:</p>
+            
+            <aside className='asideImgDetail'>
+                <img src={img} alt='Service img' className='imgDetail'/>
+            </aside>
+            
+            <p className='detailDescription'>{serviceDetail.description}</p>
+            <p className='serviceCharacts'>Duración: {serviceDetail.duration} minutos</p>
+            <p className='serviceCharacts'>Precio: $ {serviceDetail.price} pesos</p>
+
             <div className='divReservarBtn'>
                 <button className='btnReservar'><Link to={`/reservarturno?indexCategory=${paramCategoryValue}&indexService=${paramServiceValue}`}>Reservar</Link></button>
             </div>
