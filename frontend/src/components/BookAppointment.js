@@ -185,7 +185,8 @@ export default function BookAppointment() {
     //Obtengo los turnos encapsulados en su setting generadora
     const apptBySetting = processApptSettings(professionalsList,daysSettings);
     //Con set se filtra todos los ids repetidos
-    const professionals=Array.from(new Set(professionalsList));
+    let professionals=Array.from(new Set(professionalsList));
+    //professionals = professionals.map(id=>);
     //Junta todos los appt y setings con su respectivo profesional
     let apptByProfessionalsAndSettings = filterProfesionals(professionals,apptBySetting);
     //Elimina la agrupacion por settings uniendo todos los turnos de un mismo dia
