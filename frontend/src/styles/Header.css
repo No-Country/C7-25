@@ -129,7 +129,7 @@ nav > div > a:hover{
         height: 100%;
         list-style: none;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         align-items: center;
         text-align: center;
         justify-content: center;
