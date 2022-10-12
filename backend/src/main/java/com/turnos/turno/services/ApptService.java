@@ -1,7 +1,9 @@
 package com.turnos.turno.services;
 
 import com.turnos.turno.models.appt.Appointment;
+import com.turnos.turno.models.appt.ApptSettings;
 import com.turnos.turno.repositories.ApptRepository;
+import com.turnos.turno.repositories.ApptSettingsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,15 @@ public class ApptService implements IApptService {
 
     @Autowired
     private ApptRepository apptRepository;
+
+    @Autowired
+    private ApptSettingsRepository apptSettingsRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private HomeService homeService;
 
     @Override
     public List<Appointment> getAppt() {
@@ -45,5 +56,16 @@ public class ApptService implements IApptService {
     public Appointment findAppt(Long id) {
         Appointment appointment = apptRepository.findById(id).orElse(null);
         return appointment;
+    }
+
+    @Override
+    public ApptSettings saveApptSettings(ApptSettings apptSettings) {
+        return apptSettingsRepository.save(apptSettings);
+    }
+
+    @Override
+    public List<ApptSettings> getApptSettings(Long servId) {
+        return apptSettingsRepository.findByServiceId(servId);
+        //return apptSettingsRepository.findByProfessionalIdAndServiceId(profId, servId);
     }
 }

@@ -55,7 +55,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 		tokens.put("token", token);
 		String username=request.getParameter("email");
 		log.info("AutenticacionFiltro - successfulAuthentication - El user del token es: {}", username);
-		//tokens.put("email", username);
+		tokens.put("email", username);
 		
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		new ObjectMapper().writeValue(response.getOutputStream(), tokens);

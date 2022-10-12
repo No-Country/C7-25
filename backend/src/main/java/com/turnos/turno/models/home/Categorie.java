@@ -1,6 +1,5 @@
 package com.turnos.turno.models.home;
 
-import com.turnos.turno.models.home.Service;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Category")
-public class Categories implements Serializable {
+public class Categorie implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +24,11 @@ public class Categories implements Serializable {
   private String category;
   private String photo;
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
-  private List<Service> services = new ArrayList<>();
+  /*@ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
+  private List<Service> services = new ArrayList<>();*/
 
+  @OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
+  @JoinColumn(name = "fk_services", referencedColumnName ="id")
+  private List<Service> services;
 
 }

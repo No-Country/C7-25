@@ -21,5 +21,4 @@ public interface IUserService {
 
 	boolean existeEmail(String email);
 
-	String traerUsernamebyEmail(String email);
 }

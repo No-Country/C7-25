@@ -1,11 +1,23 @@
 package com.turnos.turno.services;
 
-import com.turnos.turno.models.home.Categories;
+import com.turnos.turno.models.appt.ApptSettings;
+import com.turnos.turno.models.home.Categorie;
+import com.turnos.turno.models.home.Home;
+import com.turnos.turno.models.home.Service;
 
 import java.util.List;
 
 public interface IHomeService {
-    List<Categories> getCategories();
+    Home getHome(String route);
 
-    Categories savetegories(Categories categories);
+    Home saveHome(Home home);
+
+    List<Categorie> getCategories();
+
+    Categorie savetegories(Categorie categorie);
+
+    Service getService (Long id);
+
+    ApptSettings saveApptSettings(ApptSettings apptSettings);
+
 }

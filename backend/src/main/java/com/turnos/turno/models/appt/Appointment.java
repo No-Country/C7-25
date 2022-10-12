@@ -15,11 +15,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Appointment {
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime ini;
     private LocalDateTime end;
-
+    private byte state;
+    private Long serviceId;
+    private Long apptSettingsId;
+    private Long professionalId;
+    private Long userId;
 }

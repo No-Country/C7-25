@@ -49,15 +49,8 @@ public class AuthController {
 		System.out.println("usuarioController - existeUsername");
 		return userService.existeUsername(username);
 	}
-
-	/*
-	@GetMapping("/emaillibre/{email}")
-	public boolean existeEmail(@PathVariable String email){
-		System.out.println("usuarioController - existeEmail");
-		return userService.existeEmail(email);
-	}*/
 	
-	@PostMapping("/singup")
+	@PostMapping("/signup")
 	public ResponseEntity<User>saveUser(@RequestBody User user){//
 		System.out.println("usuarioController - saveUser");
 		System.out.println(user);
@@ -66,7 +59,7 @@ public class AuthController {
 		user.setEmail("");
 		URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
 		if(existeUsername(user.getUsername()) ){// || existeEmail(user.getEmail())
-			System.out.println("Se detecto un problea de seguridad - usuarioController - saveUser 84");
+			System.out.println("Se detecto un problema de seguridad - usuarioController - saveUser 84");
 			return null;
 		}
 
@@ -74,7 +67,7 @@ public class AuthController {
 		if( !( /*Pattern.compile("^[a-zA-Z0-9_-]{4,20}$").matcher(user.getUsername()).matches()
 				&& */Pattern.compile("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$").matcher(user.getUsername()).matches()
 				&& Pattern.compile("^[a-zA-Z0-9_\\-!@#$%^&*]{4,128}$").matcher(user.getPassword()).matches() )){
-			System.out.println("Se detecto un problea de seguridad - usuarioController - saveUser 92");
+			System.out.println("Se detecto un problema de seguridad - usuarioController - saveUser 92");
 			return null;
 		}
 

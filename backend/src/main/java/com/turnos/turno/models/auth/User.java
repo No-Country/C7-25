@@ -21,6 +21,6 @@ public class User {
 	private Long identification;
 	private String photo;
 
-	@ManyToMany(fetch = FetchType.EAGER)
-	private Collection<Role> roles = new ArrayList<>();
+	@ManyToMany(fetch = FetchType.LAZY)
+	private Collection<Role> roles;
 }

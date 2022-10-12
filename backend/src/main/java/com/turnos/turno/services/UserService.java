@@ -90,9 +90,4 @@ public class UserService implements IUserService, UserDetailsService {
 		return userRepo.existsByEmail(email);
 	}
 
-	@Override
-	public String traerUsernamebyEmail(String email) {
-		return userRepo.getUsernamebyEmail(email);
-	}
-
 }

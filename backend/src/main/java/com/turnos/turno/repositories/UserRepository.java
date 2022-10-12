@@ -12,7 +12,4 @@ public interface UserRepository extends JpaRepository<User,Long>{
 
 	Boolean existsByEmail(String email);
 
-	@Query(value = "SELECT username FROM usuario WHERE email=?1", nativeQuery = true)
-	String getUsernamebyEmail(String email);
-
 }
