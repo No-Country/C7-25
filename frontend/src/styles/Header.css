@@ -44,7 +44,7 @@ nav > div > a:hover{
     } 
     .brandName{
         font-weight: 300;
-        font-size: 2.2em;
+        font-size: 2.7em;
         letter-spacing: 2px;
         color: black;
         font-family: 'Courgette', cursive;
@@ -152,4 +152,53 @@ nav > div > a:hover{
 
 /* LARGE */
 @media (min-width:901px) and (max-width:2500px){
+    .header{
+        margin: 0px;
+        background-color: #fff;
+        height: 900x;
+    }
+    .navHeader{
+        margin: 0px;
+        background-color: rgba(206, 170, 154, 1);
+        display: grid;
+        grid-template-columns: 2fr 4fr;
+    } 
+    .brandName{
+        font-weight: 300;
+        font-size: 3.2em;
+        letter-spacing: 2px;
+        color: black;
+        font-family: 'Courgette', cursive;
+        font-family: 'Cookie', cursive;
+        margin: 0px 20px;
+    }
+    .ulHeader{
+        margin: 0px;
+    }
+    .hamburgerMenu{
+        display: none;
+    }
+    .divLiHeader{
+        height: 100%;
+        list-style: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    .divLiHeader2{
+        display: none;
+    }
+    .liHeader{
+        list-style: none;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 15px;
+        padding-left: 2px;
+        margin-left: 3px;
+    }
+    .liHeader > hr{
+        display: none;
+    }
 }

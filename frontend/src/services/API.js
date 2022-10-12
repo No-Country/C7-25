@@ -1,11 +1,8 @@
 import axios from 'axios';
-//import {domain} from './Domain';
+import {domain} from './Domain';
 
 let aux = new Date();
 aux.toISOString()
-
-//const domain = 'http://localhost:8080';
-const domain = 'http://192.168.0.7:8080';
 
 export async function getHome() {
   try {

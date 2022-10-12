@@ -1,0 +1,21 @@
+footer{
+    margin: 0px;
+    background-color: rgba(181, 153, 138, 0.78);
+    text-align: center;
+}
+#copyright{
+    margin: 0px;
+    color: white;
+    padding: 5px 0px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+}
+#authors{
+    margin: 0px;
+    color: rgba(22, 19, 17, 1);
+    padding-bottom: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+}

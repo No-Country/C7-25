@@ -18,14 +18,12 @@ export default function Home() {
 
         <h1 className='homeTitle'>{home.name} Estética</h1>
         <aside className='asideData'> 
-            <p><MdLocationOn/>{home.adress}</p>
-            <p><AiOutlineWhatsApp/>{home.telephone}</p>
+            <p id='adress'><MdLocationOn className='iconsData'/> {home.adress}</p>
+            <p id='cellphoneNumber'><AiOutlineWhatsApp className='iconsData'/> {home.telephone}</p>
         </aside>
         
-        <p> {home.description} </p>
+        <p className='description'> hbjjhbjhb jhbjh bjhbjhbj hbjhbjh bh bhb hb jhbjh bjh bj jh bjh b bibi uhi uh iuh iuhihih iuhu hiuhiuhiub hb hbi ub ibi biu b iu bi biu b iu uiui iuhuuh uhipnjknlkn bhbhl blb lkjbj j jbjkjjkb{home.description} </p>
 
-       
-        
         <h2 className='homeSubtitles'>Nuestros servicios</h2>
 
         <div  className='categoriesNames'>
