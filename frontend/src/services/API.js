@@ -1,11 +1,8 @@
 import axios from 'axios';
-//import {domain} from './Domain';
+import {domain} from './Domain';
 
 let aux = new Date();
 aux.toISOString()
-
-//const domain = 'http://localhost:8080';
-const domain = 'http://192.168.0.7:8080';
 
 export async function getHome() {
   try {
@@ -90,7 +87,7 @@ export async function userAppt() {
   }
 }
 
-export function logIn(bodyAPI){
+export async function logIn(bodyAPI){
   
   const urlAPI= `${domain}/auth/login`;
   const config = {
@@ -99,18 +96,15 @@ export function logIn(bodyAPI){
     }
   }
   
-  axios
-  .post(urlAPI, bodyAPI, config)
-  
-  .then( resolve =>{
-      localStorage.setItem('token',resolve.data.token);
-      localStorage.setItem('email',resolve.data.email);
-      return resolve.data;
-  })
-  .catch( error => {
+  try {
+    const resp = await axios.post(urlAPI, bodyAPI, config);
+    localStorage.setItem('token',resp.data.token);
+    localStorage.setItem('email',resp.data.email);
+    return resp.data;
+  } catch (error) {
     console.log('Error: '+ error)
     alert('El email o la contraseña es incorrecta');
-  } );
+  }
 }
 
 export async function signUp(bodyAPI) {
