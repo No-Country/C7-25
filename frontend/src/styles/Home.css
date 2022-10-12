@@ -7,7 +7,7 @@
 /* SMALL */
 @media (min-width:0px) and (max-width:500.99px){
     
-    /*  SERVICES  */
+    /* GENERAL INFO */
     .divContainerHome{
         margin: 0px;
         padding-bottom: 30px;
@@ -16,15 +16,43 @@
         margin: 0px;
         font-family: 'Cookie', cursive;
         font-weight: 300;
-        letter-spacing: 1.6px;
+        letter-spacing: 3px;
         color: rgba(88, 52, 38, 1);
         text-align: center;
         font-size: 45px;
-        padding: 30px;
+        padding-top: 30px;
     }
     .asideData{
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1.6fr 1fr;
+        margin: 0px 10%;
+    }
+    .iconsData{
+        width: 11px;
+        height: 11px;
+    }
+    .asideData > p{
+        color: rgb(54, 37, 31);
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 9.5px;
+        margin: auto;
+        margin-top: -5px;
+    }
+    #adress{
+        margin: auto;
+    }
+    #cellphoneNumber{
+        margin: auto;
+    }
+    .description{
+        margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        color: rgba(88, 52, 38, 1);
+        font-size: 13px;
+        padding: 20px 30px 10px 30px;
+        text-align: center;
     }
     .homeSubtitles{
         margin: 0px;
@@ -35,8 +63,9 @@
         text-align: center;
         font-size: 20px;
         padding: 20px 0px;
-
     }
+
+    /*  SERVICES  */
     .categoriesNames{
         display: flex;
         align-items: top;
@@ -85,12 +114,13 @@
 
 
     /* PROFESSIONALS */
+
     .profCard{
         margin: 20px;
     }
     .profilePhoto{
-        width: 80px;
-        height: 80px;
+        width: 90%;
+        height: 100%;
         border-radius: 50%;
         overflow: hidden;
         display: grid;
@@ -106,20 +136,65 @@
 
 /* MEDIUM */
 @media (min-width:501px) and (max-width:900.99px){
+    /* GENERAL INFO */
     .divContainerHome{
         margin: 0px;
         padding-bottom: 30px;
     }
     .homeTitle{
         margin: 0px;
+        font-family: 'Cookie', cursive;
+        font-weight: 300;
+        letter-spacing: 4px;
+        color: rgba(88, 52, 38, 1);
+        text-align: center;
+        font-size: 55px;
+        padding-top: 30px;
+    }
+    .asideData{
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        margin: 0px 20%;
+    }
+    .iconsData{
+        width: 13px;
+        height: 13px;
+    }
+    .asideData > p{
+        color: rgb(54, 37, 31);
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 11.5px;
+        margin: auto;
+        margin-top: -5px;
+    }
+    #adress{
+        margin: auto;
+    }
+    #cellphoneNumber{
+        margin: auto;
+    }
+    .description{
+        margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        color: rgba(68, 32, 18);
+        font-size: 15px;
+        padding: 20px 30px 10px 30px;
+        text-align: center;
+    }
+    .homeSubtitles{
+        margin: 0px;
         font-family: 'Poppins', sans-serif;
         font-weight: bold;
-        letter-spacing: 3px;
+        letter-spacing: 1.6px;
         color: rgba(128, 92, 78, 1);
         text-align: center;
-        font-size: 30px;
-        padding: 30px;
+        font-size: 21px;
+        padding: 20px 0px;
     }
+
+    /*  SERVICES  */
     .categoriesNames{
         display: flex;
         align-items: top;
@@ -134,28 +209,28 @@
         display: flex;
         flex-direction: column;
         align-items: top;
-        margin: 0px 20px;
+        margin: 0px auto;
+        padding: 10px;
     }
     .serviceImg{
-        width: 50%;
-        margin: 0px auto;
-        cursor: pointer;
+        width: 300px;
+        height: 32vh;
+        margin: 0px 0px;
     }
     .divListServices{
         padding: 1px;
-        height: auto;
-        width: 50%;
         margin: 0px;
+        width: auto;
+        min-width: 200px;
         background-color: rgba(20, 20, 20, 0.33);
     }
     .servicesList{
-        padding: 1px;
-        margin: 3px;
+        padding: 2px;
+        margin: 8px;
     }
     .eachServiceList{
         font-family: 'Poppins', sans-serif;
         color: white;
-        padding: 0px;
         cursor: pointer;
         padding: 0px;
         list-style: none;
@@ -164,9 +239,117 @@
     .eachServiceList:hover{
         font-weight: 400;
     }
+
+
+    /* PROFESSIONALS */
 }
 
 /* LARGE */
 @media (min-width:901px) and (max-width:2500px){
+     /* GENERAL INFO */
+     .divContainerHome{
+        margin: 0px;
+        padding-bottom: 30px;
+    }
+    .homeTitle{
+        margin: 0px;
+        font-family: 'Cookie', cursive;
+        font-weight: 300;
+        letter-spacing: 6px;
+        color: rgba(88, 52, 38, 1);
+        text-align: center;
+        font-size: 60px;
+        padding-top: 30px;
+    }
+    .asideData{
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        margin: 0px 30%;
+    }
+    .iconsData{
+        width: 14px;
+        height: 14px;
+    }
+    .asideData > p{
+        color: rgb(54, 37, 31);
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        margin: auto;
+        margin-top: -5px;
+    }
+    #adress{
+        margin: auto;
+    }
+    #cellphoneNumber{
+        margin: auto;
+    }
+    .description{
+        margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        color: rgba(68, 32, 18);
+        font-size: 17px;
+        padding: 20px 30px 10px 30px;
+        text-align: center;
+    }
+    .homeSubtitles{
+        margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+        letter-spacing: 1.6px;
+        color: rgba(128, 92, 78, 1);
+        text-align: center;
+        font-size: 21px;
+        padding: 20px 0px;
+    }
+
+    /*  SERVICES  */
+    .categoriesNames{
+        display: flex;
+        align-items: top;
+        justify-content: center;
+        flex-wrap: wrap;
+        font-family: 'Poppins', sans-serif;
+        color: rgba(88, 52, 38, 1);
+        font-weight: 300;
+        font-size: 14px;
+    }
+    .category{
+        display: flex;
+        flex-direction: column;
+        align-items: top;
+        margin: 0px auto;
+        padding: 10px 20px;
+    }
+    .serviceImg{
+        width: 300px;
+        height: 32vh;
+        margin: 0px 0px;
+    }
+    .divListServices{
+        padding: 1px;
+        margin: 0px;
+        width: auto;
+        min-width: 200px;
+        background-color: rgba(20, 20, 20, 0.33);
+    }
+    .servicesList{
+        padding: 2px;
+        margin: 8px;
+    }
+    .eachServiceList{
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        cursor: pointer;
+        padding: 0px;
+        list-style: none;
+        width: auto;
+    }
+    .eachServiceList:hover{
+        font-weight: 400;
+    }
+
+    /* PROFESSIONALS */
 }
 

@@ -56,8 +56,6 @@
 }
 /* MEDIUM */
 @media (min-width:501px){
- 
-
 
     .grid{
         display: grid;
@@ -129,6 +127,72 @@
 
 /* LARGE */
 @media (min-width:901px){
+    .grid{
+        display: grid;
+        grid-template-columns: 18% 12% 18.4% 22.2% 21.4%;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: 
+        "h1 h2 h3 h4 ."
+        "b  b  b  b  b"
+        "d1 d2 d3 d4 c";
+        column-gap: 2%;
+        padding: 0 2% ;
+        box-sizing: border-box;
+    }
+    .grid>div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+    }
+    .h1{
+        grid-area: h1;
+    }
+    .h2{
+        grid-area: h2;
+    }
+    .h3{
+        grid-area: h3;
+    }
+    .h4{
+        grid-area: h4;
+    }
+    .d1{
+        grid-area: d1;
+    }
+    .d2{
+        grid-area: d2;
+    }
+    .d3{
+        grid-area: d3;
+    }
+    .d4{
+        grid-area: d4;
+    }
+    .b{
+        grid-area: b;
+    }
+    .c{
+        grid-area: c;
+    }
+
+    /*Seleciona todo los div.grid que le siguen a un div.grid*/
+    /*por lo tanto se ignora el primero, luego se seleccionan los demas elementos*/
+    .masterContainer > .grid ~ .grid > .h1{
+        display: none;
+    }
+    .masterContainer > .grid ~ .grid > .h2{
+        display: none;
+    }
+    .masterContainer > .grid ~ .grid > .h3{
+        display: none;
+    }
+    .masterContainer > .grid ~ .grid > .h4{
+        display: none;
+    }
+    .masterContainer > .grid ~ .grid > .b{
+        display: none;
+    }
 
         
 }

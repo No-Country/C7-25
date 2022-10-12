@@ -14,6 +14,7 @@ import BookAppointment from './components/BookAppointment';
 import MyAppointments from './components/MyAppointments';
 import LogOut from './components/LogOut';
 import NotFound from './components/NotFound';
+import Footer from './components/Footer';
 
 //Services
 import {getHome} from './services/API';
@@ -55,6 +56,7 @@ function App() {
             <Route path='/logout' element={<LogOut/>}/>
             <Route path='*' element={<NotFound/>}/>
           </Routes>
+          <Footer/>
         </BrowserRouter>
       </HomeContext.Provider>
     </div>
