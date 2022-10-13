@@ -58,20 +58,20 @@ function SignUp (){
                 <h1 className='signUpTitle'>Registrate</h1>
                 <form onSubmit={handleSubmit} className='signUpForm'>
 
-                    <label className='labelsInputs'>Nombre</label><br/>
-                    <input type='text' name='userName' required="required" className='inputs'/><br/>
+                    <label>Nombre</label><br/>
+                    <input type='text' name='userName' required='required'/><br/>
 
-                    <label className='labelsInputs'>Apellido</label><br/>
-                    <input type='text' name='userLastName' required="required" className='inputs'/><br/>
+                    <label>Apellido</label><br/>
+                    <input type='text' name='userLastName' required='required'/><br/>
 
-                    <label className='labelsInputs'>Documento de Identidad</label><br/>
-                    <input type='number' name='userId' required="required" className='inputs'/><br/>
+                    <label>Documento de Identidad</label><br/>
+                    <input type='number' name='userId' required='required'/><br/>
 
-                    <label className='labelsInputs'>Correo Electrónico</label><br/>
-                    <input type='email' name='userEmail' required="required" className='inputs'/><br/>
+                    <label>Correo Electrónico</label><br/>
+                    <input type='email' name='userEmail' required='required'/><br/>
 
-                    <label className='labelsInputs'>Crear contraseña</label><br/>
-                    <input type='password' name='userPassword' required="required" className='inputs'/><br/>
+                    <label>Crear contraseña</label><br/>
+                    <input type='password' name='userPassword' required='required'/><br/>
 
                     <div className='divSignUpBtn'>
                         <button type='submit' className='btnSignUp'>Registrarse</button>

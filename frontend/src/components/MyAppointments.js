@@ -10,9 +10,7 @@ function MyAppointments(){
     const [myAppointmentsBooked, setMyAppointmentsBooked] = useState([])
 
     useEffect(() => {
-        if(home.categories){
-            getAppt();
-        }
+      getAppt();
     //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [home])
     

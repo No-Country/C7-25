@@ -1,7 +1,6 @@
 import './styles/App.css'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import jwt_decode from "jwt-decode";
 
 //components
 import SignUp from "./components/SignUp";
@@ -15,6 +14,7 @@ import MyAppointments from './components/MyAppointments';
 import LogOut from './components/LogOut';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
+import Forms from './components/Forms';
 
 //Services
 import {getHome} from './services/API';
@@ -24,14 +24,10 @@ document.body.classList.add('pinkPalette');
 console.log('App se esta renderizando');
 
 
+
 function App() {
   const [home, setHome] = useState({});
-  const [roles, setRoles] = useState([]);
-
   useEffect(()=>{
-    var token = localStorage.getItem('token');
-    var decoded = jwt_decode(token);
-    setRoles(decoded.roles);
     async function getHomeJson() {
       let homeJson = await getHome();
       setHome(homeJson);
@@ -39,12 +35,12 @@ function App() {
     getHomeJson();
     //eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
-
   return (
     <div className='background'>
-      <HomeContext.Provider value={{ home, setHome, roles, setRoles }}>
+      <HomeContext.Provider value={{ home, setHome }}>
         <BrowserRouter>
           <Header/>
+          <Forms/>
           <Routes>
             <Route path='/signup' element={<SignUp/>}/>
             <Route path='/login' element={<LogIn/>}/>

@@ -29,6 +29,7 @@ export default function BookAppointment() {
 
   useEffect(()=>{
     if(home.categories){
+      //console.log('tiene algo parece',home);
       let getUrl= new URLSearchParams (window.location.search);
       let indexCategory = getUrl.get('indexCategory');
       let indexService= getUrl.get('indexService');
@@ -40,13 +41,10 @@ export default function BookAppointment() {
   },[home])
 
   //Cambia el calendario cuando currentview cambia
-  useEffect(()=>{
-    //Se dispara cuando se guarda la promesa del UseHomeContext por lo que se ignora verificando si posee contenido
-    if(home[0]){
-      renderCalendar()
-    }
-  //eslint-disable-next-line react-hooks/exhaustive-deps
-  },[currentView])
+  useEffect(()=>
+    renderCalendar()
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  ,[currentView])
 
   //Trae la informacion del back y la almacena
   async function main(idService) {
@@ -55,146 +53,40 @@ export default function BookAppointment() {
     let reserved = await BookAppointmentGetReserved(maxDays);
     setApptSettings(settings);
     setApptReserved(reserved);
-    let app = getAppts(settings,reserved,maxDays);
+    let app = getAppts(settings,maxDays);
     renderCalendar(app); 
   }
 
-  function getAppts(settings,reserved,maxDays) {
+  function getAppts(settings,maxDays) {
 
-    function getDays(){
-      let daysSettings=[];
-      const today = new Date();
-      today.setHours(0,0,0,0);
+    let app=[];
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    let quantity;
+    //
+    for (let i = 0; i < maxDays; i++) {
+      //Para el campo del dia
+      today.setDate(today.getDate()+1);
+      const time = today.getTime();
 
-      for (let i = 0; i < maxDays; i++) {
-        //Para el campo del dia
-        today.setDate(today.getDate()+1);
-        const time = today.getTime();
-        daysSettings.push(time);
-      }
-      return daysSettings;
+      //Para el campo de existencia de turnos
+      quantity = i%2===0;
+      app.push({time,quantity});
     }
-
-    function apptsOfTheDay(sett,reserved,day){ 
-      const apptSettingsId = sett.id;
-      let time=new Date(day);//Tue Sep 27 2022 08:00:00 GMT-0300 (hora estándar de Argentina)
-      //Mejorar esto
-      time.setHours(sett.workdayInit.slice(0,2),sett.workdayInit.slice(3,5),0,0);
-      let appts=[];
-      let ini='';
-      let end='';
-      ini=time.getTime();//time es un objeto por lo que el = crea una referencia, gettime es un literal
-      for (let index = 1; index <= (sett.workdayDuration/sett.apptDuration); index++) {
-    
-        const disp = !reserved.some(obj=> obj.getTime()===time.getTime());//Devuelvo true si el turno no se encuentra reservado
-  
-        time.setTime(time.getTime() + sett.apptDuration*60*1000);//Sumo el tiempo de un turno
-        end=time.getTime();//hr min para el fin del turno
-  
-        //const disp = !reserved.some(obj=> aux===obj.init.slice(11,16)); //comparo los turnos reservados con los turnos del dia
-  
-        appts.push({apptSettingsId,ini,end,disp});//Vector con todos los turnos
-        ini=end;//El fin del turno actual es el inicio del turno siguiente
-      }   
-      return appts;  
-    }
-    
-
-    function processApptSettings(professionalsList,daysSettings){
-      return settings.map((currentSetting,index)=>{
-        //Decodifico los dias habilitados
-        const prime=[2,3,5,7,11,13,17];
-        let daysAvailable = prime.map(num=>currentSetting.daysAvailable%num===0);
-        //Por cada setting agrego los dias con turnos
-        //Matriz con los dias con turnos x los turnos de cada dia
-        let appOfCurrentSetting=[];
-        for (let i = 0; i < currentSetting.daysAhead ; i++) {
-          let currentDay = new Date(daysSettings[i]);
-          //console.log(currentDay,currentDay.getDay(),daysAvailable[currentDay.getDay()]);
-          if(daysAvailable[currentDay.getDay()]){//Si el dia esta configurado para tener turnos
-            //Array de turnos del dia
-            appOfCurrentSetting.push( apptsOfTheDay(currentSetting,reserved,daysSettings[i]) );
-          }else{
-            appOfCurrentSetting.push([]);
-          }
-        }
-        //Agrego el id al array externo profesionalsList
-        professionalsList.push(currentSetting.professionalId);
-        return {currentSetting,appOfCurrentSetting};
-      });
-    }
-
-    function filterProfesionals(profesionalsId,rawApptBySetting){
-
-      return profesionalsId.map(id=>rawApptBySetting.filter(apptSeting=>
-        apptSeting.currentSetting.professionalId===id
-      ));
-
-    }
-
-    function mergeSettings(abPaS){
-      //Itera entre todos los profesionales
-      return abPaS.map(prof=>{
-        const professionalId = prof[0].currentSetting.professionalId;
-        //Una matriz de turnos para cada profesional
-        let matrix=[];
-        for (let i = 0; i < maxDays; i++) {
-          matrix.push([]);
-        }
-        //Itera entre todas las settings
-        prof.map(sett=>{
-          //Itera entre todos los dias 
-          sett.appOfCurrentSetting.forEach((element,index) => {
-            //Como element es un array de turnos necesito disperzarlo para unirlo con los otros
-            matrix[index].push(...element);
-          });
-        });
-        return {professionalId,matrix};
-      });
-    }
-
-    function addDataForRender(rAbPaD,daysSettings){
-      //Itera los profesionales
-      return rAbPaD.map(prof=>{
-        const {professionalId}=prof;
-        //Itera los dias
-        let appointments = prof.matrix.map((day,index)=>{
-          const apptAvalNumer = (day.length>0)?
-            day.reduce((count, appt, index) => 
-              (appt.disp) ?
-                count + 1 
-              : 
-                count
-            ,0) //Valor inicial, de otro modo lo toma al objeto intero como primer valor
-          :
-            0;
-          
-          return {appts:day,apptAvalNumer,timestamp:daysSettings[index]}
-        })
-        if(appointments.length!==daysSettings.length){
-          alert('problema en la logica de turnos');
-        }
-        return {professionalId,appointments}
-      })
-    }
-
-    //Obtengo los dias corridos en ms segun lo indicado en apptSeting
-    const daysSettings = getDays();
-    //Este array es editado por referencia en processApptSettings, posee los id del profesional de cada setting
-    let professionalsList=[];
-    //Obtengo los turnos encapsulados en su setting generadora
-    const apptBySetting = processApptSettings(professionalsList,daysSettings);
-    //Con set se filtra todos los ids repetidos
-    const professionals=Array.from(new Set(professionalsList));
-    //Junta todos los appt y setings con su respectivo profesional
-    let apptByProfessionalsAndSettings = filterProfesionals(professionals,apptBySetting);
-    //Elimina la agrupacion por settings uniendo todos los turnos de un mismo dia
-    let rawApptByProfessionalsAndDays = mergeSettings(apptByProfessionalsAndSettings);
-    //Agrega informacion necesaria para renderizar la vista
-    let apptByProfessionalsAndDays = addDataForRender(rawApptByProfessionalsAndDays,daysSettings);
-    setAppt(apptByProfessionalsAndDays);
-    console.log('APP',apptByProfessionalsAndDays);
-    return apptByProfessionalsAndDays;
+    //Tarea: convertir los apptSettings en turnos
+    ////Uso el codigo que ya tengo y le agrego el id del serv y del prof que estan en el apptsetting
+    //// {...appt,servid,profId}
+    //Tarea: agrupar los turnos por dia
+    ////Con un array de los dias puedo hacer un map y adentro filtrar los dias
+    //Tarea: obtener todos los profesionales del servicio
+    ////Puedo crear un array con los profId de cada appset (push) y al final eliminar los repetidos
+    ////[1,3,2,6,2,1,3,6,2,1,23,6] -> [1,3,2,6,23]
+    //Tarea: obtener los turnos de cada profesional
+    ////Con el array de los profid puedo hacer un map, agregarle los datos del prof y hacer un filter interno para reducir el array de turnos
+    //Fuera de esto necesito un metodo para que conmute los turnos del profesional
+    setAppt(app);
+    console.log('APP',app);
+    return app;
   }
 
   const renderCalendar = (app1) => {
@@ -218,13 +110,14 @@ export default function BookAppointment() {
       0
     );
 
+    //console.log(lastDay,prevLastDay.getDate());
     //Dias del mes anterior
     let number;
     let month=-1;//-1: Mes anterior, 0: Mes actual, 1: Mes siguiente
     if(prevLastDay.getDay() !== 6){
       number = prevLastDay.getDate();
       let date2 = new Date(prevLastDay.getTime());
-      for (let i = prevLastDay.getDay(); i >= 0; i--) {//Recorre desde el ultimo dia del mes anterior
+      for (let i = prevLastDay.getDay(); i > 0; i--) {//Recorre desde el ultimo dia del mes anterior
         let time = date2.getTime();//Guardo el tiempo en ms
         calendar.unshift({number,month,time});
         date2.setDate(date2.getDate()-1);//Resto un dia para la celda anterior
@@ -251,15 +144,17 @@ export default function BookAppointment() {
 
     //Se hace el merge entre apps y calendar
     let calendarAppt = calendar.map((cal,index)=>{
-      let find = app[0].appointments.find(ap=>ap.timestamp===cal.time);//Se traen los turnos del dia si existen
+      let find = app.find(ap=>ap.time===cal.time);//Se traen los turnos del dia si existen
       if(find){
-        let {timestamp,...complement}=find;
+        let {time,...complement}=find;
         return {...cal,...complement}
       }else{
         return {...cal}
       }
+      //console.log('find',find,complement);
       
     });
+    //console.log('calendatAppt',calendarAppt);
 
     //Se agregan los divs correspondiente al mes pasado
     let today=new Date();
@@ -271,10 +166,10 @@ export default function BookAppointment() {
         key={index} 
         className={
           (day.month!==0?'out-month ':'' )
-          +(day.apptAvalNumer?'on ':'')
+          +(day.quantity?'on ':'')
           +(msToday===day.time?'today ':'')
         }
-        onClick={day.apptAvalNumer?()=>apptModal(day):undefined}
+        onClick={day.quantity?()=>apptModal(day):undefined}
       >
         {day.number}
       </div>
@@ -294,6 +189,7 @@ export default function BookAppointment() {
     if(day.month>0){//Si es el mes siguiente
       setCurrentView(day.time);
     }
+    console.log(day.time);
     setApptDay(day.time);
     setModalWindow(1); //Activa el modal de los profesionales
   }

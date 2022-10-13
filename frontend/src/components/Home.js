@@ -3,7 +3,6 @@ import perfilDefault from '../multimedia/profile-picture.png';
 import { Link } from 'react-router-dom';
 import UseHomeContext from '../services/UseHomeContext';
 import img from '../multimedia/manicuria_y_pedicura.jpg'; // borrar
-
 import { MdLocationOn } from 'react-icons/md';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 
@@ -34,8 +33,8 @@ export default function Home() {
                     <div key={indexCategory} className='category'>
                         
                         <div>
-                            <h3>{eachCategory.category}</h3>{/*(eachCategory.photo!=='')?images('./'+eachCategory.photo):px*/}
-                            <img src={eachCategory.photo} alt='Service' className='serviceImg'/>
+                            <h3>{eachCategory.category}</h3>
+                            <img src={img} alt='Service' className='serviceImg'/>
                         </div>
                         
                         <div className='divListServices'>

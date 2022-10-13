@@ -15,24 +15,96 @@
         letter-spacing: 2px;
         color: rgba(128, 92, 78, 1);
         text-align: center;
-        font-size: 26px;
-        padding: 30px;
+        font-size: 30px;
+        padding: 80px 0px 20px 0px;
+    }
+    #pNotFound{
+        font-family: 'Poppins', sans-serif;
+    }
+    #goToHomeBtn{   
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        border-radius: 10px;
+        border: none;
+        height: 35px;
+        background-color: rgb(102, 77, 67);
+        color: rgba(247, 211, 197, 1);
+        cursor: pointer;
+        margin-top: 30px;
+        padding: 0px 15px;
+    }
+}
+
+/* MEDIUM */
+@media (min-width:501px) and (max-width:900.99px){
+    .divContainerNotFound{
+        margin: 0px;
+        height: 100vh;
+        text-align: center;
+    }
+    .notFoundTitle{
+        margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: bolder;
+        letter-spacing: 3.5px;
+        color: rgba(128, 92, 78, 1);
+        text-align: center;
+        font-size: 35px;
+        padding: 80px 0px 30px 0px;
     }
     #pNotFound{
         font-family: 'Poppins', sans-serif;
     }
     #goToHomeBtn{
         font-family: 'Poppins', sans-serif;
-        background-color: #fff;
+        font-weight: 400;
+        font-size: 16px;
+        border-radius: 10px;
+        border: none;
+        height: 35px;
+        background-color: rgb(102, 77, 67);
+        color: rgba(247, 211, 197, 1);
         cursor: pointer;
+        margin-top: 30px;
+        letter-spacing: 1px;
+        padding: 0px 15px;
     }
-}
-
-/* MEDIUM */
-@media (min-width:501px) and (max-width:900.99px){
     
 }
 
 /* LARGE */
 @media (min-width:901px) and (max-width:2500px){
+    .divContainerNotFound{
+        margin: 0px;
+        height: 100vh;
+        text-align: center;
+    }
+    .notFoundTitle{
+        margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: bolder;
+        letter-spacing: 4px;
+        color: rgba(128, 92, 78, 1);
+        text-align: center;
+        font-size: 35px;
+        padding: 80px 0px 30px 0px;
+    }
+    #pNotFound{
+        font-family: 'Poppins', sans-serif;
+    }
+    #goToHomeBtn{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        border-radius: 10px;
+        border: none;
+        height: 35px;
+        background-color: rgb(102, 77, 67);
+        color: rgba(247, 211, 197, 1);
+        cursor: pointer;
+        margin-top: 30px;
+        letter-spacing: 1px;
+        padding: 0px 15px;
+    }
 }

@@ -22,15 +22,15 @@
         border-radius: 50px;
         margin: 0px 10%;
         padding: 40px 30px;
-
     }
-    .labelsInputsSingUp{
+
+    .signUpForm > label{
         font-family: 'Poppins', sans-serif;
         font-weight: 300;
         font-size: 14px;
         color: white;
     }
-    .inputs{
+    .signUpForm > input{
         border: 0.8px;
         background: none;
         border-bottom: 1px solid black;
@@ -46,9 +46,9 @@
         font-size: 15px;
         border-radius: 10px;
         border: none;
-        height: 30px;
         background-color: rgba(247, 211, 197, 1);
         color: rgb(102, 77, 67);
+        padding: 3px 15px;
     }
     .btnSignUp:hover{
         cursor: pointer;
@@ -63,49 +63,105 @@
         padding-bottom: 30px;
     }
     .signUpTitle{
+        margin: 0px;
         font-family: 'Poppins', sans-serif;
-        font-weight: 300;
-        color: rgba(168, 132, 118, 1);
+        font-weight: bolder;
+        letter-spacing: 3px;
+        color: rgba(128, 92, 78, 1);
         text-align: center;
-        font-size: 22px;
+        font-size: 30px;
+        padding: 30px
     }
     .signUpForm{
         background-color: rgba(22, 22, 22, 0.348);
         border-radius: 50px;
         margin: 0px 15%;
-        padding: 40px 30px;
+        padding: 60px 50px 30px 50px;
     }
-    .labelsInputsSingUp{
+    .signUpForm > label{
         font-family: 'Poppins', sans-serif;
-        font-weight: 400;
-        font-size: 18px;
+        font-weight: 300;
+        font-size: 16px;
         color: white;
     }
-    .inputs{
+    .signUpForm > input{
         border: 0.8px;
         background: none;
         border-bottom: 1px solid black;
         width: 100%;
         margin: 15px 0px  50px 0px;
     }
-    .divBtnSignUp{
+    .divSignUpBtn{
         text-align: center;
     }
     .btnSignUp{
         font-family: 'Poppins', sans-serif;
-        font-weight: 600;
-        font-size: 18px;
+        font-weight: 400;
+        font-size: 17px;
+        letter-spacing: 1px;
         border-radius: 10px;
         border: none;
-        height: 30px;
         background-color: rgba(247, 211, 197, 1);
         color: rgb(102, 77, 67);
+        padding: 4px 15px;
     }
     .btnSignUp:hover{
         cursor: pointer;
+        font-weight: bold;
     }
 }
 
 /* LARGE */
 @media (min-width:901px) and (max-width:2500px){
+    .divContainerSignUp{
+        margin: 0px;
+        padding-bottom: 30px;
+    }
+    .signUpTitle{
+        margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: bolder;
+        letter-spacing: 3.5px;
+        color: rgba(128, 92, 78, 1);
+        text-align: center;
+        font-size: 35px;
+        padding: 30px;
+    }
+    .signUpForm{
+        background-color: rgba(22, 22, 22, 0.348);
+        border-radius: 50px;
+        margin: 0px 25%;
+        padding: 60px 60px 30px 60px;
+    }
+    .signUpForm > label{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        color: white;
+    }
+    .signUpForm > input{
+        border: 0.8px;
+        background: none;
+        border-bottom: 1px solid black;
+        width: 100%;
+        margin: 15px 0px  50px 0px;
+    }
+    .divSignUpBtn{
+        text-align: center;
+    }
+    .btnSignUp{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 17px;
+        letter-spacing: 1px;
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(247, 211, 197, 1);
+        color: rgb(102, 77, 67);
+        padding: 5px 20px;
+    }
+    .btnSignUp:hover{
+        cursor: pointer;
+        font-weight: bold;
+    }
 }
