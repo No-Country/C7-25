@@ -16,16 +16,11 @@ export default function BookAppointment() {
   const [apptDay, setApptDay] = useState((new Date()).getTime());//Dia seleccionado en el calendario
   const [apptReserved, setApptReserved] = useState([]); //Lista de turnos reservados
   const [apptSettings, setApptSettings] = useState([]); //Lista de configuraciones para los turnos
-  const [appt, setAppt] = useState([]); //Lista de turnos
+  const [masterAppt, setMasterAppt] = useState([]); //Lista de profesionales con sus respectivos turnos
+  const [appt, setAppt] = useState([]); //Lista de turnos de un profesional en particular
   const [modalWindow, setModalWindow] = useState(0); //0:Sin modal, 1:Modal profesionales, 2:Modal turnos
   const [idService, setIdService] = useState(); //Id del servicio seleccionado
   const [idProfessional, setIdProfessional] = useState() //Id del profesional
-
-  /*//Los pedidos al back solo se realizan en la primera carga
-  useEffect(() => {
-    main();
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])*//* parece que no hace falta porque home siempre demora mas y se dispara despues */
 
   useEffect(()=>{
     if(home.categories){
@@ -51,12 +46,21 @@ export default function BookAppointment() {
   //Trae la informacion del back y la almacena
   async function main(idService) {
     let settings = await BookAppointmentGetApptSettings(idService);
+    //Si el servicio no tiene turnos no se continua
+    if(settings.length===0){
+      return
+    }
     const maxDays = settings.reduce((acc,cur)=>Math.max(acc.daysAhead?acc.daysAhead:acc,cur.daysAhead));//Cantidad de dias con turnos
     let reserved = await BookAppointmentGetReserved(maxDays);
     setApptSettings(settings);
     setApptReserved(reserved);
     let app = getAppts(settings,reserved,maxDays);
-    renderCalendar(app); 
+    //Si el servicio tiene un solo profesional se lo selecciona automaticamente
+    if(app.length===1){
+      setAppt(app[0]);
+      renderCalendar(app);
+      setModalWindow(1);
+    }
   }
 
   function getAppts(settings,reserved,maxDays) {
@@ -110,7 +114,6 @@ export default function BookAppointment() {
         let appOfCurrentSetting=[];
         for (let i = 0; i < currentSetting.daysAhead ; i++) {
           let currentDay = new Date(daysSettings[i]);
-          //console.log(currentDay,currentDay.getDay(),daysAvailable[currentDay.getDay()]);
           if(daysAvailable[currentDay.getDay()]){//Si el dia esta configurado para tener turnos
             //Array de turnos del dia
             appOfCurrentSetting.push( apptsOfTheDay(currentSetting,reserved,daysSettings[i]) );
@@ -153,9 +156,9 @@ export default function BookAppointment() {
       });
     }
 
-    function addDataForRender(rAbPaD,daysSettings){
+    function addDataForRender(rAbPaD,daysSettings,professionals){
       //Itera los profesionales
-      return rAbPaD.map(prof=>{
+      return rAbPaD.map((prof,index0)=>{
         const {professionalId}=prof;
         //Itera los dias
         let appointments = prof.matrix.map((day,index)=>{
@@ -174,7 +177,7 @@ export default function BookAppointment() {
         if(appointments.length!==daysSettings.length){
           alert('problema en la logica de turnos');
         }
-        return {professionalId,appointments}
+        return {professional:professionals[index0],appointments}
       })
     }
 
@@ -186,14 +189,15 @@ export default function BookAppointment() {
     const apptBySetting = processApptSettings(professionalsList,daysSettings);
     //Con set se filtra todos los ids repetidos
     let professionals=Array.from(new Set(professionalsList));
-    //professionals = professionals.map(id=>);
     //Junta todos los appt y setings con su respectivo profesional
     let apptByProfessionalsAndSettings = filterProfesionals(professionals,apptBySetting);
+    //convierte el array de ids en array de profesionales
+    professionals = professionals.map(id=>home.professionals.find(pro=> pro.id===id));
     //Elimina la agrupacion por settings uniendo todos los turnos de un mismo dia
     let rawApptByProfessionalsAndDays = mergeSettings(apptByProfessionalsAndSettings);
     //Agrega informacion necesaria para renderizar la vista
-    let apptByProfessionalsAndDays = addDataForRender(rawApptByProfessionalsAndDays,daysSettings);
-    setAppt(apptByProfessionalsAndDays);
+    let apptByProfessionalsAndDays = addDataForRender(rawApptByProfessionalsAndDays,daysSettings,professionals);
+    setMasterAppt(apptByProfessionalsAndDays);
     console.log('APP',apptByProfessionalsAndDays);
     return apptByProfessionalsAndDays;
   }
@@ -291,57 +295,60 @@ export default function BookAppointment() {
   }
 
   function apptModal(day) {
-    //let aux = new Date(currentView);
     if(day.month>0){//Si es el mes siguiente
       setCurrentView(day.time);
     }
     setApptDay(day.time);
-    setModalWindow(1); //Activa el modal de los profesionales
+    setModalWindow(2); //Activa el modal de los profesionales
   }
 
   return (
     <div className='masterContainer'>
       <ModalProfessional 
-        apptDay={apptDay} 
+        masterAppt={masterAppt}
+        setAppt={setAppt}
         setModalWindow={setModalWindow}
         setIdProfessional={setIdProfessional}
+        professionals={masterAppt.map(pro=>pro.professional)}
       />
-      <div className="calendar">
-        <div className="month">
-          <AiFillCaretLeft onClick={()=>changeMonth(-1)} className="fas fa-angle-left prev"/>
-          <div>
-            <h1>{jsDateToYearMonth(currentView)}</h1>
-            <p>{jsDateToText((new Date()).getTime())}</p>
-          </div>
-          <AiFillCaretRight onClick={()=>changeMonth(1)} className="fas fa-angle-right next"/>
-        </div>
-        <div className="weekdays">
-          <div>Dom</div>
-          <div>Lun</div>
-          <div>Mar</div>
-          <div>Mié</div>
-          <div>Jue</div>
-          <div>Vie</div>
-          <div>Sáb</div>
-        </div>
-        <div className="days">
-          {days.map((day)=>
-            day
-          )}
-        </div>
-      </div>
       {
-        (apptSettings[0] && modalWindow===2)?
+        (apptSettings[0] && (modalWindow>0))?
+          <div className="calendar">
+            <div className="month">
+              <AiFillCaretLeft onClick={()=>changeMonth(-1)}/>
+              <div>
+                <h1>{jsDateToYearMonth(currentView)}</h1>
+                <p>{jsDateToText((new Date()).getTime())}</p>
+              </div>
+              <AiFillCaretRight onClick={()=>changeMonth(1)}/>
+            </div>
+            <div className="weekdays">
+              <div>Dom</div>
+              <div>Lun</div>
+              <div>Mar</div>
+              <div>Mié</div>
+              <div>Jue</div>
+              <div>Vie</div>
+              <div>Sáb</div>
+            </div>
+            <div className="days">
+              {days.map((day)=>
+                day
+              )}
+            </div>
+          </div>
+        :
+          <></>
+      }
+      {
+        (modalWindow===2)?
           <ModalAppt 
-            apptSettings={apptSettings[0]} 
+            appt={appt}
             apptDay={apptDay} 
-            apptReserved={apptReserved}
             idService={idService}
-            idProfessional={idProfessional}
           />
         :
           <></>
-        
       }
 
     </div>

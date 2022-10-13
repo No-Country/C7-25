@@ -13,7 +13,14 @@ export default function Home() {
   let servicesArray=home.categories || [];
   let professionalsArray=home.professionals || [];
 
-
+    function Editar() {
+        return(
+            <div className='editar'>
+                
+            </div>
+        )
+    }
+  
   return (
     <div className='divContainerHome'>
 
@@ -34,7 +41,7 @@ export default function Home() {
                     <div key={indexCategory} className='category'>
                         
                         <div>
-                            <h3>{eachCategory.category}</h3>{/*(eachCategory.photo!=='')?images('./'+eachCategory.photo):px*/}
+                            <h3>{eachCategory.category}</h3>
                             <img src={eachCategory.photo} alt='Service' className='serviceImg'/>
                         </div>
                         
@@ -44,7 +51,7 @@ export default function Home() {
                                 return(
                                     <ul className='servicesList' key={indexService}>
                                       <Link to={`/detalles?idCategory=${indexCategory}&idServicio=${indexService}`}>
-                                        <li className='eachServiceList'> • {service.name}</li>
+                                        <li className='eachServiceList'> • {service.name}</li><Editar/>
                                       </Link>
                                     </ul>
                                 )

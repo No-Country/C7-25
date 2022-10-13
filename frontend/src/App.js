@@ -30,8 +30,12 @@ function App() {
 
   useEffect(()=>{
     var token = localStorage.getItem('token');
-    var decoded = jwt_decode(token);
-    setRoles(decoded.roles);
+    console.log('token',token);
+    if(token){
+      var decoded = jwt_decode(token);
+      setRoles(decoded.roles);
+    }
+
     async function getHomeJson() {
       let homeJson = await getHome();
       setHome(homeJson);
