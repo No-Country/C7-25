@@ -1,0 +1,32 @@
+.formForms{
+    background-color: rgba(22, 22, 22, 0.348);
+    border-radius: 50px;
+    margin: 0px 10%;
+    padding: 40px 30px;
+}
+
+.formForms > label{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: white;
+}
+
+.formForms > input{
+    border: 0.8px;
+    background: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    margin: 15px 0px  50px 0px;
+}
+
+.divCheckbox{
+    padding: 10px 0px 25px 0px;
+}
+.divCheckbox > label{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: rgb(19, 19, 19);
+    font-weight: 400;
+}
