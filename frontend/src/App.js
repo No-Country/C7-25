@@ -15,6 +15,7 @@ import MyAppointments from './components/MyAppointments';
 import LogOut from './components/LogOut';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
+import Forms from './components/Forms';
 
 //Services
 import {getHome} from './services/API';
@@ -22,6 +23,7 @@ import HomeContext from './services/HomeContext';
 
 document.body.classList.add('pinkPalette');
 console.log('App se esta renderizando');
+
 
 
 function App() {
@@ -43,12 +45,12 @@ function App() {
     getHomeJson();
     //eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
-
   return (
     <div className='background'>
-      <HomeContext.Provider value={{ home, setHome, roles, setRoles }}>
+      <HomeContext.Provider value={{ home, setHome, roles, setRoles  }}>
         <BrowserRouter>
           <Header/>
+          <Forms/>
           <Routes>
             <Route path='/signup' element={<SignUp/>}/>
             <Route path='/login' element={<LogIn/>}/>

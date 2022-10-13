@@ -3,7 +3,6 @@ import perfilDefault from '../multimedia/profile-picture.png';
 import { Link } from 'react-router-dom';
 import UseHomeContext from '../services/UseHomeContext';
 import img from '../multimedia/manicuria_y_pedicura.jpg'; // borrar
-
 import { MdLocationOn } from 'react-icons/md';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 

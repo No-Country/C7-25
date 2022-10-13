@@ -26,13 +26,13 @@
         padding: 40px 30px 20px 30px;
 
     }
-    .labelsInputsLogIn{
+    .logInForm > label{
         font-family: 'Poppins', sans-serif;
         font-weight: 300;
         font-size: 14px;
         color: white;
     }
-    .inputsLogIn{
+    .logInForm > input{
         border: 0.8px;
         background: none;
         border-bottom: 1px solid black;
@@ -51,7 +51,7 @@
         font-size: 15px;
         border-radius: 10px;
         border: none;
-        height: 30px;
+        padding: 3px 8px;
         background-color: rgba(247, 211, 197, 1);
         color: rgb(102, 77, 67);
         cursor: pointer;
@@ -102,13 +102,13 @@
         padding: 70px 50px 20px 50px;
 
     }
-    .labelsInputsLogIn{
+    .logInForm > label{
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
         font-size: 15px;
         color: white;
     }
-    .inputsLogIn{
+    .logInForm > input{
         border: 0.8px;
         background: none;
         border-bottom: 1px solid black;
@@ -125,9 +125,9 @@
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
         font-size: 16px;
-        border-radius: 10px;
+        border-radius: 15px;
         border: none;
-        height: 35px;
+        padding: 4px 15px;
         background-color: rgba(247, 211, 197, 1);
         color: rgb(102, 77, 67);
         cursor: pointer;
@@ -166,27 +166,27 @@
         margin: 0px;
         font-family: 'Poppins', sans-serif;
         font-weight: bolder;
-        letter-spacing: 3px;
+        letter-spacing: 3.5px;
         color: rgba(128, 92, 78, 1);
         text-align: center;
-        font-size: 30px;
+        font-size: 35px;
         padding: 30px;
     }
 
     .logInForm{
         background-color: rgba(22, 22, 22, 0.348);
         border-radius: 50px;
-        margin: 0px 30%;
-        padding: 70px 50px 20px 50px;
+        margin: 0px 28%;
+        padding: 60px 50px 20px 50px;
 
     }
-    .labelsInputsLogIn{
+    .logInForm > label{
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
         font-size: 15px;
         color: white;
     }
-    .inputsLogIn{
+    .logInForm > input{
         border: 0.8px;
         background: none;
         border-bottom: 1px solid black;
@@ -203,9 +203,9 @@
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
         font-size: 16px;
-        border-radius: 10px;
+        border-radius: 15px;
         border: none;
-        height: 35px;
+        padding: 4px 15px;
         background-color: rgba(247, 211, 197, 1);
         color: rgb(102, 77, 67);
         cursor: pointer;

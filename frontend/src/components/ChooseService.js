@@ -12,23 +12,27 @@ function ChooseService (){
             <h1 className="chooseServiceTitle">Elije un Servicio</h1>
             {servicesArray.map((eachCategory, indexCategory)=>{
                 return(
-                    <div key={indexCategory} className='divChooseServiceGrid'>
-                        <div>
-                            <img src={eachCategory.photo} alt='Service Img'/>
-                        </div>
+                    <div>
+                        <h2 className="serviceCategory">{eachCategory.category}</h2>
+                        
+                            <div key={indexCategory} className='divChooseServiceGrid'>
+                                <div className='divChooseService1'>
+                                    <img src={eachCategory.photo} alt='Service Img' className='imgChooseService'/>
+                                </div>
 
-                        <div>
-                            <h2 className="serviceCategory">{eachCategory.category}</h2>
-                            {eachCategory.services.map((eachService, indexService)=>{
-                                return(
-                                    <ul key={indexService}>
-                                        <li className="listOfServices">
-                                            <Link to={`/reservarturno?indexCategory=${indexCategory}&indexService=${indexService}`}>{eachService.name}</Link>
-                                        </li>
-                                    </ul>
-                                )
-                            })}
-                        </div>
+                                <div className='divChooseService2'>
+                                    
+                                    {eachCategory.services.map((eachService, indexService)=>{
+                                        return(
+                                            <ul key={indexService} className='ulListOfServices'>
+                                                <li>
+                                                    <Link to={`/reservarturno?indexCategory=${indexCategory}&indexService=${indexService}`}> • {eachService.name}</Link>
+                                                </li>
+                                            </ul>
+                                        )
+                                    })}
+                                </div>
+                            </div>
                     </div>
                 )
             })}
