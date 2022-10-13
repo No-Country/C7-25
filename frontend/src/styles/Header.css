@@ -129,7 +129,7 @@ nav > div > a:hover{
         height: 100%;
         list-style: none;
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         align-items: center;
         text-align: center;
         justify-content: center;
@@ -141,7 +141,7 @@ nav > div > a:hover{
         list-style: none;
         font-family: 'Poppins', sans-serif;
         font-weight: 300;
-        font-size: 14.5px;
+        font-size: 13.5px;
         padding-left: 2px;
         margin-left: 3px;
     }
@@ -161,7 +161,7 @@ nav > div > a:hover{
         margin: 0px;
         background-color: rgba(206, 170, 154, 1);
         display: grid;
-        grid-template-columns: 2fr 3fr;
+        grid-template-columns: 2fr 4fr;
     } 
     .brandName{
         font-weight: 300;

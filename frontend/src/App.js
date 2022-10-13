@@ -50,7 +50,7 @@ function App() {
       <HomeContext.Provider value={{ home, setHome, roles, setRoles  }}>
         <BrowserRouter>
           <Header/>
-          <Forms/>
+          {/*<Forms/>*/}
           <Routes>
             <Route path='/signup' element={<SignUp/>}/>
             <Route path='/login' element={<LogIn/>}/>

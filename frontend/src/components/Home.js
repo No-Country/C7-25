@@ -3,6 +3,7 @@ import perfilDefault from '../multimedia/profile-picture.png';
 import { Link } from 'react-router-dom';
 import UseHomeContext from '../services/UseHomeContext';
 import img from '../multimedia/manicuria_y_pedicura.jpg'; // borrar
+
 import { MdLocationOn } from 'react-icons/md';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 
@@ -12,14 +13,7 @@ export default function Home() {
   let servicesArray=home.categories || [];
   let professionalsArray=home.professionals || [];
 
-    function Editar() {
-        return(
-            <div className='editar'>
-                
-            </div>
-        )
-    }
-  
+
   return (
     <div className='divContainerHome'>
 
@@ -40,7 +34,7 @@ export default function Home() {
                     <div key={indexCategory} className='category'>
                         
                         <div>
-                            <h3>{eachCategory.category}</h3>
+                            <h3>{eachCategory.category}</h3>{/*(eachCategory.photo!=='')?images('./'+eachCategory.photo):px*/}
                             <img src={eachCategory.photo} alt='Service' className='serviceImg'/>
                         </div>
                         
@@ -50,7 +44,7 @@ export default function Home() {
                                 return(
                                     <ul className='servicesList' key={indexService}>
                                       <Link to={`/detalles?idCategory=${indexCategory}&idServicio=${indexService}`}>
-                                        <li className='eachServiceList'> • {service.name}</li><Editar/>
+                                        <li className='eachServiceList'> • {service.name}</li>
                                       </Link>
                                     </ul>
                                 )
