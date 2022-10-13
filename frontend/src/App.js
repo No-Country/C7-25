@@ -1,6 +1,7 @@
 import './styles/App.css'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from 'react';
+import jwt_decode from "jwt-decode";
 
 //components
 import SignUp from "./components/SignUp";
@@ -27,7 +28,16 @@ console.log('App se esta renderizando');
 
 function App() {
   const [home, setHome] = useState({});
+  const [roles, setRoles] = useState([]);
+
   useEffect(()=>{
+    var token = localStorage.getItem('token');
+    console.log('token',token);
+    if(token){
+      var decoded = jwt_decode(token);
+      setRoles(decoded.roles);
+    }
+
     async function getHomeJson() {
       let homeJson = await getHome();
       setHome(homeJson);
@@ -37,7 +47,7 @@ function App() {
   },[])
   return (
     <div className='background'>
-      <HomeContext.Provider value={{ home, setHome }}>
+      <HomeContext.Provider value={{ home, setHome, roles, setRoles  }}>
         <BrowserRouter>
           <Header/>
           <Forms/>

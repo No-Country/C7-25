@@ -1,4 +1,28 @@
 
+.modal{
+  background-color: #0005;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  transition: 0.3s;
+}
+.modalContainer{
+  background-color: var(--fondo-color);
+  padding: 2rem;
+}
+.modalContainer > h3{
+  color: var(--text-fondo-color);
+}
+.modalBtn{
+  
+}
+
 /*//////////////////////////////*/
 .dayCalendarContainer{
   width: 300px;
@@ -62,6 +86,10 @@
 .clickList>div:nth-child(2){
   max-width: 25%;
   margin: 0 10%;
+}
+.apptCero{
+  font-size: 1.4rem;
+  color: var(--text-fondo-color);
 }
 
 /*.time{

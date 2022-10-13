@@ -1,54 +1,57 @@
 import React, { useEffect, useState } from 'react';
-import {BookAppointmentSaveAppt} from '../services/API'
-import {jsDateToHsMin, jsDateToText} from '../services/DateTime'
+import { useNavigate } from 'react-router-dom';
+import {BookAppointmentSaveAppt} from '../services/API';
+import {jsDateToHsMin, jsDateToText} from '../services/DateTime';
+import Modal from './Modal';
 
-export default function ModalAppt({apptSettings, apptDay, apptReserved,idService,idProfessional}) {
+
+export default function ModalAppt({appt, apptDay, idService}) {
   const [apptDisp, setApptDisp] = useState([]);//Lista de turnos a mostrar
-
-  useEffect(()=>
-    setApptDisp(appt(apptReserved))
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  ,[apptDay,apptSettings])
-
-  //usar usestate para la fecha
-  //Para crear el rango de hs de cada turno
-  function appt(reserved){ 
-    let time=new Date(apptDay);//Tue Sep 27 2022 08:00:00 GMT-0300 (hora estándar de Argentina)
-
-    //Mejorar esto
-    time.setHours(apptSettings.workdayInit.slice(0,2),apptSettings.workdayInit.slice(3,5),0,0);
-    let appts=[];
-    let ini='';
-    let end='';
-    ini=time.getTime();//time es un objeto por lo que el = crea una referencia, gettime es un literal
-    for (let index = 1; index <= (apptSettings.workdayDuration/apptSettings.apptDuration); index++) {
+  const [modalData, setModalData] = useState({});
+  let navigate = useNavigate();
   
-      const disp = !reserved.some(obj=> obj.getTime()===time.getTime());//Devuelvo true si el turno no se encuentra reservado
-
-      time.setTime(time.getTime() + apptSettings.apptDuration*60*1000);//Sumo el tiempo de un turno
-      end=time.getTime();//hr min para el fin del turno
-
-      //const disp = !reserved.some(obj=> aux===obj.init.slice(11,16)); //comparo los turnos reservados con los turnos del dia
-
-      appts.push({ini,end,disp});//Vector con todos los turnos
-      ini=end;//El fin del turno actual es el inicio del turno siguiente
-    }   
-    return appts;  
-  }
+  useEffect(()=>{
+    let arr=appt.appointments;
+    let resp = arr.find(day=>day.timestamp===apptDay);
+    setApptDisp(resp.appts);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  },[apptDay])
 
   //Guarda el turno en la db
-  async function saveAppt(apptm,index) {
-    let resp = await BookAppointmentSaveAppt(apptm,apptSettings,idService,idProfessional);
+  async function saveAppt(apptm) {
+    const idProfessional =appt.professional.id
+    console.log('idProfessional',)
+
+    let resp = await BookAppointmentSaveAppt(apptm,idService,idProfessional);
     if(resp.status===201){ //Si la operacion se realizo con exito
-      let aux = [...apptDisp];
-      aux[index].disp=false;
-      setApptDisp(aux);
+      let data = { 
+        msj:'Turno confirmado',
+        showBtn:false,
+        modal:true
+      }
+      setModalData(data);
+      setTimeout(() => {
+        navigate('/misturnos');
+      }, 2000);
     }
   }
 
+  function modalJson(turn) {
+    let data = { 
+      func:saveAppt,
+      msj:'Desea confirmar este turno?',
+      showBtn:true,
+      params:turn,
+      modal:true
+    }
+    setModalData(data);
+  }
+
+  console.log('apptDispapptDisp',apptDisp,apptDay);
 
   return (
     <div>
+      <Modal props={modalData}/>
       <div className='dayCalendarContainer'>
         <div className='head flexRow'>Elije un horario</div>
         <div className='date flexRow'>{jsDateToText(apptDay)}</div>
@@ -59,7 +62,7 @@ export default function ModalAppt({apptSettings, apptDay, apptReserved,idService
                 <div>{jsDateToHsMin(turn.ini)+ ' a ' +jsDateToHsMin(turn.end)}</div>
                 {
                   turn.disp?
-                    <div className='apptBtn' onClick={()=>saveAppt(turn, index)}>Reservar</div>
+                    <div className='apptBtn' onClick={()=>modalJson(turn)}>Reservar</div>
                     :
                     <div className='ghostBtn'></div>
                 }

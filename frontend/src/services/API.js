@@ -15,17 +15,12 @@ export async function getHome() {
 }
 
 //Falta agregar a la lista de turnos tomados
-export async function BookAppointmentSaveAppt(apptm,apptSettings,serviceId,professionalId) {
-  let apptSettingsId=apptSettings.id;
-  /////////////HARDCODEO//////////////////
-  let userId;
-  ////////////////////////////////////////
-  //Devido a que Springboot 
-  const jsDate= new Date(apptm.ini);
-  let ini = jsDate.toISOString();
-  jsDate.setTime(jsDate.getTime() + apptSettings.apptDuration*60*1000);
-  let end = jsDate.toISOString();
-  const turn={ ini,end,serviceId,apptSettingsId,professionalId,userId}
+export async function BookAppointmentSaveAppt(apptm,serviceId,professionalId) {
+
+  const ini = (new Date(apptm.ini)).toISOString();
+  const end = (new Date(apptm.end)).toISOString();
+  const apptSettingsId = apptm.apptSettingsId
+  const turn={ini,end,serviceId,apptSettingsId,professionalId}
 
   try {
       const token = localStorage.getItem('token');
@@ -34,7 +29,8 @@ export async function BookAppointmentSaveAppt(apptm,apptSettings,serviceId,profe
           Authorization : `Bearer ${token}`
         } 
       }
-      const UserusedUrlAPI=`${domain}/appt/save`;
+      const email = localStorage.getItem('email');
+      const UserusedUrlAPI=`${domain}/appt/save/${email}`;
       const resp = await axios.post(UserusedUrlAPI,turn,config);
       return resp;
   } catch (error) {
@@ -47,7 +43,6 @@ export async function BookAppointmentGetReserved(maxDays) {
   //let daysAhead=settings.reduce((acc,cur)=>Math.max(acc.daysAhead?acc.daysAhead:acc,cur.daysAhead));//cur.daysAhead>acc?cur.daysAhead:acc)
   //***//console.log('acc',daysAhead,settings[0].daysAhead);
   //Obtengo el periodo de turnos activos
-  console.log('maxDays',maxDays);
   const day=new Date();
   day.setHours(0,0,0,0);
   const T1=day.toISOString();
@@ -77,7 +72,8 @@ export async function BookAppointmentGetApptSettings(idService) {
 
 export async function userAppt() {
   try {
-    const urlAPI=`${domain}/appt/userappt`;
+    const email = localStorage.getItem('email');
+    const urlAPI=`${domain}/appt/userappt/${email}`;
     const resp = await axios.get(urlAPI);
     return resp.data;
   }
@@ -158,11 +154,3 @@ export async function SignUpIsEmailNotAvailable(inputEmail) {
       console.log('Error: '+ error);
   }
 }
-
-
-
-/*const val2=273;
-//Convierte un numero en un vector por el metodo de los numeros primos
-const prime=[2,3,5,7,11,13,17];
-let decod = (val) => prime.map(num=>val%num===0);
-let open=decod(val2);*/
