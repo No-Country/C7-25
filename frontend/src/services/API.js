@@ -83,6 +83,19 @@ export async function userAppt() {
   }
 }
 
+export async function profAppt() {
+  try {
+    const email = localStorage.getItem('email');
+    const urlAPI=`${domain}/appt/profappt/${email}`;
+    const resp = await axios.get(urlAPI);
+    return resp.data;
+  }
+
+  catch (error) {
+      console.log('Error: '+ error);
+  }
+}
+
 export async function logIn(bodyAPI){
   
   const urlAPI= `${domain}/auth/login`;
@@ -149,5 +162,19 @@ export async function SignUpIsEmailNotAvailable(inputEmail) {
 
   catch (error) {
       console.log('Error: '+ error);
+  }
+}
+
+
+export async function EditInfo(data){
+  
+  try {
+    const urlAPI = `${domain}/appt/savesettings`;
+    const resp = await axios.post(urlAPI,data);
+    return resp;
+  }
+
+  catch (error) {
+    console.log('Error: '+ error);
   }
 }

@@ -1,6 +1,6 @@
 import {useNavigate } from 'react-router-dom';
 import '../styles/SignUp.css';
-import {signUp, SignUpIsEmailNotAvailable} from '../services/API'
+import {signUp, SignUpIsEmailNotAvailable} from '../services/API';
 
 function SignUp (){
 

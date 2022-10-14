@@ -34,6 +34,15 @@ function Header() {
                     <li className='liHeader'>
                         <Link to='/misturnos'>Mis turnos</Link><hr/>
                     </li>
+                    {
+                        (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))? 
+                            <li className='liHeader'>
+                                <Link to='/misturnos'>Turnos de clientes</Link><hr/>
+                            </li>
+                        :
+                            <></>
+                    }
+
                     <li onClick={logOut} className='liHeader'>
                         Cerrar sesión
                     </li>

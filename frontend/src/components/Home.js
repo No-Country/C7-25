@@ -31,26 +31,29 @@ export default function Home() {
         )
     }
 
-    function Edit(){
+    function Edit({type,indexCategory,indexService}){
         return (
-            <div>
+            <div onClick={()=>showForm(type,indexCategory,indexService)}>
                 <VscEdit/>
             </div>
         )
     }
 
-    function showForm(tipe,categoriId,serviceId){
-        /*let rute,data;
+    function showForm(tipe,indexCategory,indexService){
+        let rute;
+        let data={
+            type:'a1',indexCategory:'a1',indexService:'a1'
+        }
         if (tipe==='home') {
-            rute=''
+            rute='/editinfo';
         }
         if (tipe==='category') {
-            
+            rute='/editinfo';
         }
         if (tipe==='service') {
-            rute=
+            rute='/editinfo';
         }
-        navigate(rute,data)*/
+        navigate(rute,{state:data})
     }
 
   return (
@@ -72,7 +75,9 @@ export default function Home() {
         </div>
 
 
-        <h1 className='homeTitle'>{home.name} Estética</h1>
+        <h1 className='homeTitle'>{home.name} Estética</h1>                            
+        <Edit type={'category'}/>
+
         <aside className='asideData'> 
             <p id='adress'><MdLocationOn className='iconsData'/> {home.adress}</p>
             <p id='cellphoneNumber'><AiOutlineWhatsApp className='iconsData'/> {home.telephone}</p>
@@ -80,7 +85,7 @@ export default function Home() {
         
         <p className='description'> hbjjhbjhb jhbjh bjhbjhbj hbjhbjh bh bhb hb jhbjh bjh bj jh bjh b bibi uhi uh iuh iuhihih iuhu hiuhiuhiub hb hbi ub ibi biu b iu bi biu b iu uiui iuhuuh uhipnjknlkn bhbhl blb lkjbj j jbjkjjkb{home.description} </p>
 
-        <h2 className='homeSubtitles'>Nuestros servicios</h2>
+        <hr/><h2 className='homeSubtitles'>Nuestros servicios</h2><hr/>
 
         <div  className='categoriesNames'>
             
@@ -89,7 +94,9 @@ export default function Home() {
                     <div key={indexCategory} className='category'>
                         
                         <div>
-                            <h3>{eachCategory.category}</h3><Edit/><New/>
+                            <h3>{eachCategory.category}</h3>
+                            <Edit type={'category'} indexCategory={indexCategory}/>
+                            <New type={'category'} />
                             <img src={eachCategory.photo} alt='Service' className='serviceImg'/>
                         </div>
                         
@@ -98,9 +105,13 @@ export default function Home() {
                             {eachCategory.services.map( (service,indexService)=>{
                                 return(
                                     <ul className='servicesList' key={indexService}>
-                                      <Link to={`/detalles?idCategory=${indexCategory}&idServicio=${indexService}`}>
-                                        <li className='eachServiceList'> • {service.name}<Edit/><New/></li>
-                                      </Link>
+                                        <Link to={`/detalles?idCategory=${indexCategory}&idServicio=${indexService}`}>
+                                            <li className='eachServiceList'>
+                                                • {service.name}
+                                            </li>
+                                        </Link>
+                                        <Edit type={'service'} indexCategory={indexCategory} indexService={indexService} />
+                                        <New type={'service'} indexCategory={indexCategory} />
                                     </ul>
                                 )
                             })}
@@ -112,7 +123,7 @@ export default function Home() {
             })}
         </div>
         
-        <h2 className='homeSubtitles'>Nuestros profesionales</h2>
+        <hr/><h2 className='homeSubtitles'>Nuestros profesionales</h2><hr/>
         
         <div className='flexRow'>
             

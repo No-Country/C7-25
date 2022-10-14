@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 import SignUp from "./components/SignUp";
 import Header from './components/Header';
 import Home from './components/Home';
-import LogIn from './components/LogIn';
+import LogIn from './components/Login';
 import ChooseService from './components/ChooseService';
 import ServiceDetails from './components/ServiceDetails';
 import BookAppointment from './components/BookAppointment';
@@ -45,7 +45,9 @@ function App() {
     }
     getHomeJson();
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[]);
+
+  
   return (
     <div className='background'>
       <HomeContext.Provider value={{ home, setHome, roles, setRoles  }}>
@@ -61,6 +63,7 @@ function App() {
             <Route path='/reservarturno' element={<BookAppointment/>}/>
             <Route path='/misturnos' element={<MyAppointments/>}/>
             <Route path='/logout' element={<LogOut/>}/>
+            <Route path='/editinfo' element={<Forms/>}/>
             <Route path='*' element={<NotFound/>}/>
           </Routes>
           <Footer/>
