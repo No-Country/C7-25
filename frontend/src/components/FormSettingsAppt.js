@@ -1,13 +1,20 @@
 import '../styles/Forms.css';
 import {EditInfo} from '../services/API';
 import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
-function Forms(){
+function FormSettingsAppt(e){
     const location = useLocation();
 
     console.log('location',location)
+
+
     let handleEditForm = async (e) =>{
+        
         e.preventDefaul();
+        
+        console.log( e.target.inputWorkDayInit.value)
+        console.log(e.target.inputApptDuration.value)
 
         const data={
             workdayInit: e.target.inputWorkDayInit.value, 
@@ -23,6 +30,7 @@ function Forms(){
             alert('Los datos han sido editados');
         }
     }
+    
  
     return(
         <div className='divContainerForms'>
@@ -58,4 +66,4 @@ function Forms(){
         </div>
     )
 }
-export default Forms;
+export default FormSettingsAppt;
