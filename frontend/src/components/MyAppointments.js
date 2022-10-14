@@ -45,7 +45,12 @@ function MyAppointments(){
 
     return(
         <div className='masterContainer flexColumn'>
-            <h1 className='myAppointmentsTitle'>Turnos Reservados</h1>
+            <h1 className='myAppointmentsTitle'>{
+                (myAppointmentsBooked.length>0)?
+                    'Turnos Reservados'
+                :
+                    'No posee turnos reservados'
+            }</h1>
             {
                 myAppointmentsBooked.map((appt, index) =>
                     <div className='grid' key={index}>

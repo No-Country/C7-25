@@ -35,6 +35,7 @@ function App() {
     console.log('token',token);
     if(token){
       var decoded = jwt_decode(token);
+      console.log('decoded',decoded)
       setRoles(decoded.roles);
     }
 
