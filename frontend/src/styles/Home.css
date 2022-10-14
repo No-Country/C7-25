@@ -53,6 +53,47 @@
     text-align: center;
 }
 
+/*  SERVICES  */
+.categoriesNames{
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: 'Poppins', sans-serif;
+    color: rgba(88, 52, 38, 1);
+    font-weight: 300;
+    font-size: 13px;
+    text-align: center;
+}
+.category{
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+}
+.serviceImg{
+    width: 300px;
+    margin: 0px 0px;
+}
+.divListServices{
+    padding: 1px;
+    margin: 0px;
+    width: auto;
+    min-width: 200px;
+    background-color: rgba(20, 20, 20, 0.33);
+}
+.eachServiceList{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    padding: 0px;
+    cursor: pointer;
+    padding: 0px;
+    list-style: none;
+    width: auto;
+}
+.eachServiceList:hover{
+    font-weight: 400;
+}
+
 
 /* SMALL */
 @media (min-width:0px) and (max-width:500.99px){
@@ -79,10 +120,6 @@
         font-size: 13px;
         padding: 20px 30px;
     }
-    .divContainerHome > hr{
-        color: rgba(128, 92, 78, 1);
-        border: solid 0.1px;
-    }
     .homeSubtitles{
         letter-spacing: 1.6px;
         font-size: 20px;
@@ -91,52 +128,15 @@
 
     /*  SERVICES  */
     .categoriesNames{
-        display: flex;
-        align-items: top;
-        justify-content: center;
-        flex-wrap: wrap;
-        font-family: 'Poppins', sans-serif;
-        color: rgba(88, 52, 38, 1);
-        font-weight: 300;
         font-size: 13px;
-        text-align: center;
     }
     .category{
-        display: flex;
-        flex-direction: column;
-        align-items: top;
         margin: 0px 20px;
         padding: 10px;
     }
     .serviceImg{
-        width: 300px;
         height: 30vh;
-        margin: 0px 0px;
     }
-    .divListServices{
-        padding: 1px;
-        margin: 0px;
-        width: auto;
-        min-width: 200px;
-        background-color: rgba(20, 20, 20, 0.33);
-    }
-    .servicesList{
-        padding: 1px;
-        margin: 3px;
-    }
-    .eachServiceList{
-        font-family: 'Poppins', sans-serif;
-        color: white;
-        padding: 0px;
-        cursor: pointer;
-        padding: 0px;
-        list-style: none;
-        width: auto;
-    }
-    .eachServiceList:hover{
-        font-weight: 400;
-    }
-
 
     /* PROFESSIONALS */
 
@@ -186,56 +186,20 @@
     .homeSubtitles{
         letter-spacing: 1.6px;
         font-size: 21px;
-        padding: 20px 0px;
+        padding: 0px;
     }
 
     /*  SERVICES  */
     .categoriesNames{
-        display: flex;
-        align-items: top;
-        justify-content: center;
-        flex-wrap: wrap;
-        font-family: 'Poppins', sans-serif;
-        color: rgba(88, 52, 38, 1);
-        font-weight: 300;
         font-size: 14px;
-        text-align: center;
     }
     .category{
-        display: flex;
-        flex-direction: column;
-        align-items: top;
         margin: 0px auto;
         padding: 10px;
     }
     .serviceImg{
-        width: 300px;
         height: 32vh;
-        margin: 0px 0px;
     }
-    .divListServices{
-        padding: 1px;
-        margin: 0px;
-        width: auto;
-        min-width: 200px;
-        background-color: rgba(20, 20, 20, 0.33);
-    }
-    .servicesList{
-        padding: 2px;
-        margin: 8px;
-    }
-    .eachServiceList{
-        font-family: 'Poppins', sans-serif;
-        color: white;
-        cursor: pointer;
-        padding: 0px;
-        list-style: none;
-        width: auto;
-    }
-    .eachServiceList:hover{
-        font-weight: 400;
-    }
-
 
     /* PROFESSIONALS */
 }
@@ -243,23 +207,12 @@
 /* LARGE */
 @media (min-width:901px) and (max-width:2500px){
      /* GENERAL INFO */
-     .divContainerHome{
-        margin: 0px;
-        padding-bottom: 30px;
-    }
     .homeTitle{
-        margin: 0px;
-        font-family: 'Cookie', cursive;
-        font-weight: 300;
         letter-spacing: 6px;
-        color: rgba(88, 52, 38, 1);
-        text-align: center;
         font-size: 60px;
         padding-top: 30px;
     }
     .asideData{
-        display: grid;
-        grid-template-columns: 1.6fr 1fr;
         margin: 0px 30%;
     }
     .iconsData{
@@ -267,88 +220,34 @@
         height: 14px;
     }
     .asideData > p{
-        color: rgb(54, 37, 31);
-        font-family: 'Poppins', sans-serif;
         font-weight: 400;
         font-size: 12px;
-        margin: auto;
         margin-top: -5px;
     }
-    #adress{
-        margin: auto;
-    }
-    #cellphoneNumber{
-        margin: auto;
-    }
     .description{
-        margin: 0px;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 300;
-        color: rgba(68, 32, 18);
         font-size: 17px;
         padding: 50px 30px 50px 30px;
-        text-align: center;
-    }
-    .divContainerHome > hr{
-        color: rgba(88, 52, 38, 1);
-        border: solid 0.1px;
     }
     .homeSubtitles{
-        margin: 0px;
-        font-family: 'Poppins', sans-serif;
-        font-weight: bold;
         letter-spacing: 1.6px;
-        color: rgba(128, 92, 78, 1);
-        text-align: center;
         font-size: 21px;
         padding: 5px 0px;
     }
 
     /*  SERVICES  */
     .categoriesNames{
-        display: flex;
-        align-items: top;
-        justify-content: center;
-        flex-wrap: wrap;
-        font-family: 'Poppins', sans-serif;
-        color: rgba(88, 52, 38, 1);
-        font-weight: 300;
         font-size: 14px;
-        text-align: center;
     }
     .category{
-        display: flex;
-        flex-direction: column;
-        align-items: top;
         margin: 0px auto;
         padding: 10px 20px;
     }
     .serviceImg{
-        width: 300px;
         height: 32vh;
-        margin: 0px 0px;
-    }
-    .divListServices{
-        padding: 1px;
-        margin: 0px;
-        width: auto;
-        min-width: 200px;
-        background-color: rgba(20, 20, 20, 0.33);
-    }
-    .servicesList{
-        padding: 2px;
-        margin: 8px;
     }
     .eachServiceList{
-        font-family: 'Poppins', sans-serif;
-        color: white;
-        cursor: pointer;
-        padding: 0px;
-        list-style: none;
-        width: auto;
-    }
-    .eachServiceList:hover{
-        font-weight: 400;
+        padding: 2px;
+        margin: 8px;
     }
 
     /* PROFESSIONALS */
