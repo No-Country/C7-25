@@ -1,11 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import '../styles/LogIn.css';
-import {logIn} from '../services/API'
+import {logIn} from '../services/API';
+import jwt_decode from "jwt-decode";
+import UseHomeContext from '../services/UseHomeContext';
 
 
-function LogIn() {
+function LogIn() {  
+  const {setRoles} = UseHomeContext();
+  let navigate = useNavigate();
 
-  let handleLogin = (e) =>{
+  let handleLogin = async (e) =>{
     e.preventDefault();
 
     const inputEmail= e.target.userEmail.value;
@@ -15,10 +19,13 @@ function LogIn() {
     bodyAPI.append('email', inputEmail);
     bodyAPI.append('password', inputPassword);
 
-    logIn(bodyAPI); //Ejecuto la API
+    const resp = await logIn(bodyAPI); //Ejecuto la API
+    if(resp){
+      var decoded = jwt_decode(resp.token);
+      setRoles(decoded.roles);
+      navigate('/');
+    }
   }
-  
-  let navigate = useNavigate();
 
   let goToSignUp = ()=>{
     navigate('/signup');

@@ -34,7 +34,7 @@ function ServiceDetails (){
             <h1 className='serviceDetailsTitle'>{serviceDetail.name}</h1>
             
             <aside className='asideImgDetail'>
-                <img src={img} alt='Service img' className='imgDetail'/>
+                <img src={img} alt='Service img'/>
             </aside>
             
             <p className='detailDescription'>{serviceDetail.description}</p>
@@ -42,7 +42,7 @@ function ServiceDetails (){
             <p className='serviceCharacts'>Precio: $ {serviceDetail.price} pesos</p>
 
             <div className='divReservarBtn'>
-                <button className='btnReservar'><Link to={`/reservarturno?indexCategory=${paramCategoryValue}&indexService=${paramServiceValue}`}>Reservar</Link></button>
+                <button><Link to={`/reservarturno?indexCategory=${paramCategoryValue}&indexService=${paramServiceValue}`}>Reservar</Link></button>
             </div>
             
         </div>

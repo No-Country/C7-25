@@ -154,3 +154,17 @@ export async function SignUpIsEmailNotAvailable(inputEmail) {
       console.log('Error: '+ error);
   }
 }
+
+
+export async function EditInfo(data){
+  
+  try {
+    const urlAPI = `${domain}/appt/savesettings`;
+    const resp = await axios.post(urlAPI,data);
+    return resp;
+  }
+
+  catch (error) {
+    console.log('Error: '+ error);
+  }
+}

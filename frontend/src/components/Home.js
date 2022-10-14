@@ -31,7 +31,7 @@ export default function Home() {
         
         <p className='description'> hbjjhbjhb jhbjh bjhbjhbj hbjhbjh bh bhb hb jhbjh bjh bj jh bjh b bibi uhi uh iuh iuhihih iuhu hiuhiuhiub hb hbi ub ibi biu b iu bi biu b iu uiui iuhuuh uhipnjknlkn bhbhl blb lkjbj j jbjkjjkb{home.description} </p>
 
-        <h2 className='homeSubtitles'>Nuestros servicios</h2>
+        <hr/><h2 className='homeSubtitles'>Nuestros servicios</h2><hr/>
 
         <div  className='categoriesNames'>
             
@@ -63,7 +63,7 @@ export default function Home() {
             })}
         </div>
         
-        <h2 className='homeSubtitles'>Nuestros profesionales</h2>
+        <hr/><h2 className='homeSubtitles'>Nuestros profesionales</h2><hr/>
         
         <div className='flexRow'>
             

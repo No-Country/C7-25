@@ -44,13 +44,14 @@ function App() {
     }
     getHomeJson();
     //eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+  },[]);
+
+  
   return (
     <div className='background'>
       <HomeContext.Provider value={{ home, setHome, roles, setRoles  }}>
         <BrowserRouter>
           <Header/>
-          <Forms/>
           <Routes>
             <Route path='/signup' element={<SignUp/>}/>
             <Route path='/login' element={<LogIn/>}/>
@@ -60,6 +61,7 @@ function App() {
             <Route path='/reservarturno' element={<BookAppointment/>}/>
             <Route path='/misturnos' element={<MyAppointments/>}/>
             <Route path='/logout' element={<LogOut/>}/>
+            <Route path='/editinfo' element={<Forms/>}/>
             <Route path='*' element={<NotFound/>}/>
           </Routes>
           <Footer/>

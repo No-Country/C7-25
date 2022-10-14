@@ -1,32 +1,206 @@
-.formForms{
-    background-color: rgba(22, 22, 22, 0.348);
-    border-radius: 50px;
-    margin: 0px 10%;
-    padding: 40px 30px;
+/* FORMS STYLES */
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Poppins:wght@300;400&display=swap');
+
+/* SMALL */
+@media (min-width:0px) and (max-width:500.99px){
+    .divContainerForms{
+        margin: 0px;
+        padding-bottom: 30px;
+    }
+    .FormsTitle{
+        margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: rgba(128, 92, 78, 1);
+        text-align: center;
+        font-size: 26px;
+        padding: 30px;
+    }
+    .formForms{
+        background-color: rgba(22, 22, 22, 0.348);
+        border-radius: 50px;
+        margin: 0px 10%;
+        padding: 40px 30px;
+    }
+    
+    .formForms > label{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        color: white;
+    }
+    
+    .formForms > input{
+        border: 0.8px;
+        background: none;
+        border-bottom: 1px solid black;
+        width: 100%;
+        margin: 15px 0px  50px 0px;
+    }
+    
+    .divCheckbox{
+        padding: 10px 0px 25px 0px;
+    }
+    .divCheckbox > label{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+        color: rgb(19, 19, 19);
+        font-weight: 400;
+    }
+    .divEditBtn{
+        text-align: center;
+    }
+    .divEditBtn > button{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(247, 211, 197, 1);
+        color: rgb(102, 77, 67);
+        padding: 3px 15px;
+    }
+    .divEditBtn > button:hover{
+        cursor: pointer;
+        font-weight: bold;
+    }
 }
 
-.formForms > label{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    color: white;
+/* MEDIUM */
+@media (min-width:501px) and (max-width:900.99px){
+    .divContainerForms{
+        margin: 0px;
+        padding-bottom: 30px;
+    }
+    .FormsTitle{
+        margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: bolder;
+        letter-spacing: 3px;
+        color: rgba(128, 92, 78, 1);
+        text-align: center;
+        font-size: 30px;
+        padding: 30px
+    }
+    .formForms{
+        background-color: rgba(22, 22, 22, 0.348);
+        border-radius: 50px;
+        margin: 0px 15%;
+        padding: 60px 50px 30px 50px;
+    }
+    
+    .formForms > label{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        color: white;
+    }
+    
+    .formForms > input{
+        border: 0.8px;
+        background: none;
+        border-bottom: 1px solid black;
+        width: 100%;
+        margin: 15px 0px  50px 0px;
+    }
+    .divCheckbox{
+        padding: 10px 0px 25px 0px;
+    }
+    .divCheckbox > label{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 16px;
+        color: rgb(19, 19, 19);
+        font-weight: 400;
+    }
+    .divEditBtn{
+        text-align: center;
+    }
+    .divEditBtn > button{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 17px;
+        letter-spacing: 1px;
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(247, 211, 197, 1);
+        color: rgb(102, 77, 67);
+        padding: 4px 15px;
+    }
+    .divEditBtn > button:hover{
+        cursor: pointer;
+        font-weight: bold;
+    }
+
 }
 
-.formForms > input{
-    border: 0.8px;
-    background: none;
-    border-bottom: 1px solid black;
-    width: 100%;
-    margin: 15px 0px  50px 0px;
-}
+/* LARGE */
+@media (min-width:901px) and (max-width:2500px){
+    
+    .divContainerForms{
+        margin: 0px;
+        padding-bottom: 30px;
+    }
+    .FormsTitle{
+        margin: 0px;
+        font-family: 'Poppins', sans-serif;
+        font-weight: bolder;
+        letter-spacing: 3.5px;
+        color: rgba(128, 92, 78, 1);
+        text-align: center;
+        font-size: 35px;
+        padding: 30px;
+    }
+    .formForms{
+        background-color: rgba(22, 22, 22, 0.348);
+        border-radius: 50px;
+        margin: 0px 25%;
+        padding: 60px 60px 30px 60px;
+    }
+    
+    .formForms > label{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 18px;
+        color: white;
+    }
+    
+    .formForms > input{
+        border: 0.8px;
+        background: none;
+        border-bottom: 1px solid black;
+        width: 100%;
+        margin: 15px 0px  50px 0px;
+    }
+    .divCheckbox{
+        padding: 10px 0px 25px 0px;
+    }
+    .divCheckbox > label{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 300;
+        font-size: 17px;
+        color: rgb(19, 19, 19);
+        font-weight: 400;
+    }
+    .divEditBtn{
+        text-align: center;
+    }
+    .divEditBtn > button{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 18px;
+        letter-spacing: 1px;
+        border-radius: 10px;
+        border: none;
+        background-color: rgba(247, 211, 197, 1);
+        color: rgb(102, 77, 67);
+        padding: 5px 20px;
+    }
+    .divEditBtn > button:hover{
+        cursor: pointer;
+        font-weight: bold;
+    }
 
-.divCheckbox{
-    padding: 10px 0px 25px 0px;
-}
-.divCheckbox > label{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 300;
-    font-size: 14px;
-    color: rgb(19, 19, 19);
-    font-weight: 400;
 }

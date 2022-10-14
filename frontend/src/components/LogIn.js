@@ -25,9 +25,7 @@ function LogIn() {
       setRoles(decoded.roles);
       navigate('/');
     }
-
   }
-
 
   let goToSignUp = ()=>{
     navigate('/signup');
