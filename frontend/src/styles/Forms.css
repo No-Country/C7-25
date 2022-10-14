@@ -22,6 +22,7 @@
         border-radius: 50px;
         margin: 0px 10%;
         padding: 40px 30px;
+        backdrop-filter: blur(5px);
     }
     
     .formForms > label{
@@ -89,6 +90,7 @@
         border-radius: 50px;
         margin: 0px 15%;
         padding: 60px 50px 30px 50px;
+        backdrop-filter: blur(5px);
     }
     
     .formForms > label{
@@ -158,6 +160,7 @@
         border-radius: 50px;
         margin: 0px 25%;
         padding: 60px 60px 30px 60px;
+        backdrop-filter: blur(5px);
     }
     
     .formForms > label{

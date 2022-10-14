@@ -7,9 +7,11 @@ import { jsDateToText, jsDateToYearMonth} from '../services/DateTime'
 import ModalAppt from './ModalAppt';
 import ModalProfessional from './ModalProfessional';
 import UseHomeContext from '../services/UseHomeContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function BookAppointment() {
 
+  const navigate= useNavigate();
   const {home} = UseHomeContext();
   const [days, setDays] = useState([]);//Lista con los divs de los dias del calendario
   const [currentView, setCurrentView] = useState((new Date()).getTime());//Mes actual en el calendario
@@ -23,6 +25,9 @@ export default function BookAppointment() {
   const [idProfessional, setIdProfessional] = useState() //Id del profesional
 
   useEffect(()=>{
+    if(!localStorage.getItem('token')){
+      navigate('/login');
+    }
     if(home.categories){
       let getUrl= new URLSearchParams (window.location.search);
       let indexCategory = getUrl.get('indexCategory');
@@ -346,6 +351,7 @@ export default function BookAppointment() {
             appt={appt}
             apptDay={apptDay} 
             idService={idService}
+            setModalWindow={setModalWindow}
           />
         :
           <></>

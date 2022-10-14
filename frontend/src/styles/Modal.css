@@ -28,6 +28,7 @@
   width: 300px;
   margin: 1.5rem 0;
   background-color: var(--fondo-color);
+  max-height: 80%;
 }
 .head{
   background-color: var(--medio-color);
@@ -42,7 +43,7 @@
   padding: 8px;
 }
 .scrollContainer{
-  max-height: 375px;
+  max-height: 70vh;
   overflow-y: scroll;
 }
 .appt{
@@ -90,6 +91,16 @@
 .apptCero{
   font-size: 1.4rem;
   color: var(--text-fondo-color);
+}
+.closeMA{
+  width: 300px;
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
+}
+.closeMA > svg{
+  color: white;
+  scale: 2;
 }
 
 /*.time{

@@ -1,8 +1,11 @@
 import '../styles/Forms.css';
 import {EditInfo} from '../services/API';
+import { useLocation } from 'react-router-dom';
 
 function Forms(){
+    const location = useLocation();
 
+    console.log('location',location)
     let handleEditForm = async (e) =>{
         e.preventDefaul();
 
@@ -20,9 +23,7 @@ function Forms(){
             alert('Los datos han sido editados');
         }
     }
-
-   
-
+ 
     return(
         <div className='divContainerForms'>
             <h1 className='FormsTitle'>Editar</h1>

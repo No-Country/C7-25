@@ -7,7 +7,7 @@ import jwt_decode from "jwt-decode";
 import SignUp from "./components/SignUp";
 import Header from './components/Header';
 import Home from './components/Home';
-import LogIn from './components/LogIn';
+import LogIn from './components/Login';
 import ChooseService from './components/ChooseService';
 import ServiceDetails from './components/ServiceDetails';
 import BookAppointment from './components/BookAppointment';
@@ -35,6 +35,7 @@ function App() {
     console.log('token',token);
     if(token){
       var decoded = jwt_decode(token);
+      console.log('decoded',decoded)
       setRoles(decoded.roles);
     }
 
@@ -52,6 +53,7 @@ function App() {
       <HomeContext.Provider value={{ home, setHome, roles, setRoles  }}>
         <BrowserRouter>
           <Header/>
+          {/*<Forms/>*/}
           <Routes>
             <Route path='/signup' element={<SignUp/>}/>
             <Route path='/login' element={<LogIn/>}/>

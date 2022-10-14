@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import {BookAppointmentSaveAppt} from '../services/API';
 import {jsDateToHsMin, jsDateToText} from '../services/DateTime';
 import Modal from './Modal';
+import { AiOutlineClose } from 'react-icons/ai';
 
 
-export default function ModalAppt({appt, apptDay, idService}) {
+export default function ModalAppt({appt, apptDay, idService, setModalWindow}) {
   const [apptDisp, setApptDisp] = useState([]);//Lista de turnos a mostrar
   const [modalData, setModalData] = useState({});
   let navigate = useNavigate();
@@ -51,26 +52,32 @@ export default function ModalAppt({appt, apptDay, idService}) {
 
   return (
     <div>
-      <Modal props={modalData}/>
-      <div className='dayCalendarContainer'>
-        <div className='head flexRow'>Elije un horario</div>
-        <div className='date flexRow'>{jsDateToText(apptDay)}</div>
-        <div className='scrollContainer'>
-        {
-            apptDisp.map((turn,index)=>
-              <div  className='clickList  flexRow' key={index}>
-                <div>{jsDateToHsMin(turn.ini)+ ' a ' +jsDateToHsMin(turn.end)}</div>
-                {
-                  turn.disp?
-                    <div className='apptBtn' onClick={()=>modalJson(turn)}>Reservar</div>
-                    :
-                    <div className='ghostBtn'></div>
-                }
-              </div>
-            )
-          }
+      <div className='modal flexColumn'>
+        <Modal props={modalData}/>
+        <div className='closeMA' onClick={()=>setModalWindow(1)}>
+          <AiOutlineClose/>
+        </div>
+        <div className='dayCalendarContainer'>
+          <div className='head flexRow'>Elije un horario</div>
+          <div className='date flexRow'>{jsDateToText(apptDay)}</div>
+          <div className='scrollContainer'>
+          {
+              apptDisp.map((turn,index)=>
+                <div  className='clickList  flexRow' key={index}>
+                  <div>{jsDateToHsMin(turn.ini)+ ' a ' +jsDateToHsMin(turn.end)}</div>
+                  {
+                    turn.disp?
+                      <div className='apptBtn' onClick={()=>modalJson(turn)}>Reservar</div>
+                      :
+                      <div className='ghostBtn'></div>
+                  }
+                </div>
+              )
+            }
+          </div>
         </div>
       </div>
+      
     </div>
   )
 }
