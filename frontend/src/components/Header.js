@@ -37,13 +37,13 @@ function Header() {
                     {
                         (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))? 
                             <li className='liHeader'>
-                                <Link to='/misturnos'>Turnos de clientes</Link><hr/>
+                                <Link to='/turnosclientes'>Turnos de clientes</Link><hr/>
                             </li>
                         :
                             <></>
                     }
 
-                    <li onClick={logOut} className='liHeader'>
+                    <li onClick={logOut} style={{cursor:'pointer'}} className='liHeader'>
                         Cerrar sesión
                     </li>
                 </>

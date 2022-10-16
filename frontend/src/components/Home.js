@@ -14,69 +14,31 @@ import { useState } from 'react';
 export default function Home() {
     const navigate = useNavigate();
     const {home,roles} = UseHomeContext();
-    const [homeBtn, setHomeBtn] = useState(false)
 
     let servicesArray=home.categories || [];
     let professionalsArray=home.professionals || [];
 
-    function showBtn(){
-        setHomeBtn(!homeBtn);
-    }
 
-    function New(){
-        return (
-            <div>
-                <GrAdd/>
-            </div>
-        )
-    }
-
-    function Edit({type,indexCategory,indexService}){
-        return (
-            <div onClick={()=>showForm(type,indexCategory,indexService)}>
-                <VscEdit/>
-            </div>
-        )
-    }
-
-    function showForm(tipe,indexCategory,indexService){
+    function form(type,indexCategory,indexService){
         let rute;
-        let data={
-            type:'a1',indexCategory:'a1',indexService:'a1'
+        let data={type,indexCategory,indexService};
+        if (type==='') {
+            rute='/formhome';
         }
-        if (tipe==='home') {
-            rute='/editinfo';
+        if (type==='category') {
+            rute='/formcategory';
         }
-        if (tipe==='category') {
-            rute='/editinfo';
-        }
-        if (tipe==='service') {
-            rute='/editinfo';
+        if (type==='service') {
+            rute='/formservices';
         }
         navigate(rute,{state:data})
-    }
+    } 
 
   return (
     <div className='divContainerHome'>
-        <div className='flexColumn'>
-            {
-                (roles.includes('ROLE_MANAGER'))?
-                    <div className='btnHome editHome' onClick={showBtn}>Editar home</div>
-                :
-                    <></>
-            }
-            {
-                (homeBtn && roles.includes('ROLE_MANAGER'))?
-                    <div  className='gridHome'>
-                    </div>
-                :
-                    <></>
-            }            
-        </div>
 
-
-        <h1 className='homeTitle'>{home.name} Estética</h1>                            
-        <Edit type={'category'}/>
+        <h1 className='homeTitle'>{home.name} Estética <VscEdit onClick={()=>form('eh')} /></h1>                            
+        
 
         <aside className='asideData'> 
             <p id='adress'><MdLocationOn className='iconsData'/> {home.adress}</p>
@@ -94,9 +56,12 @@ export default function Home() {
                     <div key={indexCategory} className='category'>
                         
                         <div>
-                            <h3>{eachCategory.category}</h3>
-                            <Edit type={'category'} indexCategory={indexCategory}/>
-                            <New type={'category'} />
+                            <div className='flexRow'>
+                                <h3>{eachCategory.category}</h3>
+                                <VscEdit onClick={()=>form('ec',indexCategory)} />
+                                <GrAdd onClick={()=>form('nc')} />
+                            </div>
+
                             <img src={eachCategory.photo} alt='Service' className='serviceImg'/>
                         </div>
                         
@@ -104,14 +69,14 @@ export default function Home() {
                             
                             {eachCategory.services.map( (service,indexService)=>{
                                 return(
-                                    <ul className='servicesList' key={indexService}>
+                                    <ul className='servicesList flexRow' key={indexService}>
                                         <Link to={`/detalles?idCategory=${indexCategory}&idServicio=${indexService}`}>
                                             <li className='eachServiceList'>
                                                 • {service.name}
                                             </li>
                                         </Link>
-                                        <Edit type={'service'} indexCategory={indexCategory} indexService={indexService} />
-                                        <New type={'service'} indexCategory={indexCategory} />
+                                        <VscEdit onClick={()=>form('es',indexCategory,indexService)} />
+                                        <GrAdd onClick={()=>form('ns',indexCategory)} />
                                     </ul>
                                 )
                             })}

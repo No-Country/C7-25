@@ -20,6 +20,7 @@ import Forms from './components/Forms';
 //Services
 import {getHome} from './services/API';
 import HomeContext from './services/HomeContext';
+import ClientsAppointments from './components/ClientsAppointments';
 
 document.body.classList.add('pinkPalette');
 console.log('App se esta renderizando');
@@ -62,6 +63,7 @@ function App() {
             <Route path='/detalles' element={<ServiceDetails/>}/>
             <Route path='/reservarturno' element={<BookAppointment/>}/>
             <Route path='/misturnos' element={<MyAppointments/>}/>
+            <Route path='/turnosclientes' element={<ClientsAppointments/>}/>
             <Route path='/logout' element={<LogOut/>}/>
             <Route path='/editinfo' element={<Forms/>}/>
             <Route path='*' element={<NotFound/>}/>

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { MyAppointmentsCancelAppt, userAppt } from '../services/API';
+import { MyAppointmentsCancelAppt, profAppt } from '../services/API';
 import '../styles/MyAppointments.css';
 import UseHomeContext from '../services/UseHomeContext';
 import { jsISODateToTextAndDate } from '../services/DateTime';
+import { Link } from 'react-router-dom';
 
 function ClientsAppointments(){
     const {home} = UseHomeContext();
@@ -16,7 +17,7 @@ function ClientsAppointments(){
     }, [home])
     
     async function getAppt() {
-        let apptsRaw = await userAppt();
+        let apptsRaw = await profAppt();
         let appt = apptsRaw.map(ap=>{
             const id = ap.id;
             const date = jsISODateToTextAndDate(ap.ini);
@@ -44,6 +45,7 @@ function ClientsAppointments(){
 
     return(
         <div className='masterContainer flexColumn'>
+            <div className='btnHome editHome'><Link to='/form'>Editar la configuración de turnos</Link></div>
             <h1 className='myAppointmentsTitle'>{
                 (myAppointmentsBooked.length>0)?
                     'Turnos Reservados'
