@@ -109,6 +109,10 @@
     min-width: 200px;
     background-color: rgba(20, 20, 20, 0.33);
 }
+.servicesList{
+    text-align: left;
+    margin: 5% 0px;
+}
 .eachServiceList{
     font-family: 'Poppins', sans-serif;
     color: white;
@@ -121,6 +125,36 @@
 .eachServiceList:hover{
     font-weight: 400;
 }
+
+
+/* PROFESSIONALS */
+
+    .profCard{
+        margin: 20px;
+    }
+    .divProfessionals{
+        margin-top: 40px;
+    }
+    .profilePhoto{
+        width: 90%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        display: grid;
+        justify-content: center;
+    }
+    .profilePhoto>img{
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+    }
+    .divProfessionals > p{
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        color: rgba(128, 92, 78, 1);
+        text-align: center;
+    }
+
 
 
 /* SMALL */

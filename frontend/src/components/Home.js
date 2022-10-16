@@ -94,7 +94,7 @@ export default function Home() {
             
             {professionalsArray.map( (eachProfessional, indexProfessionals)=>{
                 return(
-                    <div key={indexProfessionals}>
+                    <div key={indexProfessionals} className='divProfessionals'>
                         <aside className='profilePhoto'>
                             <img src={ eachProfessional.photo? eachProfessional.photo : perfilDefault } alt=""/>   
                         </aside>

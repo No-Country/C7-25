@@ -22,7 +22,6 @@
         border-radius: 50px;
         margin: 0px 10%;
         padding: 40px 30px;
-        backdrop-filter: blur(5px);
     }
     
     .formForms > label{

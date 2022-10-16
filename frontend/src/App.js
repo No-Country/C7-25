@@ -15,7 +15,10 @@ import MyAppointments from './components/MyAppointments';
 import LogOut from './components/LogOut';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
-import Forms from './components/Forms';
+import FormSettingsAppt from './components/FormSettingsAppt';
+import FormHome from './components/FormHome';
+import FormCategory from './components/FormCategory';
+import FormServices from './components/FormServices';
 
 //Services
 import {getHome} from './services/API';
@@ -65,7 +68,10 @@ function App() {
             <Route path='/misturnos' element={<MyAppointments/>}/>
             <Route path='/turnosclientes' element={<ClientsAppointments/>}/>
             <Route path='/logout' element={<LogOut/>}/>
-            <Route path='/editinfo' element={<Forms/>}/>
+            <Route path='/formcategory' element={<FormCategory/>}/>
+            <Route path='/editinfo' element={<FormSettingsAppt/>}/>
+            <Route path='/formhome' element={<FormHome/>}/>
+            <Route path='/formservices' element={<FormServices/>}/>
             <Route path='*' element={<NotFound/>}/>
           </Routes>
           <Footer/>
