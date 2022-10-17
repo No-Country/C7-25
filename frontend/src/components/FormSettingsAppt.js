@@ -1,7 +1,6 @@
 import '../styles/Forms.css';
 import {EditInfo} from '../services/API';
 import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 
 function FormSettingsAppt(e){
     const location = useLocation();
@@ -12,9 +11,6 @@ function FormSettingsAppt(e){
     let handleEditForm = async (e) =>{
         
         e.preventDefaul();
-        
-        console.log( e.target.inputWorkDayInit.value)
-        console.log(e.target.inputApptDuration.value)
 
         const data={
             workdayInit: e.target.inputWorkDayInit.value, 

@@ -178,3 +178,38 @@ export async function EditInfo(data){
     console.log('Error: '+ error);
   }
 }
+
+export async function EditHome(dataHome){
+
+  try{
+    const urlAPI = `${domain}home/savehome`;
+    const resolve = await axios.post(urlAPI, dataHome);
+    return(resolve)
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
+
+export async function EditCategory(dataCateg){
+  try{
+    const urlAPI = `${domain}home/savecategory`;
+    const resolve = await axios.post(urlAPI, dataCateg);
+    return(resolve)
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
+
+export async function EditServices(dataServices){
+
+  try{
+    const urlAPI = `${domain}home/saveservice`;
+    const resolve = await axios.post(urlAPI, dataServices);
+    return(resolve)
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
