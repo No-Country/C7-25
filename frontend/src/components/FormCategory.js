@@ -1,16 +1,30 @@
+import '../styles/Forms.css';
+
 function FormCategory(){
+
+    let handleFormCategory = (e) =>{
+        e.preventDefault();
+
+        const dataCateg= {
+            category: e.target.categoryNameInput.value,
+            photo: e.target.categoryImgInput.value
+        }
+    }
     return(
-        <div>
-            <div>
-            <form>
+        <div className='divContainerForms'>
+        <h1 className='FormsTitle'>Editar</h1>
+            <form  onSubmit={handleFormCategory} className='formForms'>
                 <label>Nombre de categoria:</label><br/>
                 <input type='text' name='categoryNameInput'/>
 
                 <label>Foto de la categoria:</label><br/>
-                <input type='text' name='imgCategoryInput'/><br/>
-            </form>
-        </div>
+                <input type='text' name='categoryImgInput'/><br/>
 
+                <div className='divEditBtn'>
+                    <button type='submit'>Editar</button>
+                </div>           
+           
+            </form>
         </div>
     )
 }

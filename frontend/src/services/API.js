@@ -178,7 +178,7 @@ export async function SignUpIsEmailNotAvailable(inputEmail) {
 }
 
 
-export async function editApptSetting(data){
+export async function EditApptSetting(data){
   
   try {
     const urlAPI = `${domain}/appt/savesettings`;
@@ -188,5 +188,40 @@ export async function editApptSetting(data){
 
   catch (error) {
     console.log('Error: '+ error);
+  }
+}
+
+export async function EditHome(dataHome){
+
+  try{
+    const urlAPI = `${domain}home/savehome`;
+    const resolve = await axios.post(urlAPI, dataHome);
+    return(resolve)
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
+
+export async function EditCategory(dataCateg){
+  try{
+    const urlAPI = `${domain}home/savecategory`;
+    const resolve = await axios.post(urlAPI, dataCateg);
+    return(resolve)
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
+
+export async function EditServices(dataServices){
+
+  try{
+    const urlAPI = `${domain}home/saveservice`;
+    const resolve = await axios.post(urlAPI, dataServices);
+    return(resolve)
+  }
+  catch (error){
+    console.log('Error: ' + error)
   }
 }

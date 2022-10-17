@@ -1,5 +1,5 @@
 import '../styles/Forms.css';
-import { editApptSetting, getApptSettingsByProfessionalId } from '../services/API';
+import { EditApptSetting, getApptSettingsByProfessionalId } from '../services/API';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -88,7 +88,7 @@ function FormSettingsAppt(e){
             daysAhead: e.target.inputDaysAhead.value
         }
         
-        const response= await editApptSetting(data);
+        const response= await EditApptSetting(data);
 
         if(response.status===201){ //Si la operacion se realizo con exito
             setMostrarForm(false);
