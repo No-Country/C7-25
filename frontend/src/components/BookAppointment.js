@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../styles/BookAppointment.css';
 import '../styles/Modal.css';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
-import { BookAppointmentGetApptSettings, BookAppointmentGetReserved} from '../services/API'
+import { getApptSettingsByServiceId, BookAppointmentGetReserved} from '../services/API'
 import { jsDateToText, jsDateToYearMonth} from '../services/DateTime'
 import ModalAppt from './ModalAppt';
 import ModalProfessional from './ModalProfessional';
@@ -50,7 +50,7 @@ export default function BookAppointment() {
 
   //Trae la informacion del back y la almacena
   async function main(idService) {
-    let settings = await BookAppointmentGetApptSettings(idService);
+    let settings = await getApptSettingsByServiceId(idService);
     //Si el servicio no tiene turnos no se continua
     if(settings.length===0){
       return
@@ -88,7 +88,7 @@ export default function BookAppointment() {
       const apptSettingsId = sett.id;
       let time=new Date(day);//Tue Sep 27 2022 08:00:00 GMT-0300 (hora estándar de Argentina)
       //Mejorar esto
-      time.setHours(sett.workdayInit.slice(0,2),sett.workdayInit.slice(3,5),0,0);
+      time.setHours(Math.floor(sett.workdayInit/60),Math.floor(sett.workdayInit%60),0,0);
       let appts=[];
       let ini='';
       let end='';

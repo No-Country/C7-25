@@ -59,9 +59,21 @@ export async function BookAppointmentGetReserved(maxDays) {
   }
 }
 
-export async function BookAppointmentGetApptSettings(idService) {
+export async function getApptSettingsByServiceId(idService) {
   try {
-    const urlAPI=`${domain}/appt/apptsettings/${idService}`;
+    const urlAPI=`${domain}/appt/apptsettingsservice/${idService}`;
+    const resp = await axios.get(urlAPI);
+    return resp.data;//Necesitara la z?
+  } catch (error) {
+      //Tarea: en caso de error hay que evitar que salga la ventana porque van a a estar todos los turnos disponibles
+      console.log('Error: '+ error);
+  }
+}
+
+export async function getApptSettingsByProfessionalId() {
+  try {
+    const email = localStorage.getItem('email');
+    const urlAPI=`${domain}/appt/apptsettingsprofessional/${email}`;
     const resp = await axios.get(urlAPI);
     return resp.data;//Necesitara la z?
   } catch (error) {
@@ -166,7 +178,7 @@ export async function SignUpIsEmailNotAvailable(inputEmail) {
 }
 
 
-export async function EditInfo(data){
+export async function editApptSetting(data){
   
   try {
     const urlAPI = `${domain}/appt/savesettings`;

@@ -36,10 +36,8 @@ function App() {
 
   useEffect(()=>{
     var token = localStorage.getItem('token');
-    console.log('token',token);
     if(token){
       var decoded = jwt_decode(token);
-      console.log('decoded',decoded)
       setRoles(decoded.roles);
     }
 
@@ -69,7 +67,7 @@ function App() {
             <Route path='/turnosclientes' element={<ClientsAppointments/>}/>
             <Route path='/logout' element={<LogOut/>}/>
             <Route path='/formcategory' element={<FormCategory/>}/>
-            <Route path='/editinfo' element={<FormSettingsAppt/>}/>
+            <Route path='/formsettingsappt' element={<FormSettingsAppt/>}/>
             <Route path='/formhome' element={<FormHome/>}/>
             <Route path='/formservices' element={<FormServices/>}/>
             <Route path='*' element={<NotFound/>}/>

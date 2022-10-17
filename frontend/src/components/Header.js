@@ -64,7 +64,7 @@ function Header() {
         <header className='header'>
             <nav className='navHeader'>
                 
-                <h1 className='brandName'>Carola</h1>
+                <h1 className='brandName'><Link to='/'>Carola</Link></h1>
 
                 <ul className='ulHeader'>
                     <AiOutlineMenu onClick={openMenu} className='hamburgerMenu'/>
