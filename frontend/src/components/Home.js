@@ -21,23 +21,53 @@ export default function Home() {
 
     function form(type,indexCategory,indexService){
         let rute;
-        let data={type,indexCategory,indexService};
-        if (type==='') {
+        let data;
+        if (type==='home') {
             rute='/formhome';
+            const {professionals,categories,...homeDTO}=home;
+            data=homeDTO;
         }
+        
         if (type==='category') {
             rute='/formcategory';
+            if(indexCategory!==undefined){
+                data={
+                    id:servicesArray[indexCategory].id,
+                    category:servicesArray[indexCategory].category,
+                    photo:servicesArray[indexCategory].photo
+                }
+            }else{
+                data={
+                    id:null,
+                    category:null,
+                    photo:null
+                }
+            }
         }
-        if (type==='service') {
-            rute='/formservices';
-        }
-        navigate(rute,{state:data})
-    } 
+            if (type==='service') {
+                rute='/formservices';
+                if(indexService!==undefined){
+                    data=home.categories[indexCategory].services[indexService];
+                }
+                else{
+                    data={
+                        id:null,
+                        name:null,
+                        description:null,
+                        photo:null,
+                        price:null,
+                        duration:null
+                    }
+                }
+            }
+            navigate(rute,{state:data})
+        
+    }
 
   return (
     <div className='divContainerHome'>
 
-        <h1 className='homeTitle'>{home.name} Estética <VscEdit onClick={()=>form('eh')} /></h1>                            
+        <h1 className='homeTitle'>{home.name} <VscEdit onClick={()=>form('home')} /></h1>                            
         
 
         <aside className='asideData'> 
@@ -58,8 +88,8 @@ export default function Home() {
                         <div>
                             <div className='flexRow'>
                                 <h3>{eachCategory.category}</h3>
-                                <VscEdit onClick={()=>form('ec',indexCategory)} />
-                                <GrAdd onClick={()=>form('nc')} />
+                                <VscEdit onClick={()=>form('category',indexCategory)} />
+                                <GrAdd onClick={()=>form('category')} />
                             </div>
 
                             <img src={eachCategory.photo} alt='Service' className='serviceImg'/>
@@ -75,7 +105,7 @@ export default function Home() {
                                                 • {service.name}
                                             </li>
                                         </Link>
-                                        <VscEdit onClick={()=>form('es',indexCategory,indexService)} />
+                                        <VscEdit onClick={()=>form('service',indexCategory,indexService)} />
                                         <GrAdd onClick={()=>form('ns',indexCategory)} />
                                     </ul>
                                 )

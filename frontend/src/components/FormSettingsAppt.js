@@ -53,10 +53,6 @@ function FormSettingsAppt(e){
         return daysAvailable.reduce((acc,cur,index)=>(cur)?acc*prime[index]:acc,1);
     }
     
-
-
-
-
     function edit(index){
         setApptSettingsId(settings[index].id);
         setWorkdayInit(settings[index].workdayInit);
