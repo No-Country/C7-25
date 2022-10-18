@@ -24,6 +24,7 @@ export default function Home() {
             const {professionals,categories,...homeDTO}=home;
             data=homeDTO;
         }
+        
         if (type==='category') {
             rute='/formcategory';
             if(indexCategory!==undefined){
@@ -66,7 +67,7 @@ export default function Home() {
   return (
     <div className='divContainerHome'>
 
-        <h1 className='homeTitle'>{home.name} Estética <VscEdit onClick={()=>form('home')} /></h1>                            
+        <h1 className='homeTitle'>{home.name} <VscEdit onClick={()=>form('home')} /></h1>                            
         
 
         <aside className='asideData'> 

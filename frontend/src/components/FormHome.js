@@ -1,12 +1,17 @@
 import '../styles/Forms.css';
 import {EditHome} from '../services/API';
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 function FormHome(){
 
-    const location = useLocation();
-    console.log(location)
+    const location= useLocation();
 
+    const[brandName, setBrandName] = useState('');
+    const[adress, setAdress] = useState('');
+    const[telephone, setTelephone] = useState('');
+    const[description, setDescription] = useState('');
+    
     let handleEditHome = (e)=>{
         e.preventDefault();
 
@@ -16,13 +21,23 @@ function FormHome(){
             telephone: e.target.telephoneInput.value,
             description: e.target.descriptionInput.value
         }
-
         const resolve= EditHome(dataHome);
 
         if( resolve.status === 201){
             alert('Los datos han sido modificados')
         }
-    }
+    };
+
+    useEffect(()=>{
+        let editInfoHome=()=>{
+            setBrandName(location.state.name);
+            setAdress(location.state.adress);
+            setTelephone(location.state.telephone);
+            setDescription(location.state.description);
+        }
+        editInfoHome();
+    },[]);
+
     
     return(
         <div className='divContainerForms'>
