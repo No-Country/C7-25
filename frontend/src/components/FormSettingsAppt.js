@@ -9,6 +9,7 @@ function FormSettingsAppt(e){
     const [WorkdayDuration, setWorkdayDuration] = useState('');
     const [ApptDuration, setApptDuration] = useState('');
     const [DaysAhead, setDaysAhead] = useState('');
+    const [daysAvailable, setDaysAvailable] = useState([]);
     const [mostrarForm, setMostrarForm] = useState(false);
     const [apptSettingsId, setApptSettingsId] = useState();
 
@@ -63,6 +64,10 @@ function FormSettingsAppt(e){
         setWorkdayDuration(settings[index].workdayDuration);
         setApptDuration(settings[index].apptDuration);
         setDaysAhead(settings[index].daysAhead);
+        //document.querySelector('formForms');
+        const prime=[2,3,5,7,11,13,17];
+        let daysAvailable = prime.map(num=>settings[index].daysAvailable%num===0);
+        setDaysAvailable(daysAvailable);
         setMostrarForm(true)
     }
     function add(){
@@ -97,29 +102,33 @@ function FormSettingsAppt(e){
     }
  
     return(
-        <div>
+        <div className='masterContainer'>
 
             {
                 (!mostrarForm)?
                     <div>
-                        <div onClick={()=>add()}>
-                            Crear turno
+                        <div className='btnFrente' style={{width:'15rem'}} onClick={()=>add()}>
+                            Crear configuración nueva
                         </div>
-                        <div>
-                            <div></div>
+                        <div className='flexRow'>
                             {
                                 settings.map((sett,index)=>
-                                    <div key={index}>
-                                        <div>Servicio: {sett.serviceId}</div>
-                                        <div>Duración del truno: {sett.apptDuration}</div>
-                                        <div>Dias de la semana con turnos: {sett.daysAvailable}</div>
-                                        <div>Horas de atención: {sett.workdayDuration}</div>
-                                        <div>Hora de inicio de la jornada: {sett.workdayInit}</div>
-                                        <div>Dias corridos con turnos disponibles: {sett.daysAhead}</div>
-                                        <div onClick={()=>edit(index)}>Editar</div>
-                                        <div>Eliminar</div>
+                                    <div className='tarjetaAppt' key={index}>
+                                        <div>
+                                            <div>Servicio: {sett.serviceId}</div>
+                                            <div>Duración del truno: {sett.apptDuration}</div>
+                                            <div>Dias de la semana con turnos: {sett.daysAvailable}</div>
+                                            <div>Horas de atención: {sett.workdayDuration}</div>
+                                            <div>Hora de inicio de la jornada: {sett.workdayInit}</div>
+                                            <div>Dias corridos con turnos disponibles: {sett.daysAhead}</div>                                            
+                                        </div>
+                                        <div className='flexRow'>
+                                            <div className='btnFrente' onClick={()=>edit(index)}>Editar</div>
+                                            <div className='btnFrente'>Eliminar</div>                                            
+                                        </div>
                                     </div>
                                 )
+                                
                             }
                         </div>
                     </div>                
@@ -138,13 +147,13 @@ function FormSettingsAppt(e){
 
                             <label>Días de la semana que desea atender</label><br/>
                             <div className='divCheckbox'>
-                                <label><input type='checkbox' name='inputDaysAvailable0' value='sunday'/>Domingo</label><br/>
-                                <label><input type='checkbox' name='inputDaysAvailable1' value='monday'/>Lunes</label><br/>
-                                <label><input type='checkbox' name='inputDaysAvailable2' value='tuesday'/>Martes</label><br/>
-                                <label><input type='checkbox' name='inputDaysAvailable3' value='wednesday'/>Miércoles</label><br/>
-                                <label><input type='checkbox' name='inputDaysAvailable4' value='thursday'/>Jueves</label><br/>
-                                <label><input type='checkbox' name='inputDaysAvailable5' value='friday'/>Viernes</label><br/>
-                                <label><input type='checkbox' name='inputDaysAvailable6' value='saturday'/>Sábado</label><br/>
+                                <label><input type='checkbox' name='inputDaysAvailable0' defaultChecked={daysAvailable[0]}/>Domingo</label><br/>
+                                <label><input type='checkbox' name='inputDaysAvailable1' defaultChecked={daysAvailable[1]}/>Lunes</label><br/>
+                                <label><input type='checkbox' name='inputDaysAvailable2' defaultChecked={daysAvailable[2]}/>Martes</label><br/>
+                                <label><input type='checkbox' name='inputDaysAvailable3' defaultChecked={daysAvailable[3]}/>Miércoles</label><br/>
+                                <label><input type='checkbox' name='inputDaysAvailable4' defaultChecked={daysAvailable[4]}/>Jueves</label><br/>
+                                <label><input type='checkbox' name='inputDaysAvailable5' defaultChecked={daysAvailable[5]}/>Viernes</label><br/>
+                                <label><input type='checkbox' name='inputDaysAvailable6' defaultChecked={daysAvailable[6]}/>Sábado</label><br/>
                             </div>
 
                             <label>Por cuantos dias desea que se muestren turnos disponibles:</label><br/>

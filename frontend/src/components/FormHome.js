@@ -1,7 +1,11 @@
 import '../styles/Forms.css';
 import {EditHome} from '../services/API';
+import { useLocation } from 'react-router-dom';
 
 function FormHome(){
+
+    const location = useLocation();
+    console.log(location)
 
     let handleEditHome = (e)=>{
         e.preventDefault();

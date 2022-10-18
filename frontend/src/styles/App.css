@@ -23,6 +23,19 @@ textarea:focus, input:focus{
     margin: 0px auto;
 }
 
+.btnFrente{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--frente-color) ;
+    color: var(--text-frente-color);
+    padding: 0.2rem 0.2rem 0.3rem;
+    margin: 0 auto;
+    width: 5rem;
+    cursor: pointer;
+    border-radius: 0.2rem;
+}
+
 @media (max-width:300px){
     .masterContainer{
         width: 300px;
@@ -62,6 +75,7 @@ textarea:focus, input:focus{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .diffuse{

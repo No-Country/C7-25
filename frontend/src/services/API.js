@@ -194,7 +194,7 @@ export async function EditApptSetting(data){
 export async function EditHome(dataHome){
 
   try{
-    const urlAPI = `${domain}home/savehome`;
+    const urlAPI = `${domain}/home/savehome`;
     const resolve = await axios.post(urlAPI, dataHome);
     return(resolve)
   }
@@ -205,7 +205,7 @@ export async function EditHome(dataHome){
 
 export async function EditCategory(dataCateg){
   try{
-    const urlAPI = `${domain}home/savecategory`;
+    const urlAPI = `${domain}/home/savecategory`;
     const resolve = await axios.post(urlAPI, dataCateg);
     return(resolve)
   }
@@ -217,9 +217,20 @@ export async function EditCategory(dataCateg){
 export async function EditServices(dataServices){
 
   try{
-    const urlAPI = `${domain}home/saveservice`;
+    const urlAPI = `${domain}/home/saveservice`;
     const resolve = await axios.post(urlAPI, dataServices);
     return(resolve)
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
+
+export async function DeleteApptSetting(id){
+  try{
+    const urlAPI = `${domain}/eliminar/${id}`;
+    const resolve = await axios.delete(urlAPI);
+    return(resolve);
   }
   catch (error){
     console.log('Error: ' + error)

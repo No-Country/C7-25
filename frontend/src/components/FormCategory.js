@@ -1,6 +1,10 @@
+import { useLocation } from 'react-router-dom';
 import '../styles/Forms.css';
 
 function FormCategory(){
+
+    const location = useLocation();
+    console.log(location);
 
     let handleFormCategory = (e) =>{
         e.preventDefault();

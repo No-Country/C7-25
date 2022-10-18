@@ -1,6 +1,14 @@
 /* FORMS STYLES */
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Poppins:wght@300;400&display=swap');
 
+
+.tarjetaAppt{
+    background-color: #CEAA9A;
+    padding: 1rem;
+    margin: 1rem;
+    display: inline-block;
+
+}
 /* SMALL */
 @media (min-width:0px) and (max-width:500.99px){
     .divContainerForms{
