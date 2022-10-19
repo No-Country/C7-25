@@ -3,11 +3,23 @@
 
 
 .tarjetaAppt{
-    background-color: #CEAA9A;
+    background-color: rgb(206, 170, 154);
     padding: 1rem;
     margin: 1rem;
     display: inline-block;
-
+    border: solid 1px rgb(148, 112, 98);
+}
+.divItemsToEdit > p{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: rgb(36, 25, 21);
+}
+.btnFrente{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    padding: 7px 15px;
+    background-color: rgb(148, 112, 98);
+    border: solid 1px rgb(118, 82, 68);
 }
 /* SMALL */
 @media (min-width:0px) and (max-width:500.99px){
