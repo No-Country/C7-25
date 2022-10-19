@@ -127,13 +127,13 @@ function FormSettingsAppt(e){
                             {
                                 settings.map((sett,index)=>
                                     <div className='tarjetaAppt' key={index}>
-                                        <div>
-                                            <div>Servicio: {sett.serviceId}</div>
-                                            <div>Duración del truno: {sett.apptDuration}</div>
-                                            <div>Dias de la semana con turnos: {sett.daysAvailable}</div>
-                                            <div>Horas de atención: {sett.workdayDuration}</div>
-                                            <div>Hora de inicio de la jornada: {sett.workdayInit}</div>
-                                            <div>Dias corridos con turnos disponibles: {sett.daysAhead}</div>                                            
+                                        <div className='divItemsToEdit'>
+                                            <p>Servicio: {sett.serviceId}</p>
+                                            <p>Duración del truno: {sett.apptDuration}</p>
+                                            <p>Dias de la semana con turnos: {sett.daysAvailable}</p>
+                                            <p>Horas de atención: {sett.workdayDuration}</p>
+                                            <p>Hora de inicio de la jornada: {sett.workdayInit}</p>
+                                            <p>Dias corridos con turnos disponibles: {sett.daysAhead}</p>                                            
                                         </div>
                                         <div className='flexRow'>
                                             <div className='btnFrente' onClick={()=>edit(index)}>Editar</div>

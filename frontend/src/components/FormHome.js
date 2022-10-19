@@ -12,7 +12,7 @@ function FormHome(){
     const[telephone, setTelephone] = useState('');
     const[description, setDescription] = useState('');
     
-    let handleEditHome = (e)=>{
+    let handleEditHome = async (e)=>{
         e.preventDefault();
 
         const dataHome = {
@@ -21,7 +21,7 @@ function FormHome(){
             telephone: e.target.telephoneInput.value,
             description: e.target.descriptionInput.value
         }
-        const resolve= EditHome(dataHome);
+        const resolve= await EditHome(dataHome);
 
         if( resolve.status === 201){
             alert('Los datos han sido modificados')
