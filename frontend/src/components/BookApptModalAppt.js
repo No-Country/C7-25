@@ -63,12 +63,12 @@ export default function ModalAppt({appt, apptDay, idService, setModalWindow}) {
           <div className='scrollContainer'>
           {
               apptDisp.map((turn,index)=>
-                <div  className='clickList  flexRow' key={index}>
-                  <div>{jsDateToHsMin(turn.ini)+ ' a ' +jsDateToHsMin(turn.end)}</div>
+                <div  className='clickList' key={index}>
+                  <div className='listText'>{jsDateToHsMin(turn.ini)+ ' a ' +jsDateToHsMin(turn.end)}</div>
                   {
                     turn.disp?
                       <div className='apptBtn' onClick={()=>modalJson(turn)}>Reservar</div>
-                      :
+                    :
                       <div className='ghostBtn'></div>
                   }
                 </div>

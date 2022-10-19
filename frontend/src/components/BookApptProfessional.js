@@ -13,6 +13,7 @@ export default function ModalProfessional({masterAppt,setAppt,setModalWindow,pro
 
   function setProf(index) {
     //setIdProfessional(professionals[index].id);
+    setActiveIndex(index);
     setAppt(masterAppt[index]);
     setModalWindow(1);
   }
@@ -26,18 +27,21 @@ export default function ModalProfessional({masterAppt,setAppt,setModalWindow,pro
             {/*<div className='date flexRow'>{jsDateToText(apptDay)}</div>*/}
             <div className='apptsContainer'>
             {
-                professionals.map((prof,index)=>
-                  <div  className='clickList  flexRow' key={index}>
-                    <div>{prof.name+ ' ' +prof.lastname}</div>
+                (professionals.length>1)?
+                  professionals.map((prof,index)=>
+                    <div  className='clickList' key={index}>
+                      <div className='listText'>{prof.name+ ' ' +prof.lastname}</div>
 
-                    {
-                      (activeIndex!==index)?
-                        <div onClick={()=>setProf(index)} className='profBtn'>Elegir</div>
-                      :
-                        <div></div>
-                    }
-                  </div>
-                )
+                      {
+                        (activeIndex!==index)?
+                          <div onClick={()=>setProf(index)} className='profBtn'>Elegir</div>
+                        :
+                          <div></div>
+                      }
+                    </div>
+                  )
+                :
+                <div className='oneProf flexRow'>{professionals[0].name+ ' ' +professionals[0].lastname}</div>
               }
             </div>
           </div>
