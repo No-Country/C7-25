@@ -3,7 +3,6 @@
 
 /* SMALL */
 .myAppointmentsTitle{
-
     margin: 0px;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
@@ -27,8 +26,12 @@
     column-gap: 2rem;
     width: 90%;
     background-color: #CEAA9A;
+    font-family: 'Poppins', sans-serif;
 }
-.grid>div{
+.grid > section{
+    padding: 0.25rem;
+}
+.grid > div{
     padding: 0.25rem;
 }
 .grid:last-child > .b{

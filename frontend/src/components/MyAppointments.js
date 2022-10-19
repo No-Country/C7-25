@@ -54,30 +54,31 @@ function MyAppointments(){
             {
                 myAppointmentsBooked.map((appt, index) =>
                     <div className='grid' key={index}>
-                        <div className='h1'>
+                        <section className='h1'>
                             Dia
-                        </div>
-                        <div className='d1'>
+                        </section>
+                        <p className='d1'>
                             {appt.date}
-                        </div>
-                        <div className='h2'>
+                        </p>
+                        <section className='h2'>
                             Hora
-                        </div>
-                        <div className='d2'>
+                        </section>
+                        <p className='d2'>
                             {appt.time}
-                        </div>
-                        <div className='h3'>
+                        </p>
+                        <section className='h3'>
                             Servicio
-                        </div>
-                        <div className='d3'>
+                        </section>
+                        <p className='d3'>
                             {appt.service}
-                        </div>
-                        <div className='h4'>
+                        </p>
+                        <section className='h4'>
                             Profesional
-                        </div>
-                        <div className='d4'>
+                        </section>
+                        <p className='d4'>
                             {appt.professional}
-                        </div>
+                        </p>
+
                         <div  className='b flexRow'></div>
                         <div className='c flexRow'>
                             {

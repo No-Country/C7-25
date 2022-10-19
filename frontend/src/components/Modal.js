@@ -16,10 +16,9 @@ export default function Modal({props}) {
         ShowModal?
           <div className='modal'>
             <div className='modalContainer'>
+              
               <h3>{props.msj}</h3>
-              <div>
-
-              </div>
+              
               {(props.showBtn)?
                 <div className='flexRow'>
                   <button className='apptBtn' onClick={()=>props.func(props.params)}>Confirmar</button>
