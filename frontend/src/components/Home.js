@@ -13,7 +13,7 @@ export default function Home() {
     const navigate = useNavigate();
     const {home,roles} = UseHomeContext();
 
-    let servicesArray=home.categories || [];
+    let categoriesArray=home.categories || [];
     let professionalsArray=home.professionals || [];
 
     function form(type,indexCategory,indexService){
@@ -29,9 +29,9 @@ export default function Home() {
             rute='/formcategory';
             if(indexCategory!==undefined){
                 data={
-                    id:servicesArray[indexCategory].id,
-                    category:servicesArray[indexCategory].category,
-                    photo:servicesArray[indexCategory].photo
+                    id:categoriesArray[indexCategory].id,
+                    category:categoriesArray[indexCategory].category,
+                    photo:categoriesArray[indexCategory].photo
                 }
             }else{
                 data={
@@ -55,6 +55,7 @@ export default function Home() {
                     duration:null
                 }
             }
+            data.idCategory=categoriesArray[indexCategory].id;
         }
         console.log(data);
         navigate(rute,{state:data})
@@ -67,7 +68,15 @@ export default function Home() {
   return (
     <div className='divContainerHome'>
 
-        <h1 className='homeTitle'>{home.name} <VscEdit onClick={()=>form('home')} /></h1>                            
+        <h1 className='homeTitle'>
+            {home.name}
+            {
+                (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))?
+                    <VscEdit onClick={()=>form('home')} />
+                :
+                    <></>
+            }
+        </h1>                            
         
 
         <aside className='asideData'> 
@@ -81,15 +90,22 @@ export default function Home() {
 
         <div  className='categoriesNames'>
             
-            {servicesArray.map( (eachCategory, indexCategory) =>{
+            {categoriesArray.map( (eachCategory, indexCategory) =>{
                 return(
                     <div key={indexCategory} className='category'>
                         
                         <div>
                             <div className='flexRow'>
                                 <h3>{eachCategory.category}</h3>
-                                <VscEdit onClick={()=>form('category',indexCategory)} />
-                                <VscChromeClose onClick={()=>del(indexCategory)} />
+                                {
+                                    (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))?
+                                        <>
+                                            <VscEdit onClick={()=>form('category',indexCategory)} />
+                                            <VscChromeClose onClick={()=>del(indexCategory)} />
+                                        </>
+                                    :
+                                        <></>
+                                }
                             </div>
 
                             <img src={eachCategory.photo} alt='Service' className='serviceImg'/>
@@ -105,19 +121,36 @@ export default function Home() {
                                                 • {service.name}
                                             </li>
                                         </Link>
-                                        <VscEdit onClick={()=>form('service',indexCategory,indexService)} />
-                                        <VscChromeClose onClick={()=>del(indexCategory,indexService)} />
+                                        {
+                                            (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))?
+                                                <>
+                                                    <VscEdit onClick={()=>form('service',indexCategory,indexService)} />
+                                                    <VscChromeClose onClick={()=>del(indexCategory,indexService)} />
+                                                </>
+                                            :
+                                                <></>
+                                        }
+
                                     </ul>
                                 )
                             })}
-                            <VscAdd onClick={()=>form('service',indexCategory)} />
-
+                            {
+                                (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))?
+                                    <VscAdd onClick={()=>form('service',indexCategory)} />
+                                :
+                                    <></>
+                            }
                         </div>
 
                     </div>
                 )
             })}
-            <VscAdd onClick={()=>form('category')} />
+            {
+                (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))?
+                    <VscAdd onClick={()=>form('category')} />
+                :
+                    <></>
+            }
         </div>
         
         <hr/><h2 className='homeSubtitles'>Nuestros profesionales</h2><hr/>

@@ -21,7 +21,7 @@ function MyAppointments(){
         let appt = apptsRaw.map(ap=>{
             const id = ap.id;
             const date = jsISODateToTextAndDate(ap.ini);
-            const time = ap.ini.slice(11,16);
+            const time = ap.ini.slice(11,16);//ARREGLAR
             const state = ap.state;
             //El servicio esta anidado en Home por lo que busco primero la categoria
             const category = home.categories.find(cat=>

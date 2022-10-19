@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import '../styles/ServiceDetails.css';
 
 import img from '../multimedia/manicuria_y_pedicura.jpg'
+import UseHomeContext from "../services/UseHomeContext";
 
 function ServiceDetails (){
 
     const [serviceDetail, setServiceDetail] = useState ('');
+    const {home} = UseHomeContext();
+    let categoriesArray=home.categories || [];
 
     let getUrl= new URLSearchParams (window.location.search);
     let paramCategoryValue = getUrl.get('idCategory');
@@ -17,15 +20,9 @@ function ServiceDetails (){
     console.log(paramServiceValue);
     
     useEffect( () =>{
-        const urlAPI= 'http://190.244.201.188:8080/home/categories';
-        axios.get(urlAPI)
 
-        .then(resolve =>{
-            console.log(resolve.data);
-            console.log(resolve.data[paramCategoryValue].services[paramServiceValue]);
-            setServiceDetail(resolve.data[paramCategoryValue].services[paramServiceValue])
+        setServiceDetail(categoriesArray[paramCategoryValue].services[paramServiceValue])
 
-        })
     },[paramCategoryValue, paramServiceValue]);
     
 //agregar: foto, precio, duracion 

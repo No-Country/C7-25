@@ -41,8 +41,8 @@ export function jsDateToText(timeInMS){
 
 // 2022-10-21T08:00:00 -> Viernes 21/10
 export function jsISODateToTextAndDate(ISOtime){
-
-  const jsDate= new Date(ISOtime+'Z');
+  const jsDate= new Date(`${ISOtime}Z`);
+  console.log(jsDate);
   const day=days[jsDate.getDay()];
   const dayNumber=parseInt(jsDate.getDate());
   const month=jsDate.getMonth();

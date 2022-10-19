@@ -25,6 +25,7 @@ function FormServices(){
             duration: e.target.serviceDurationInput.value,
             price: e.target.servicePriceInput.value,
         }
+        EditServices(location.state.idCategory,dataServices);
     };
     
     useEffect(()=>{

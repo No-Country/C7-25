@@ -154,7 +154,7 @@ export async function signUp(bodyAPI) {
 
 export async function MyAppointmentsCancelAppt(id) {
   try {
-    const email = await localStorage.getItem('email');
+    const email = localStorage.getItem('email');
     const urlAPI=`${domain}/appt/apptstate/${id}/${email}`;
     const resp = await axios.put(urlAPI);
     return resp.data;
@@ -181,7 +181,8 @@ export async function SignUpIsEmailNotAvailable(inputEmail) {
 export async function EditApptSetting(data){
   
   try {
-    const urlAPI = `${domain}/appt/savesettings`;
+    const email = localStorage.getItem('email');
+    const urlAPI = `${domain}/appt/savesettings/${email}`;
     const resp = await axios.post(urlAPI,data);
     return resp;
   }
@@ -214,10 +215,10 @@ export async function EditCategory(dataCateg){
   }
 }
 
-export async function EditServices(dataServices){
+export async function EditServices(idCategory,dataServices){
 
   try{
-    const urlAPI = `${domain}/home/saveservice`;
+    const urlAPI = `${domain}/home/saveservice/${idCategory}`;
     const resolve = await axios.post(urlAPI, dataServices);
     return(resolve)
   }
@@ -228,7 +229,7 @@ export async function EditServices(dataServices){
 
 export async function DeleteApptSetting(id){
   try{
-    const urlAPI = `${domain}/eliminar/${id}`;
+    const urlAPI = `${domain}/appt/delete/${id}`;
     const resolve = await axios.delete(urlAPI);
     return(resolve);
   }

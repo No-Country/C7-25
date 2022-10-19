@@ -45,7 +45,7 @@ function ClientsAppointments(){
 
     return(
         <div className='masterContainer flexColumn'>
-            <div className='btnHome editHome'><Link to='/formsettingsappt'>Editar la configuración de turnos</Link></div>
+            <div className='btnFrente'><Link to='/formsettingsappt'>Editar la configuración de turnos</Link></div>
             <h1 className='myAppointmentsTitle'>{
                 (myAppointmentsBooked.length>0)?
                     'Turnos Reservados'

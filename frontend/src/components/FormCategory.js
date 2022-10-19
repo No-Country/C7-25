@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { EditCategory } from '../services/API';
 import '../styles/Forms.css';
 
 function FormCategory(){
@@ -16,6 +17,7 @@ function FormCategory(){
             category: e.target.categoryNameInput.value,
             photo: e.target.categoryImgInput.value
         }
+        EditCategory(dataCateg);
     };
 
     useEffect(()=>{

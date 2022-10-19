@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { jsDateToText } from '../services/DateTime';
-import UseHomeContext from '../services/UseHomeContext';
 
-export default function ModalProfessional({masterAppt,setAppt,setModalWindow,setIdProfessional,professionals}) {
+export default function ModalProfessional({masterAppt,setAppt,setModalWindow,professionals}) {
 
   const [activeIndex, setActiveIndex] = useState(null);
 

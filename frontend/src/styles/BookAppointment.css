@@ -94,19 +94,9 @@
 }
 
 .on{
-  border: 0.25rem solid #0f05;
+  border: 0.25rem solid var(--frente-color);
 }
 .on:hover {/*:not(.today)*/
   background-color: var(--fondo-color);
-  border: 0.25rem solid var(--frente-color);
   cursor: pointer;
 }
-
-
-
-/*@media (min-width: 768px) {
-  .button-36 {
-    padding: 0 2.6rem;
-  }
-}*/
-
