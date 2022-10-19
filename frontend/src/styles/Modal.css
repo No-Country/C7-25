@@ -19,13 +19,10 @@
 .modalContainer > h3{
   color: var(--text-fondo-color);
 }
-.modalBtn{
-  
-}
 
 /*//////////////////////////////*/
 .dayCalendarContainer{
-  width: 300px;
+  width: auto;
   margin: 1.5rem 0;
   background-color: var(--fondo-color);
   max-height: 80%;
@@ -46,6 +43,7 @@
   max-height: 70vh;
   overflow-y: scroll;
 }
+
 .appt{
   padding: 10px;
   height: 45px;
@@ -59,11 +57,7 @@
   cursor: pointer;
   box-sizing: border-box;
 }
-/*.ghostBtn{
-  width: 71px;
-  height: 24px;
-  margin-left: 20px;
-}*/
+
 .profBtn{
   background-color: var(--black-white-main);
   padding: 3px 10px 5px 10px;
@@ -74,19 +68,23 @@
 }
 
 .clickList{
-  padding: 10px;
-  height: 45px;
+  padding: 0.5rem 2rem;
   box-sizing: border-box;
   color: #8E746A;
+  display: flex;
+  justify-content: space-between;
 }
-.clickList>div:first-child{
-  width: 50%;
-  margin-left: 10%;
+.listText{
+  padding-right: 2rem;
   color: #8E746A;
+  white-space: nowrap;
 }
-.clickList>div:nth-child(2){
-  max-width: 25%;
-  margin: 0 10%;
+
+.oneProf{
+  width: 100%;
+  height: 2.5rem;
+  color: #8E746A;
+  white-space: nowrap;
 }
 .apptCero{
   font-size: 1.4rem;
