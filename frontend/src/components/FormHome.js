@@ -1,5 +1,5 @@
 import '../styles/Forms.css';
-import {EditHome} from '../services/API';
+import { EditHome } from '../services/API';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -16,7 +16,7 @@ function FormHome(){
         e.preventDefault();
 
         const dataHome = {
-            name: e.target.brandNameinput.value,
+            name: e.target.brandNameInput.value,
             adress: e.target.adressInput.value,
             telephone: e.target.telephoneInput.value,
             description: e.target.descriptionInput.value

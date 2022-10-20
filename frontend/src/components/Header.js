@@ -3,11 +3,13 @@ import '../styles/Header.css';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { useState } from 'react';
 import UseHomeContext from '../services/UseHomeContext';
+import Modal from './Modal';
 
 function Header() {
     
     const [menuOpened, setMenuOpened] = useState(false);
     const {roles,setRoles} = UseHomeContext();
+    const [modalData, setModalData] = useState({});
     const redirect = useNavigate();
 
     let openMenu = ()=>{
@@ -19,6 +21,10 @@ function Header() {
         localStorage.removeItem('email');
         setRoles([]);
         redirect('/');
+        let data = { 
+            modal:false
+        }
+        setModalData(data);
     }
   
     let HeaderLi = () => <>
@@ -35,7 +41,7 @@ function Header() {
                         <Link to='/misturnos'>Mis turnos</Link><hr/>
                     </li>
                     {
-                        (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))? 
+                        (roles.includes('ROLE_MANAGER'))? 
                             <li className='liHeader'>
                                 <Link to='/turnosclientes'>Turnos de clientes</Link><hr/>
                             </li>
@@ -43,7 +49,7 @@ function Header() {
                             <></>
                     }
 
-                    <li onClick={logOut} style={{cursor:'pointer'}} className='liHeader'>
+                    <li onClick={modalJson} style={{cursor:'pointer'}} className='liHeader'>
                         Cerrar sesión
                     </li>
                 </>
@@ -59,7 +65,17 @@ function Header() {
         }
     </>;
 
-    console.log(menuOpened)
+    function modalJson() {
+        let data = { 
+            func:logOut,
+            msj:'Desea cerrar sesión?',
+            showBtn:true,
+            params:null,
+            modal:true
+        }
+        setModalData(data);
+    }
+
     return (
         <header className='header'>
             <nav className='navHeader'>
@@ -78,6 +94,7 @@ function Header() {
             <div onClick={openMenu} className={`divLiHeader2 ${menuOpened && 'menuIsOpened'}`}>
                 <HeaderLi/>
             </div>
+            <Modal props={modalData}/>
         </header>
     )
   

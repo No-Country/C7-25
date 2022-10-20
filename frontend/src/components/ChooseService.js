@@ -12,7 +12,7 @@ function ChooseService (){
             <h1 className="chooseServiceTitle">Elije un Servicio</h1>
             {servicesArray.map((eachCategory, indexCategory)=>{
                 return(
-                    <div>
+                    <div key={indexCategory}>
                         <h2 className="serviceCategory">{eachCategory.category}</h2>
                         
                             <div key={indexCategory} className='divChooseServiceGrid'>

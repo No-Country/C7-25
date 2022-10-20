@@ -1,8 +1,15 @@
 import axios from 'axios';
 import {domain} from './Domain';
 
-let aux = new Date();
-aux.toISOString()
+function Config(){
+  const token = localStorage.getItem('token');
+  return {
+    headers: {
+      Authorization : `Bearer ${token}`
+    } 
+  }
+}
+
 
 export async function getHome() {
   try {
@@ -14,7 +21,6 @@ export async function getHome() {
   }
 }
 
-//Falta agregar a la lista de turnos tomados
 export async function BookAppointmentSaveAppt(apptm,serviceId,professionalId) {
 
   const ini = (new Date(apptm.ini)).toISOString();
@@ -23,15 +29,8 @@ export async function BookAppointmentSaveAppt(apptm,serviceId,professionalId) {
   const turn={ini,end,serviceId,apptSettingsId,professionalId}
 
   try {
-      const token = localStorage.getItem('token');
-      const config = {
-        headers: {
-          Authorization : `Bearer ${token}`
-        } 
-      }
-      const email = localStorage.getItem('email');
-      const UserusedUrlAPI=`${domain}/appt/save/${email}`;
-      const resp = await axios.post(UserusedUrlAPI,turn,config);
+      const UserusedUrlAPI=`${domain}/appt/save`;
+      const resp = await axios.post(UserusedUrlAPI,turn,Config());
       return resp;
   } catch (error) {
       console.log('Error: '+ error);
@@ -51,7 +50,7 @@ export async function BookAppointmentGetReserved(maxDays) {
   const T2=day.toISOString();
   try {
     const urlAPI=`${domain}/appt/getapptday/${T1}/${T2}`;
-    const resp = await axios.get(urlAPI);
+    const resp = await axios.get(urlAPI,Config());
     return resp.data.map(elem=>new Date(`${elem.ini}Z`));//La Z es para decirle que los datos estan en el timezone 0UTC
   } catch (error) {
       //Tarea: en caso de error hay que evitar que salga la ventana porque van a a estar todos los turnos disponibles
@@ -62,7 +61,7 @@ export async function BookAppointmentGetReserved(maxDays) {
 export async function getApptSettingsByServiceId(idService) {
   try {
     const urlAPI=`${domain}/appt/apptsettingsservice/${idService}`;
-    const resp = await axios.get(urlAPI);
+    const resp = await axios.get(urlAPI,Config());
     return resp.data;//Necesitara la z?
   } catch (error) {
       //Tarea: en caso de error hay que evitar que salga la ventana porque van a a estar todos los turnos disponibles
@@ -72,9 +71,8 @@ export async function getApptSettingsByServiceId(idService) {
 
 export async function getApptSettingsByProfessionalId() {
   try {
-    const email = localStorage.getItem('email');
-    const urlAPI=`${domain}/appt/apptsettingsprofessional/${email}`;
-    const resp = await axios.get(urlAPI);
+    const urlAPI=`${domain}/appt/apptsettingsprofessional`;
+    const resp = await axios.get(urlAPI,Config());
     return resp.data;//Necesitara la z?
   } catch (error) {
       //Tarea: en caso de error hay que evitar que salga la ventana porque van a a estar todos los turnos disponibles
@@ -84,9 +82,8 @@ export async function getApptSettingsByProfessionalId() {
 
 export async function userAppt() {
   try {
-    const email = localStorage.getItem('email');
-    const urlAPI=`${domain}/appt/userappt/${email}`;
-    const resp = await axios.get(urlAPI);
+    const urlAPI=`${domain}/appt/userappt`;
+    const resp = await axios.get(urlAPI,Config());
     return resp.data;
   }
 
@@ -97,9 +94,8 @@ export async function userAppt() {
 
 export async function profAppt() {
   try {
-    const email = localStorage.getItem('email');
-    const urlAPI=`${domain}/appt/profappt/${email}`;
-    const resp = await axios.get(urlAPI);
+    const urlAPI=`${domain}/appt/profappt`;
+    const resp = await axios.get(urlAPI,Config());
     return resp.data;
   }
 
@@ -154,9 +150,8 @@ export async function signUp(bodyAPI) {
 
 export async function MyAppointmentsCancelAppt(id) {
   try {
-    const email = localStorage.getItem('email');
-    const urlAPI=`${domain}/appt/apptstate/${id}/${email}`;
-    const resp = await axios.put(urlAPI);
+    const urlAPI=`${domain}/appt/apptstate/${id}`;
+    const resp = await axios.put(urlAPI,{},Config());//Requiere un body aun que sea vacio
     return resp.data;
   }
 
@@ -183,7 +178,7 @@ export async function EditApptSetting(data){
   try {
     const email = localStorage.getItem('email');
     const urlAPI = `${domain}/appt/savesettings/${email}`;
-    const resp = await axios.post(urlAPI,data);
+    const resp = await axios.post(urlAPI,data,Config());
     return resp;
   }
 
@@ -196,7 +191,7 @@ export async function EditHome(dataHome){
 
   try{
     const urlAPI = `${domain}/home/savehome`;
-    const resolve = await axios.post(urlAPI, dataHome);
+    const resolve = await axios.post(urlAPI, dataHome, Config());
     return(resolve)
   }
   catch (error){
@@ -206,8 +201,9 @@ export async function EditHome(dataHome){
 
 export async function EditCategory(dataCateg){
   try{
+
     const urlAPI = `${domain}/home/savecategory`;
-    const resolve = await axios.post(urlAPI, dataCateg);
+    const resolve = await axios.post(urlAPI, dataCateg, Config());
     return(resolve)
   }
   catch (error){
@@ -219,7 +215,7 @@ export async function EditServices(idCategory,dataServices){
 
   try{
     const urlAPI = `${domain}/home/saveservice/${idCategory}`;
-    const resolve = await axios.post(urlAPI, dataServices);
+    const resolve = await axios.post(urlAPI, dataServices, Config());
     return(resolve)
   }
   catch (error){
@@ -229,8 +225,30 @@ export async function EditServices(idCategory,dataServices){
 
 export async function DeleteApptSetting(id){
   try{
-    const urlAPI = `${domain}/appt/delete/${id}`;
-    const resolve = await axios.delete(urlAPI);
+    const urlAPI = `${domain}/appt/deleteapptsetting/${id}`;
+    const resolve = await axios.delete(urlAPI,Config());
+    return(resolve);
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
+
+export async function DeleteCategory(id){
+  try{
+    const urlAPI = `${domain}/home/deletecategory/${id}`;
+    const resolve = await axios.delete(urlAPI,Config());
+    return(resolve);
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
+
+export async function DeleteService(id){
+  try{
+    const urlAPI = `${domain}/home/deleteservice/${id}`;
+    const resolve = await axios.delete(urlAPI,Config());
     return(resolve);
   }
   catch (error){

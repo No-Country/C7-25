@@ -24,16 +24,13 @@ textarea:focus, input:focus{
 }
 
 .btnFrente{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--frente-color) ;
+    display: inline-block;
     color: var(--text-frente-color);
     padding: 0.2rem 0.2rem 0.3rem;
-    margin: 0 auto;
-    width: 5rem;
     cursor: pointer;
     border-radius: 0.2rem;
+    background-color: rgb(148, 112, 98);
+    border: solid 1px rgb(118, 82, 68);
 }
 
 @media (max-width:300px){

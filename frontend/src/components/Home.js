@@ -8,10 +8,14 @@ import { VscAdd, VscEdit, VscChromeClose } from 'react-icons/vsc';
 import { MdLocationOn } from 'react-icons/md';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { useState } from 'react';
+import Modal from './Modal';
+import { DeleteCategory, DeleteService } from '../services/API';
 
 export default function Home() {
     const navigate = useNavigate();
     const {home,roles} = UseHomeContext();
+    const [adminEdit, setAdminEdit] = useState(false);
+    const [modalData, setModalData] = useState({});
 
     let categoriesArray=home.categories || [];
     let professionalsArray=home.professionals || [];
@@ -61,18 +65,64 @@ export default function Home() {
         navigate(rute,{state:data})
     } 
 
-    function del(indexCategory,indexService){
-        console.log('En el delete');
+    function toggleEdit(){
+        if(roles.includes('ROLE_ADMIN')){
+            setAdminEdit(!adminEdit);
+        }
     }
+
+    function del({idCategory,idService}){
+        if(idService){
+            DeleteService(idService);
+        }else{
+            DeleteCategory(idCategory);
+        }
+    }
+
+    function modalJson(idCategory,idService) {
+        const msj = (idService)? 
+                'Esta accion eliminará el servicio de forma permanente. Desea eliminar el servicio?'
+            :
+                'Esta accion eliminará la categoria y sus servicios de forma permanente. Desea eliminar la categoria?'
+        let data = { 
+          func:del,
+          msj,
+          showBtn:true,
+          params:{idCategory,idService},
+          modal:true
+        }
+        console.log('data',data)
+        setModalData(data);
+    }  
 
   return (
     <div className='divContainerHome'>
+        {
+            (roles.includes('ROLE_ADMIN'))?
+                <>
+                    <br/>
+                    <div onClick={toggleEdit} className='flexRow'>
+                        <div className='btnFrente'>
+                            {
+                                (adminEdit)?
+                                    'Desactivar edición'
+                                :
+                                    'Activar edición'
+                            }
+                        </div>
+                    </div>
+                </>      
+            :
+                <></>
+        }
 
-        <h1 className='homeTitle'>
+        <h1 className='homeTitle flexRow'>
             {home.name}
             {
-                (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))?
-                    <VscEdit onClick={()=>form('home')} />
+                (adminEdit)?
+                    <div  onClick={()=>form('home')} className='iconHome'>
+                        <VscEdit/>
+                    </div>
                 :
                     <></>
             }
@@ -84,7 +134,7 @@ export default function Home() {
             <p id='cellphoneNumber'><AiOutlineWhatsApp className='iconsData'/> {home.telephone}</p>
         </aside>
         
-        <p className='description'> hbjjhbjhb jhbjh bjhbjhbj hbjhbjh bh bhb hb jhbjh bjh bj jh bjh b bibi uhi uh iuh iuhihih iuhu hiuhiuhiub hb hbi ub ibi biu b iu bi biu b iu uiui iuhuuh uhipnjknlkn bhbhl blb lkjbj j jbjkjjkb{home.description} </p>
+        <p className='description'>{home.description}</p>
 
         <hr/><h2 className='homeSubtitles'>Nuestros servicios</h2><hr/>
 
@@ -98,11 +148,11 @@ export default function Home() {
                             <div className='flexRow'>
                                 <h3>{eachCategory.category}</h3>
                                 {
-                                    (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))?
-                                        <>
+                                    (adminEdit)?
+                                        <div className='iconsEdit'>
                                             <VscEdit onClick={()=>form('category',indexCategory)} />
-                                            <VscChromeClose onClick={()=>del(indexCategory)} />
-                                        </>
+                                            <VscChromeClose onClick={()=>modalJson(eachCategory.id)} />
+                                        </div>
                                     :
                                         <></>
                                 }
@@ -122,11 +172,11 @@ export default function Home() {
                                             </li>
                                         </Link>
                                         {
-                                            (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))?
-                                                <>
+                                            (adminEdit)?
+                                                <div className='iconsEdit'>
                                                     <VscEdit onClick={()=>form('service',indexCategory,indexService)} />
-                                                    <VscChromeClose onClick={()=>del(indexCategory,indexService)} />
-                                                </>
+                                                    <VscChromeClose onClick={()=>modalJson(eachCategory.id,service.id)} />
+                                                </div>
                                             :
                                                 <></>
                                         }
@@ -135,8 +185,11 @@ export default function Home() {
                                 )
                             })}
                             {
-                                (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))?
-                                    <VscAdd onClick={()=>form('service',indexCategory)} />
+                                (adminEdit)?
+                                    <div className='iconAdd' onClick={()=>form('service',indexCategory)} >
+                                        <VscAdd/>
+                                        Agregar servicio
+                                    </div>
                                 :
                                     <></>
                             }
@@ -146,7 +199,7 @@ export default function Home() {
                 )
             })}
             {
-                (roles.includes('ROLE_MANAGER') || roles.includes('ROLE_ADMIN'))?
+                (adminEdit)?
                     <VscAdd onClick={()=>form('category')} />
                 :
                     <></>
@@ -170,6 +223,7 @@ export default function Home() {
             })}
 
         </div>
+        <Modal props={modalData}/>
     </div>
   )
 }

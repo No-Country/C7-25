@@ -18,8 +18,6 @@
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     padding: 7px 15px;
-    background-color: rgb(148, 112, 98);
-    border: solid 1px rgb(118, 82, 68);
 }
 /* SMALL */
 @media (min-width:0px) and (max-width:500.99px){

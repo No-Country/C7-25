@@ -18,6 +18,10 @@
 }
 .modalContainer > h3{
   color: var(--text-fondo-color);
+  text-align: center;
+}
+.btnContainer>div{
+  margin: 0.5rem;
 }
 
 /*//////////////////////////////*/
@@ -93,14 +97,10 @@
 .closeMA{
   width: 300px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   cursor: pointer;
 }
 .closeMA > svg{
   color: white;
   scale: 2;
 }
-
-/*.time{
-  
-}*/

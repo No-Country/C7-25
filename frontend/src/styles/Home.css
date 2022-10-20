@@ -5,9 +5,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
 
 
-.editHome{
-    margin: 1.5rem;
-    width: 7rem;
+.iconsEdit{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 0.8rem;
+    cursor: pointer;
+}
+.iconAdd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+.iconHome{
+    cursor: pointer;
+    margin-left: 1rem;
+}
+.iconHome>svg{
+    width: 2rem;
+    height: 2rem;
+}
+.iconEdit>svg,.iconsEdit>svg{
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.5rem;
 }
 /* GENERAL INFO */
 .divContainerHome{
