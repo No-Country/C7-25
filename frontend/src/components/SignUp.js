@@ -52,6 +52,10 @@ function SignUp (){
         };
     }
 
+    let goToLogin = (e) =>{
+        e.preventDefault();
+        redirect('/login')
+    }
 
     return(
         <div className='divContainer'>
@@ -75,6 +79,7 @@ function SignUp (){
 
                     <div className='divSignUpBtn'>
                         <button type='submit' className='btnSignUp'>Registrarse</button>
+                        <button onClick={goToLogin} className='btnGoToLogin'>Ya tengo cuenta, iniciar sesión</button>                    
                     </div>
                 </form>
         </div>

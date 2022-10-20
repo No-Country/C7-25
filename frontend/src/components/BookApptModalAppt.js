@@ -4,7 +4,7 @@ import {BookAppointmentSaveAppt} from '../services/API';
 import {jsDateToHsMin, jsDateToText} from '../services/DateTime';
 import Modal from './Modal';
 import { AiOutlineClose } from 'react-icons/ai';
-
+import '../styles/BookApptModal.css'
 
 export default function ModalAppt({appt, apptDay, idService, setModalWindow}) {
   const [apptDisp, setApptDisp] = useState([]);//Lista de turnos a mostrar
@@ -57,17 +57,17 @@ export default function ModalAppt({appt, apptDay, idService, setModalWindow}) {
         <div className='closeMA' onClick={()=>setModalWindow(1)}>
           <AiOutlineClose/>
         </div>
-        <div className='dayCalendarContainer'>
-          <div className='head flexRow'>Elije un horario</div>
+        <div className='chooseTimetableDiv'>
+          <h1 className='chooseTimetableTitle'>Elije un horario</h1>
           <div className='date flexRow'>{jsDateToText(apptDay)}</div>
           <div className='scrollContainer'>
           {
               apptDisp.map((turn,index)=>
                 <div  className='clickList' key={index}>
-                  <div className='listText'>{jsDateToHsMin(turn.ini)+ ' a ' +jsDateToHsMin(turn.end)}</div>
+                  <p className='listHours'>{jsDateToHsMin(turn.ini)+ ' a ' +jsDateToHsMin(turn.end)}</p>
                   {
                     turn.disp?
-                      <div className='apptBtn' onClick={()=>modalJson(turn)}>Reservar</div>
+                      <button className='bookBtn' onClick={()=>modalJson(turn)}>Reservar</button>
                     :
                       <div className='ghostBtn'></div>
                   }

@@ -52,9 +52,9 @@ textarea:focus, input:focus{
     --text-frente-color: rgb(243, 241, 253);
 }
 .pinkPalette{
-    --fondo-color: rgb(255, 227, 217);
+    --fondo-color: rgb(232, 200, 188);
     --medio-color: rgb(182, 143, 143);
-    --frente-color: rgb(168, 132, 118);
+    --frente-color: rgb(160, 121, 105);
     --text-fondo-color: rgb(142, 116, 106);
     --text-medio-color: rgb(217, 215, 227);
     --text-frente-color: rgb(243, 241, 253);

@@ -13,16 +13,19 @@
 }
 .cancelBtn{
     font-family: 'Poppins', sans-serif;
-    padding: 0.1rem 0.8rem 0.3rem;
     cursor: pointer;
     background-color: rgb(140, 101, 85);
     border: solid 1px rgb(108, 72, 58);
     box-shadow: 0.2px 0px 3px rgb(108, 72, 58);
     color: white;
-    padding: 0.1rem 0.8rem 0.3rem;
+    padding: 0.1rem 2%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 .cancelBtn:hover{
-    font-size:0.9em;
+    text-shadow: 1px 1px 1px rgba(8, 8, 8, 0.661), 1px 1px 1px rgba(0, 0, 0, 0.719);
+        
 }
 /* SMALL */
 @media (min-width:0px){
@@ -60,10 +63,10 @@
         box-sizing: border-box;
     }
     .cancelBtn{
-        font-size: 16;
+        font-size: 19;
     }
     .cancelBtn:hover{
-        font-size:16.5px;
+        font-size:16px;
     }
     .b{
         grid-area: b;
@@ -136,7 +139,6 @@
         font-size: 15px;
     }
     .cancelBtn:hover{
-        text-shadow: 1px 1px 1px rgba(8, 8, 8, 0.661), 1px 1px 1px rgba(0, 0, 0, 0.719);
         font-size: 15.5px;
     }
 

@@ -136,7 +136,7 @@ export default function Home() {
         
         <p className='description'>{home.description}</p>
 
-        <hr/><h2 className='homeSubtitles'>Nuestros servicios</h2><hr/>
+        <hr/><h2 className='homeSubtitles'>Nuestros Servicios</h2><hr/>
 
         <div  className='categoriesNames'>
             
@@ -206,7 +206,7 @@ export default function Home() {
             }
         </div>
         
-        <hr/><h2 className='homeSubtitles'>Nuestros profesionales</h2><hr/>
+        <hr/><h2 className='homeSubtitles'>Nuestros Profesionales</h2><hr/>
         
         <div className='flexRow'>
             

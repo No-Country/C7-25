@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import '../styles/BookApptProfessional.css'
 
 export default function ModalProfessional({masterAppt,setAppt,setModalWindow,professionals}) {
 
@@ -22,19 +23,19 @@ export default function ModalProfessional({masterAppt,setAppt,setModalWindow,pro
     <div className='flexRow'>
       {
         masterAppt.length>0 ?
-          <div className='dayCalendarContainer'>
-            <div className='head flexRow'>{masterAppt.length===1?'Profesional disponible':'Elije un profesional'}</div>
+          <div className='chooseProfessionalDiv'>
+            <h1 className='chooseProfessionalTitle'>{masterAppt.length===1?'Profesional disponible':'Elije un profesional'}</h1>
             {/*<div className='date flexRow'>{jsDateToText(apptDay)}</div>*/}
             <div className='apptsContainer'>
             {
                 (professionals.length>1)?
                   professionals.map((prof,index)=>
                     <div  className='clickList' key={index}>
-                      <div className='listText'>{prof.name+ ' ' +prof.lastname}</div>
+                      <p className='listText'>{prof.name+ ' ' +prof.lastname}</p>
 
                       {
                         (activeIndex!==index)?
-                          <div onClick={()=>setProf(index)} className='profBtn'>Elegir</div>
+                          <button onClick={()=>setProf(index)} className='chooseProfBtn'>Elegir</button>
                         :
                           <div></div>
                       }

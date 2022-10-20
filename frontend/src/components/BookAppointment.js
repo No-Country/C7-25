@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/BookAppointment.css';
+import '../styles/BookApptCalendar.css';
 import '../styles/Modal.css';
 import { getApptSettingsByServiceId, BookAppointmentGetReserved} from '../services/API';
 import ModalAppt from './BookApptModalAppt';

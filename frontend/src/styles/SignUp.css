@@ -32,6 +32,9 @@
 }
 .divSignUpBtn{
     text-align: center;
+    display: grid;
+    align-items: center;
+    justify-content: center;
 }
 .btnSignUp{
     font-family: 'Poppins', sans-serif;
@@ -40,12 +43,24 @@
     border: none;
     background-color: rgba(247, 211, 197, 1);
     color: rgb(102, 77, 67);
+    margin-bottom: 5px;
 }
 .btnSignUp:hover{
     cursor: pointer;
     font-weight: bold;
 }
-
+.btnGoToLogin{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    cursor: pointer;
+    background-color: rgba(247, 211, 197, 0);
+    color: rgb(40, 24, 17);
+    border: none;
+}
+.btnGoToLogin:hover{
+    text-decoration: underline;
+    font-weight: 400;
+}
 
 
 
@@ -101,6 +116,11 @@
         letter-spacing: 1px;
         padding: 4px 15px;
     }
+    .btnGoToLogin{
+        font-size: 15px;
+        letter-spacing: -0.8px;
+        margin-top: 15px;
+    }
 }
 
 /* LARGE */
@@ -127,5 +147,10 @@
         font-size: 17px;
         letter-spacing: 1px;
         padding: 5px 20px;
+    }
+    .btnGoToLogin{
+        font-size: 15px;
+        letter-spacing: -0.8px;
+        margin-top: 15px;
     }
 }
