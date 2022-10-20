@@ -1,7 +1,6 @@
 /* MY APPONTMENTS STYLES */
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Poppins:wght@300;400&display=swap');
 
-/* SMALL */
 .myAppointmentsTitle{
     margin: 0px;
     font-family: 'Poppins', sans-serif;
@@ -12,56 +11,74 @@
     font-size: 26px;
     padding: 30px;
 }
-.grid{
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto auto auto auto;
-    grid-template-areas: 
-    "h1 d1"
-    "h2 d2"
-    "h3 d3"
-    "h4 d4"
-    "c c"
-    "b b";
-    column-gap: 2rem;
-    width: 90%;
-    background-color: #CEAA9A;
+.cancelBtn{
     font-family: 'Poppins', sans-serif;
-}
-.grid > section{
-    padding: 0.25rem;
-}
-.grid > div{
-    padding: 0.25rem;
-}
-.grid:last-child > .b{
-    display: none;
-}
-.h1,.h2,.h3,.h4{
-    color: var(--text-frente-color);
-}
-.c{
-    grid-area: c;
-    height: 2.5rem;
-    box-sizing: border-box;
-}
-.cBtn{
-    padding: 0.2rem 0.5rem 0.4rem;
-    background-color: #0002;
+    padding: 0.1rem 0.8rem 0.3rem;
     cursor: pointer;
+    background-color: rgb(140, 101, 85);
+    border: solid 1px rgb(108, 72, 58);
+    box-shadow: 0.2px 0px 3px rgb(108, 72, 58);
+    color: white;
+    padding: 0.1rem 0.8rem 0.3rem;
 }
-.b{
-    grid-area: b;
-    height: 0.2rem;
-    margin: 0.3rem 0.5rem;
-    padding: 0 !important;
-    background-color: var(--black-white-main);
+.cancelBtn:hover{
+    font-size:0.9em;
 }
-/* MEDIUM */
-@media (min-width:501px){
-
+/* SMALL */
+@media (min-width:0px){
     .grid{
         display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto auto auto auto;
+        grid-template-areas: 
+        "h1 d1"
+        "h2 d2"
+        "h3 d3"
+        "h4 d4"
+        "c c"
+        "b b";
+        column-gap: 2rem;
+        width: 90%;
+        background-color: rgb(206, 170, 154);
+        font-family: 'Poppins', sans-serif;
+    }
+    .grid > section{
+        padding: 0.25rem;
+    }
+    .grid > div{
+        padding: 0.25rem;
+    }
+    .grid:last-child > .b{
+        display: none;
+    }
+    .h1,.h2,.h3,.h4{
+        color: var(--text-frente-color);
+    }
+    .c{
+        grid-area: c;
+        height: 2.5rem;
+        box-sizing: border-box;
+    }
+    .cancelBtn{
+        font-size: 16;
+    }
+    .cancelBtn:hover{
+        font-size:16.5px;
+    }
+    .b{
+        grid-area: b;
+        height: 0.2rem;
+        margin: 0.3rem 0.5rem;
+        padding: 0 !important;
+        background-color: var(--black-white-main);
+    }
+}
+
+
+/* MEDIUM */
+@media (min-width:501px) and (max-width:900.99px){
+
+    .grid{
         grid-template-columns: 18% 12% 18.4% 22.2% 21.4%;
         grid-template-rows: auto auto auto;
         grid-template-areas: 
@@ -92,21 +109,35 @@
     }
     .d1{
         grid-area: d1;
+        font-size: 15px;
     }
     .d2{
         grid-area: d2;
+        font-size: 15px;
     }
     .d3{
         grid-area: d3;
+        font-size: 15px;
     }
     .d4{
         grid-area: d4;
+        font-size: 15px;
     }
     .b{
         grid-area: b;
     }
     .c{
         grid-area: c;
+        font-size: 13.5px;
+    }
+    .cancelBtn{
+        text-align: center;
+        width: 100%;
+        font-size: 15px;
+    }
+    .cancelBtn:hover{
+        text-shadow: 1px 1px 1px rgba(8, 8, 8, 0.661), 1px 1px 1px rgba(0, 0, 0, 0.719);
+        font-size: 15.5px;
     }
 
     /*Seleciona todo los div.grid que le siguen a un div.grid*/
@@ -129,7 +160,7 @@
 }
 
 /* LARGE */
-@media (min-width:901px){
+@media (min-width:901px) and (max-width:2500px){
     .grid{
         display: grid;
         grid-template-columns: 18% 12% 18.4% 22.2% 21.4%;
@@ -150,15 +181,27 @@
     }
     .h1{
         grid-area: h1;
+        font-size: 19px;
+        font-weight: 400;
+        text-shadow: 1px 1px 1px rgba(99, 99, 99, 0.485), 1px 1px 1px rgba(154, 154, 154, 0.485);
     }
     .h2{
         grid-area: h2;
+        font-size: 19px;
+        font-weight: 400;
+        text-shadow: 1px 1px 1px rgba(99, 99, 99, 0.485), 1px 1px 1px rgba(154, 154, 154, 0.485);
     }
     .h3{
         grid-area: h3;
+        font-size: 19px;
+        font-weight: 400;
+        text-shadow: 1px 1px 1px rgba(99, 99, 99, 0.485), 1px 1px 1px rgba(154, 154, 154, 0.485);
     }
     .h4{
         grid-area: h4;
+        font-size: 19px;
+        font-weight: 400;
+        text-shadow: 1px 1px 1px rgba(99, 99, 99, 0.485), 1px 1px 1px rgba(154, 154, 154, 0.485);
     }
     .d1{
         grid-area: d1;
@@ -178,7 +221,15 @@
     .c{
         grid-area: c;
     }
-
+    .cancelBtn{
+        text-align: center;
+        width: 100%;
+        font-size: 17px;
+    }
+    .cancelBtn:hover{
+        text-shadow: 1px 1px 1px rgba(8, 8, 8, 0.661), 1px 1px 1px rgba(0, 0, 0, 0.719);
+        font-size:17.5px;
+    }
     /*Seleciona todo los div.grid que le siguen a un div.grid*/
     /*por lo tanto se ignora el primero, luego se seleccionan los demas elementos*/
     .masterContainer > .grid ~ .grid > .h1{
@@ -195,7 +246,5 @@
     }
     .masterContainer > .grid ~ .grid > .b{
         display: none;
-    }
-
-        
+    }       
 }

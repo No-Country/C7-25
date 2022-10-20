@@ -77,7 +77,7 @@
         font-family: 'Poppins', sans-serif;
         font-weight: bold;
         letter-spacing: 1.5px;
-        font-size: 18px;
+        font-size: 20px;
         margin: 20px 10px 10px 0px;
         padding-left: 12%;
     }
@@ -105,7 +105,7 @@
         color: rgba(98, 62, 48, 1);
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
-        font-size: 15px;
+        font-size: 17px;
         padding: 5% 0px;
     }
     .ulListOfServices > li:hover{
@@ -134,7 +134,7 @@
         font-family: 'Poppins', sans-serif;
         font-weight: bold;
         letter-spacing: 1.5px;
-        font-size: 20px;
+        font-size: 24px;
         margin: 20px 10px 10px 0px;
         padding-left: 12%;
     }
@@ -162,7 +162,7 @@
         color: rgba(98, 62, 48, 1);
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
-        font-size: 15px;
+        font-size: 17px;
         padding: 5% 0px;
     }
     .ulListOfServices > li:hover{

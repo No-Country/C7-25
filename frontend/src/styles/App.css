@@ -27,7 +27,7 @@ textarea:focus, input:focus{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--frente-color) ;
+    background-color: var(--frente-color);
     color: var(--text-frente-color);
     padding: 0.2rem 0.2rem 0.3rem;
     margin: 0 auto;
@@ -55,14 +55,14 @@ textarea:focus, input:focus{
     --text-frente-color: rgb(243, 241, 253);
 }
 .pinkPalette{
-    --fondo-color: #FFE3D9;
-    --medio-color: #B68F8F;
-    --frente-color: #A88476;
-    --text-fondo-color: #8E746A;
+    --fondo-color: rgb(255, 227, 217);
+    --medio-color: rgb(182, 143, 143);
+    --frente-color: rgb(168, 132, 118);
+    --text-fondo-color: rgb(142, 116, 106);
     --text-medio-color: rgb(217, 215, 227);
     --text-frente-color: rgb(243, 241, 253);
-    --black-white-main: #FFF;
-    --black-white-oposite: #000;
+    --black-white-main: rgb(255, 255, 255);
+    --black-white-oposite: rgb(0, 0, 0);
 }
 
 .flexColumn{

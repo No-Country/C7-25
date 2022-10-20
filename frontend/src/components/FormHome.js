@@ -53,7 +53,7 @@ function FormHome(){
                 <input type='tel' name='telephoneInput' value={telephone} onChange={(e) => setTelephone(e.target.value)}/><br/>
                 
                 <label>Descripción de la empresa:</label><br/>
-                <input type='text' name='descriptionInput' value={description} onChange={(e) => setDescription(e.target.value)}/><br/>
+                <textarea rows='8' cols='40' type='text' name='descriptionInput' value={description} onChange={(e) => setDescription(e.target.value)}></textarea><br/>
 
                 <div className='divEditBtn'>
                     <button type='submit'>Editar</button>

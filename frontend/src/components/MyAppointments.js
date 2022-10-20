@@ -8,7 +8,8 @@ import { jsISODateToTextAndDate } from '../services/DateTime';
 function MyAppointments(){
     const {home} = UseHomeContext();
     const [myAppointmentsBooked, setMyAppointmentsBooked] = useState([])
-
+    const [cancelAppointment, setCancelAppointment] = useState(false)
+    
     useEffect(() => {
         if(home.categories){
             getAppt();
@@ -38,19 +39,22 @@ function MyAppointments(){
         setMyAppointmentsBooked(appt);
     }
 
-    function cancelAppt(id){
-        MyAppointmentsCancelAppt(id);
+    async function cancelAppt(id, appt){
+        let resp= await MyAppointmentsCancelAppt(id);
         console.log('cancelando',id);
+        getAppt();
     }
 
     return(
-        <div className='masterContainer flexColumn'>
-            <h1 className='myAppointmentsTitle'>{
-                (myAppointmentsBooked.length>0)?
-                    'Turnos Reservados'
-                :
-                    'No posee turnos reservados'
-            }</h1>
+        <div className='masterContainer divContainerForms flexColumn'>
+            <h1 className='myAppointmentsTitle'>
+                {
+                    (myAppointmentsBooked.length>0)?
+                        'Turnos Reservados'
+                    :
+                        'No posee turnos reservados'
+                }
+            </h1>
             {
                 myAppointmentsBooked.map((appt, index) =>
                     <div className='grid' key={index}>
@@ -81,14 +85,10 @@ function MyAppointments(){
 
                         <div  className='b flexRow'></div>
                         <div className='c flexRow'>
-                            {
-                                appt.state?
-                                    appt.state===1?
-                                        'Cancelado por el usuario'
-                                    :
-                                        'Cancelado por el professional'
+                            { appt.state?
+                                appt.state===1? 'Cancelado por el usuario': 'Cancelado por el professional'
                                 :
-                                    <div className='cBtn' onClick={()=>cancelAppt(appt.id)}>Cancelar</div>
+                                <button className='cancelBtn' onClick={()=>cancelAppt(appt.id)}>Cancelar</button>
                             }
                         </div>
                     </div>

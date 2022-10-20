@@ -12,7 +12,6 @@ import ChooseService from './components/ChooseService';
 import ServiceDetails from './components/ServiceDetails';
 import BookAppointment from './components/BookAppointment';
 import MyAppointments from './components/MyAppointments';
-import LogOut from './components/LogOut';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import FormSettingsAppt from './components/FormSettingsAppt';
@@ -65,7 +64,6 @@ function App() {
             <Route path='/reservarturno' element={<BookAppointment/>}/>
             <Route path='/misturnos' element={<MyAppointments/>}/>
             <Route path='/turnosclientes' element={<ClientsAppointments/>}/>
-            <Route path='/logout' element={<LogOut/>}/>
             <Route path='/formcategory' element={<FormCategory/>}/>
             <Route path='/formsettingsappt' element={<FormSettingsAppt/>}/>
             <Route path='/formhome' element={<FormHome/>}/>

@@ -45,7 +45,7 @@ function ClientsAppointments(){
 
     return(
         <div className='masterContainer flexColumn'>
-            <div className='btnFrente'><Link to='/formsettingsappt'>Editar la configuración de turnos</Link></div>
+            <button className='editAppointmentsBtn'><Link to='/formsettingsappt'>Editar la configuración de turnos</Link></button>
             <h1 className='myAppointmentsTitle'>{
                 (myAppointmentsBooked.length>0)?
                     'Turnos Reservados'
@@ -56,7 +56,7 @@ function ClientsAppointments(){
                 myAppointmentsBooked.map((appt, index) =>
                     <div className='grid' key={index}>
                         <div className='h1'>
-                            Dia
+                            Día
                         </div>
                         <div className='d1'>
                             {appt.date}
@@ -88,7 +88,7 @@ function ClientsAppointments(){
                                     :
                                         'Cancelado por el professional'
                                 :
-                                    <div className='cBtn' onClick={()=>cancelAppt(appt.id)}>Cancelar</div>
+                                    <div className='cancelBtn' onClick={()=>cancelAppt(appt.id)}>Cancelar</div>
                             }
                         </div>
                     </div>
