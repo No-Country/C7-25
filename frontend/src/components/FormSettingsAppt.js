@@ -120,7 +120,7 @@ function FormSettingsAppt(e){
             {
                 (!mostrarForm)?
                     <div>
-                        <button className='btnFrente' style={{width:'15rem'}} onClick={()=>add()}>
+                        <button className='btnNewSetting' style={{width:'15rem'}} onClick={()=>add()}>
                             Crear configuración nueva
                         </button>
                         <div className='flexRow'>

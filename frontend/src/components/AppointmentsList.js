@@ -47,56 +47,53 @@ export default function AppointmentsList({roleAppt}) {
 
   return(
     <div className='masterContainer flexColumn'>
-      <h1 className='myAppointmentsTitle'>
+        <h1 className='myAppointmentsTitle'>
+            {
+                (myAppointmentsBooked.length>0)?
+                    'Turnos Reservados'
+                :
+                    'No posee turnos reservados'
+            }
+        </h1>
         {
-          (myAppointmentsBooked.length>0)?
-              'Turnos Reservados'
-          :
-              'No posee turnos reservados'
-        }
-      </h1>
-      {
-        myAppointmentsBooked.map((appt, index) =>
-            <div className='grid' key={index}>
-                <div className='h1'>
-                    Dia
-                </div>
-                <div className='d1'>
-                    {appt.date}
-                </div>
-                <div className='h2'>
-                    Hora
-                </div>
-                <div className='d2'>
-                    {appt.time}
-                </div>
-                <div className='h3'>
-                    Servicio
-                </div>
-                <div className='d3'>
-                    {appt.service}
-                </div>
-                <div className='h4'>
-                    Profesional
-                </div>
-                <div className='d4'>
-                    {appt.professional}
-                </div>
-                <div  className='b flexRow'></div>
-                <div className='c flexRow'>
-                    {
-                        appt.state?
-                            appt.state===1?
-                                'Cancelado por el usuario'
+            myAppointmentsBooked.map((appt, index) =>
+                <div className='grid' key={index}>
+                    <section className='h1'>
+                        Dia
+                    </section>
+                    <p className='d1'>
+                        {appt.date}
+                    </p>
+                    <section className='h2'>
+                        Hora
+                    </section>
+                    <p className='d2'>
+                        {appt.time}
+                    </p>
+                    <section className='h3'>
+                        Servicio
+                    </section>
+                    <p className='d3'>
+                        {appt.service}
+                    </p>
+                    <section className='h4'>
+                        Profesional
+                    </section>
+                    <p className='d4'>
+                        {appt.professional}
+                    </p>
+
+                    <div  className='b flexRow'></div>
+                    <div className='c flexRow'>
+                        { appt.state?
+                            appt.state===1? 'Cancelado por el usuario': 'Cancelado por el professional'
                             :
-                                'Cancelado por el professional'
-                        :
-                            <div className='cBtn' onClick={()=>cancelAppt(appt.id)}>Cancelar</div>
-                    }
+                            <button className='cancelBtn' onClick={()=>cancelAppt(appt.id)}>Cancelar</button>
+                        }
+                    </div>
                 </div>
-            </div>
-        )
-      }
+            )
+        }
     </div>
   )
 }
