@@ -67,6 +67,11 @@ function SignUp (){
         };
     }
 
+    let goToLogin = (e) =>{
+        e.preventDefault();
+        redirect('/login')
+    }
+
     return(
         <div className='divContainer'>
                 <h1 className='signUpTitle'>Registrate</h1>
@@ -89,6 +94,7 @@ function SignUp (){
 
                     <div className='divSignUpBtn'>
                         <button type='submit' className='btnSignUp'>Registrarse</button>
+                        <button onClick={goToLogin} className='btnGoToLogin'>Ya tengo cuenta, iniciar sesión</button>                    
                     </div>
                 </form>
                 <Modal props={modalData}/>

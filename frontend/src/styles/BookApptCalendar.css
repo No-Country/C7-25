@@ -1,7 +1,7 @@
 
 .calendar {
   /*box-shadow: 0 0.5rem 3rem rgba(0, 0, 0, 0.4);*/
-  background-color: #E2B7A7;
+  background-color: rgb(226, 183, 167);
 }
 
 .month {
@@ -83,21 +83,17 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-
-
-
 .out-month {
   opacity: 0.5;
 }
 
 .today {
-  
-  background-color: var(--fondo-color) !important;
+  background-color: rgb(255, 227, 217) !important;
   font-weight: 1000;
 }
 
 .on{
-  border: 0.25rem solid var(--frente-color);
+  border: 0.22rem solid var(--frente-color);
 }
 .on:hover {/*:not(.today)*/
   background-color: var(--fondo-color);

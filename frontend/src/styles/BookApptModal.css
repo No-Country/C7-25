@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Poppins:wght@300;400&display=swap');
+
+.chooseTimetableDiv{
+    width: auto;
+    margin: 1.5rem 0;
+    background-color: var(--fondo-color);
+    max-height: 80%;
+}
+.chooseTimetableTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--frente-color);
+    padding: 5px;
+    color: var(--text-frente-color);
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0px;
+    border-radius: 3px 3px 0px 0px;
+}
+.date{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--text-fondo-color);
+    padding: 8px;
+}
+.listHours{
+    font-family: 'Poppins', sans-serif;
+    padding-right: 2rem;
+    color: rgb(80, 53, 42);
+    white-space: nowrap;
+}
+.bookBtn{
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    padding: 0px 15px;
+    margin: 6% 0px;
+    font-size: 0.83em;
+    background-color: rgb(150, 111, 95);
+    border: solid 1px rgb(108, 72, 58);
+    box-shadow: 0.2px 0px 3px rgb(108, 72, 58);
+    color: white;
+    text-shadow: 0.2px 0.2px 0.2px rgba(8, 8, 8, 0.661), 1px 1px 1px rgba(0, 0, 0, 0.719);
+
+}
+.bookBtn:hover{
+    text-shadow: 1px 1px 1px rgba(8, 8, 8, 0.661), 1px 1px 1px rgba(0, 0, 0, 0.719);
+
+    background-color: rgb(160, 121, 105);
+    font-size: 0.84em;
+}
+/* SMALL */
+@media (min-width:0px) and (max-width:500.99px){
+    .chooseProfessionalTitle{
+
+    }
+}
