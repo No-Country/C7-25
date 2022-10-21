@@ -22,5 +22,5 @@ public class User {
 	private String photo;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	private Collection<Role> roles;
+	private Collection<Role> roles = new ArrayList<>();
 }

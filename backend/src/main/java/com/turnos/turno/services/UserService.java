@@ -63,15 +63,26 @@ public class UserService implements IUserService, UserDetailsService {
 		log.info("Agregando el role {} al usuario {}",roleName,username);
 		User user=userRepo.findByUsername(username);
 		Role role=roleRepo.findByName(roleName);
-		log.info("E usuario {}",user);
-		log.info("El role {}",role);
 		user.getRoles().add(role);
+	}
+
+	@Override
+	public void removeRoleToUser(Long userid, String roleName) {
+		log.info("Eliminando el role {} al usuario {}",roleName,userid);
+		User user=userRepo.getReferenceById(userid);
+		Role role=roleRepo.findByName(roleName);
+		user.getRoles().remove(role);
 	}
 
 	@Override
 	public User getUser(String username) {
 		log.info("Trayendo el usuario {}",username);
 		return userRepo.findByUsername(username);
+	}
+
+	@Override
+	public User getUserById(Long id) {
+		return userRepo.getReferenceById(id);
 	}
 
 	@Override

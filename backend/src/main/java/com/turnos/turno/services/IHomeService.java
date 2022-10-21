@@ -1,7 +1,7 @@
 package com.turnos.turno.services;
 
 import com.turnos.turno.models.appt.ApptSettings;
-import com.turnos.turno.models.home.Categorie;
+import com.turnos.turno.models.home.Category;
 import com.turnos.turno.models.home.Home;
 import com.turnos.turno.models.home.Service;
 
@@ -12,12 +12,20 @@ public interface IHomeService {
 
     Home saveHome(Home home);
 
-    List<Categorie> getCategories();
+    void addProfessional(String route, String email);
 
-    Categorie savetegories(Categorie categorie);
+    List<Category> getCategories();
+
+    Category getCategorie(Long id);
+
+    Category savetegories(Category category);
 
     Service getService (Long id);
 
     ApptSettings saveApptSettings(ApptSettings apptSettings);
+
+    void deleteCategory(Long id);
+
+    void deleteService(Long id);
 
 }

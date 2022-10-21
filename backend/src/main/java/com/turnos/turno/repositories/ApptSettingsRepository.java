@@ -1,5 +1,6 @@
 package com.turnos.turno.repositories;
 
+import com.turnos.turno.models.appt.Appointment;
 import com.turnos.turno.models.appt.ApptSettings;
 import com.turnos.turno.models.auth.User;
 import com.turnos.turno.models.home.Service;
@@ -13,4 +14,6 @@ public interface ApptSettingsRepository extends JpaRepository<ApptSettings,Long>
     List<ApptSettings> findByProfessionalIdAndServiceId(Long professionalId, Long serviceId);
 
     List<ApptSettings> findByServiceId(Long serviceId);
+
+    List<ApptSettings> findByProfessionalId(Long id);
 }

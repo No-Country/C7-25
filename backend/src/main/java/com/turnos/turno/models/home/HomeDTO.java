@@ -1,6 +1,5 @@
 package com.turnos.turno.models.home;
 
-import com.turnos.turno.models.auth.User;
 import com.turnos.turno.models.auth.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,10 +19,10 @@ public class HomeDTO {
     private String adress;
     private String telephone;
     private String email;
-    private String presentation;
+    private String description;
 
 
     private List<UserDTO> professionals;
 
-    private List<Categorie> categories;
+    private List<Category> categories;
 }

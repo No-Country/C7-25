@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Category")
-public class Categorie implements Serializable {
+public class Category implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,11 +24,8 @@ public class Categorie implements Serializable {
   private String category;
   private String photo;
 
-  /*@ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.ALL)
-  private List<Service> services = new ArrayList<>();*/
-
   @OneToMany(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
   @JoinColumn(name = "fk_services", referencedColumnName ="id")
-  private List<Service> services;
+  private List<Service> services = new ArrayList<>();
 
 }

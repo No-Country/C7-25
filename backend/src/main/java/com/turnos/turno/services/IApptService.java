@@ -10,6 +10,10 @@ public interface IApptService {
 
     List<Appointment> getAppt();
 
+    List<Appointment> getApptUser(Long id);
+
+    List<Appointment> getApptProf(Long id);
+
     List<Appointment> getApptTime(LocalDateTime ini, LocalDateTime end);
 
     Appointment saveAppt(Appointment appointment);
@@ -20,5 +24,9 @@ public interface IApptService {
 
     ApptSettings saveApptSettings (ApptSettings apptSettings);
 
-    List<ApptSettings> getApptSettings (Long servId);
+    List<ApptSettings> getApptSettingsService (Long servId);
+
+    List<ApptSettings> getApptSettingsProfessional (Long profId);
+
+    void deleteApptSettings(Long id);
 }

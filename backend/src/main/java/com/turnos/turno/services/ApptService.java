@@ -38,6 +38,18 @@ public class ApptService implements IApptService {
     }
 
     @Override
+    public List<Appointment> getApptUser(Long id) {
+        List<Appointment> listAppointment = apptRepository.findByUserId(id);
+        return listAppointment;
+    }
+
+    @Override
+    public List<Appointment> getApptProf(Long id) {
+        List<Appointment> listAppointment = apptRepository.findByProfessionalId(id);
+        return listAppointment;
+    }
+
+    @Override
     public List<Appointment> getApptTime(LocalDateTime ini, LocalDateTime end) {
         return apptRepository.findAllByIniBetween(ini, end);
     }
@@ -64,8 +76,18 @@ public class ApptService implements IApptService {
     }
 
     @Override
-    public List<ApptSettings> getApptSettings(Long servId) {
+    public List<ApptSettings> getApptSettingsService(Long servId) {
         return apptSettingsRepository.findByServiceId(servId);
         //return apptSettingsRepository.findByProfessionalIdAndServiceId(profId, servId);
+    }
+
+    public List<ApptSettings> getApptSettingsProfessional (Long profId){
+        return apptSettingsRepository.findByProfessionalId(profId);
+        //return apptSettingsRepository.findByProfessionalIdAndServiceId(profId, servId);
+    }
+
+    @Override
+    public void deleteApptSettings(Long id) {
+        apptSettingsRepository.deleteById(id);
     }
 }

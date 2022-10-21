@@ -12,8 +12,12 @@ public interface IUserService {
 	Role saveRole(Role role);
 	
 	void addRoleToUser(String username,String roleName);//Evitar usuarios duplicados
+
+	void removeRoleToUser(Long userid,String roleName);
 	
 	User getUser(String username);
+
+	User getUserById(Long id);
 	
 	List<User>getUsers();
 	

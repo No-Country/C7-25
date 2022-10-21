@@ -9,6 +9,7 @@ import com.turnos.turno.services.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,13 +29,24 @@ public class ApptController {
     @PostMapping("/save")
     public ResponseEntity<Appointment> saveAppt(@RequestBody Appointment appt){
         System.out.println("ApptController - saveAppt");
-        appt.setUserId(2L);//Hardcodeado
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user=userService.getUser(email);
+        appt.setUserId(user.getId());
         URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/appt/save").toUriString());
         return ResponseEntity.created(uri).body(apptService.saveAppt(appt));
     }
 
+    @PostMapping("/savesettings")
+    public ResponseEntity<ApptSettings> editAppt(@RequestBody ApptSettings apptSettings){
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user=userService.getUser(email);
+        apptSettings.setProfessionalId(user.getId());
+        URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/appt/savesettings").toUriString());
+        return ResponseEntity.created(uri).body(apptService.saveApptSettings(apptSettings));
+    }
+
     //Trae los turnos de un periodo del tiempo para el calendario
-    @GetMapping("/getapptday/{date1}/{date2}")//
+    @GetMapping("/getapptday/{date1}/{date2}")
     public ResponseEntity<List<Appointment>> getApptTime(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date1, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date2){//
         System.out.println("en getApptTime");
         System.out.println(date1);
@@ -45,26 +57,40 @@ public class ApptController {
 
     @GetMapping("/userappt")
     public ResponseEntity<List<Appointment>> getUserAppt(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user=userService.getUser(email);
         URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/appt/userappt").toUriString());
-        return ResponseEntity.created(uri).body(apptService.getAppt());
+        return ResponseEntity.created(uri).body(apptService.getApptUser(user.getId()));
     }
 
     @GetMapping("/profappt")
     public ResponseEntity<List<Appointment>> getProfessionalAppt(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user=userService.getUser(email);
         URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/appt/profappt").toUriString());
-        return ResponseEntity.created(uri).body(apptService.getAppt());
+        return ResponseEntity.created(uri).body(apptService.getApptProf(user.getId()));
     }
 
-    @GetMapping("/apptsettings/{idServ}")
-    public ResponseEntity<List<ApptSettings>> getApptSettings(@PathVariable Long idServ){
-        URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/appt/apptsettings").toUriString());
-        List<ApptSettings> resp = apptService.getApptSettings(idServ);
+    @GetMapping("/apptsettingsservice/{idServ}")
+    public ResponseEntity<List<ApptSettings>> getApptSettingsService(@PathVariable Long idServ){
+        URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/appt/pptsettingsservice").toUriString());
+        List<ApptSettings> resp = apptService.getApptSettingsService(idServ);
         return ResponseEntity.created(uri).body(resp);
     }
 
-    @PutMapping("/apptstate/{apptid}/{username}")
-    public Appointment setApptState (@PathVariable Long apptid, @PathVariable String username){
-        User user = userService.getUser(username);
+    @GetMapping("/apptsettingsprofessional")
+    public ResponseEntity<List<ApptSettings>> getApptSettingsProfessional(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user=userService.getUser(email);
+        URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/appt/apptsettingsprofessional").toUriString());
+        List<ApptSettings> resp = apptService.getApptSettingsProfessional(user.getId());
+        return ResponseEntity.created(uri).body(resp);
+    }
+
+    @PutMapping("/apptstate/{apptid}")
+    public Appointment setApptState (@PathVariable Long apptid){
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user = userService.getUser(email);
         Appointment appointment = apptService.findAppt(apptid);
         if(user.getId().equals(appointment.getUserId())){
             appointment.setState((byte) 1);
@@ -73,7 +99,13 @@ public class ApptController {
         }else{
             return null;
         }
-        //Change username to token
         return apptService.saveAppt(appointment);
+    }
+
+    @DeleteMapping ("/deleteapptsetting/{id}")
+    public ResponseEntity<String> deleteAppSettings (@PathVariable Long id){
+        apptService.deleteApptSettings(id);
+        URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/appt/eliminar").toUriString());
+        return ResponseEntity.created(uri).body("Se elimino correctamente");
     }
 }

@@ -1,7 +1,7 @@
 package com.turnos.turno;
 
 import com.turnos.turno.models.appt.ApptSettings;
-import com.turnos.turno.models.home.Categorie;
+import com.turnos.turno.models.home.Category;
 import com.turnos.turno.models.home.Home;
 import com.turnos.turno.models.home.Service;
 import com.turnos.turno.models.auth.User;
@@ -17,7 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.turnos.turno.models.auth.Role;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,75 +57,80 @@ public class TurnoApplication {
 						"",
 						"admin@gmail.com",
 						masterPass,
-						"Nombre",
-						"Apellido",
+						"Carola",
+						"Moyano",
 						12345678L,
 						"",
 						new ArrayList<>()
 					)
 				);
 				userService.saveUser(
-						new User(
-								null,
-								"",
-								"user@gmail.com",
-								masterPass,
-								"UserNom",
-								"UserApe",
-								12345678L,
-								"",
-								new ArrayList<>()
-						)
+					new User(
+						null,
+						"",
+						"user@gmail.com",
+						masterPass,
+						"UserNom",
+						"UserApe",
+						12345678L,
+						"",
+						new ArrayList<>()
+					)
 				);
-
+				userService.saveUser(
+					new User(
+						null,
+						"",
+						"manager1@gmail.com",
+						masterPass,
+						"Sofia",
+						"Perez",
+						null,
+						"",
+						new ArrayList<>()
+					)
+				);
+				userService.saveUser(
+					new User(
+						null,
+						"",
+						"manager2@gmail.com",
+						masterPass,
+						"Lucia",
+						"Gomez",
+						null,
+						"",
+						new ArrayList<>()
+					)
+				);
+				userService.saveUser(
+					new User(
+						null,
+						"",
+						"manager3@gmail.com",
+						masterPass,
+						"Maria",
+						"Lopez",
+						null,
+						"",
+						new ArrayList<>()
+					)
+				);
 
 				homeService.saveHome(new Home(
 					null,
-					"Carola",
+					"Carola Estética",
 					"carola",
 					"P.sherman calle wallaby 42 sydney ",
 					"+54987654321",
 					"carolaestetica@gmail.com",
 					"",
+					"",
+					"",
 					userService.getUser("admin@gmail.com"),
+					new ArrayList<>(),
 					new ArrayList<>(Arrays.asList(
-						//userService.getUser("admin@gmail.com"),
-						new User(
-							null,
-							"",
-							"manager1@gmail.com",
-							masterPass,
-							"Sofia",
-							"Perez",
-							null,
-							"",
-							new ArrayList<>()
-						),
-						new User(
-							null,
-							"",
-							"manager2@gmail.com",
-							masterPass,
-							"Lucia",
-							"Gomez",
-							null,
-							"",
-							new ArrayList<>()
-						),
-						new User(
-							null,
-							"",
-							"manager3@gmail.com",
-							masterPass,
-							"Maria",
-							"Lopez",
-							null,
-							"",
-							new ArrayList<>()
-						)
-					)),
-					new ArrayList<>(Arrays.asList(
-						new Categorie(
+						new Category(
 							null,
 							"Manicura y Pedicura",
 							"./multimedia/manicuria_y_pedicura.jpg",
@@ -166,7 +170,7 @@ public class TurnoApplication {
 							))
 						),
 
-						new Categorie(
+						new Category(
 							null,
 							"Tratamientos Faciales",
 							"./multimedia/Tratamientos-faciales.jpg",
@@ -207,7 +211,7 @@ public class TurnoApplication {
 							))
 						),
 
-						new Categorie(
+						new Category(
 							null,
 							"Depilación Definitiva",
 							"./multimedia/Depilacion-laser.jpg",
@@ -260,7 +264,7 @@ public class TurnoApplication {
 							))
 						),
 
-						new Categorie(
+						new Category(
 							null,
 							"Cejas y Pestañas",
 							"./multimedia/cejas_y_pestanias.jpg",
@@ -304,29 +308,30 @@ public class TurnoApplication {
 
 				Home home = homeService.getHome("carola");//professionals
 				List<User> professionals=home.getProfessionals();
-				//List<User> professionals=home.getCategories().get(0).getServices().get(0).getProfessionals();
 				professionals.add(userService.getUser("admin@gmail.com"));
+				professionals.add(userService.getUser("manager1@gmail.com"));
 				professionals.add(userService.getUser("manager2@gmail.com"));
 				professionals.add(userService.getUser("manager3@gmail.com"));
+				homeService.saveHome(home);
 
 
 				apptService.saveApptSettings(
 					new ApptSettings(
 						null,
-						LocalTime.of(8,0,0),
+						480,
 						480,
 						20,
 						273,
 						14,
 						new ArrayList<>(),
 						4L,
-						1L
+						3L
 					)
 				);
 				apptService.saveApptSettings(
 					new ApptSettings(
 						null,
-						LocalTime.of(8,0,0),
+						480,
 						480,
 						20,
 						273,
@@ -339,26 +344,26 @@ public class TurnoApplication {
 				apptService.saveApptSettings(
 					new ApptSettings(
 						null,
-						LocalTime.of(8,0,0),
+						480,
 						240,
 						20,
 						273,
 						14,
 						new ArrayList<>(),
-						1L,
+						5L,
 						6L
 					)
 				);
 				apptService.saveApptSettings(
 						new ApptSettings(
 								null,
-								LocalTime.of(16,0,0),
+								960,
 								180,
 								20,
 								273,
 								14,
 								new ArrayList<>(),
-								1L,
+								5L,
 								6L
 						)
 				);

@@ -41,23 +41,37 @@ public class SecurityConfig {//Para sobreescribir el usuario a loguear
 		
 		http.csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		/*http.authorizeRequests().antMatchers(
+		http.authorizeRequests().antMatchers(
+				"/home/",
 				"/auth/login",
-				"/auth/user/save",
-				"/auth/usernamelibre/**",
-				"/auth/emaillibre/**",
-				"/auth/token/refresh"
+				"/auth/signup",
+				"/auth/useravailability/**"
 		).permitAll();
 		http.authorizeRequests().antMatchers(
-				"/auth/users"
-		).hasAnyAuthority("ROLE_ADMIN");
+				"/appt/save",
+				"/appt/getapptday/**/**",
+				"/appt/apptsettingsservice/**",
+				"/appt/userappt",
+				"/appt/apptstate/**"
+		).hasAnyAuthority("ROLE_USER");
 		http.authorizeRequests().antMatchers(
-				"/auth/foto",
-				"/auth/user/**",
-				"/auth/user/save/**"
-		).hasAnyAuthority("ROLE_USER");*/
-		//http.authorizeRequests().anyRequest().authenticated();
-		http.authorizeRequests().anyRequest().permitAll();//permite todo
+				"/appt/apptsettingsprofessional",
+				"/appt/profappt",
+				"/appt/savesettings"
+		).hasAnyAuthority("ROLE_MANAGER");
+		http.authorizeRequests().antMatchers(
+				"/home/savehome",
+				"/home/savecategory",
+				"/home/saveservice/**",
+				"/appt/deleteapptsetting/**",
+				"/home/deletecategory/**",
+				"/home/deleteservice/**",
+				"/home/addprofessional/**",
+				"/home/deleprofessional/**",
+				"/auth/userbyemail/**"
+		).hasAnyAuthority("ROLE_ADMIN");
+		http.authorizeRequests().anyRequest().authenticated();
+		//http.authorizeRequests().anyRequest().permitAll();//permite todo
 		//Si se cambia la url del login
 		http.addFilter(customAuthenticationFilter);
 		http.addFilterBefore(new AuthorizationFilter(createJWT), UsernamePasswordAuthenticationFilter.class);

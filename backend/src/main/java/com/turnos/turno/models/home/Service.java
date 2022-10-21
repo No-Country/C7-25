@@ -24,8 +24,4 @@ public class Service {
   private String photo;
   private Long price;
   private int duration;
-
-  /*@OneToMany(fetch = FetchType.LAZY)
-  private List<User> professionals;*/
-
 }

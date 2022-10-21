@@ -40,9 +40,10 @@ public class AuthorizationFilter extends OncePerRequestFilter{
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		System.out.println("AutorizacionFiltro - doFilterInternal");
-		if(true || request.getServletPath().equals("/auth/login")
-				|| request.getServletPath().equals("/auth/usernamelibre/**")
-				|| request.getServletPath().equals("/auth/emaillibre/**")) {
+		if(request.getServletPath().equals("/auth/login")
+				|| request.getServletPath().equals("/auth/signup")
+				|| request.getServletPath().equals("/auth/useravailability/**")
+				|| request.getServletPath().equals("/home/")) {
 			filterChain.doFilter(request, response);
 		}else {
 			String authorizationHeader=request.getHeader(HttpHeaders.AUTHORIZATION);

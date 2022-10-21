@@ -38,7 +38,7 @@ public class AuthController {
 		return ResponseEntity.ok().body(userService.getUsers());
 	}
 
-	@GetMapping("/user/{username}")
+	@GetMapping("/userbyemail/{username}")
 	public User traerUsername(@PathVariable String username){
 		System.out.println("usuarioController - traerUsername");
 		return userService.getUser(username);
@@ -81,14 +81,21 @@ public class AuthController {
 	@PostMapping("/role/save")
 	public ResponseEntity<Role>saveRole(@RequestBody Role role){
 		System.out.println("usuarioController - saveRole");
-		URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
+		URI uri=URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/auth/role/save").toUriString());
 		return ResponseEntity.created(uri).body(userService.saveRole(role));
 	}
 	
 	@PostMapping("/role/addtouser")
 	public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form){
 		System.out.println("usuarioController - addRoleToUser");
+		System.out.println(form);
 		userService.addRoleToUser(form.getUsername(),form.getRolename());
+		return ResponseEntity.ok().build();
+	}
+
+	public ResponseEntity<?>removeRoleToUser(Long userid, String rolename){
+		System.out.println("usuarioController - removeRoleToUser");
+		userService.removeRoleToUser(userid,rolename);
 		return ResponseEntity.ok().build();
 	}
 }
