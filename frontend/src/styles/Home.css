@@ -60,11 +60,11 @@
     margin: auto;
 }
 .description{
-    margin: 0px;
+    margin: 0px 5%;
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     color: rgba(88, 52, 38, 1);
-    text-align: center;
+    text-align: justify;
 }
 .divContainerHome > hr{
     color: rgba(128, 92, 78, 1);
@@ -125,6 +125,7 @@
 }
 .eachServiceList:hover{
     font-weight: 400;
+    
 }
 
 
@@ -200,6 +201,9 @@
     .serviceImg{
         height: 30vh;
     }
+    .eachServiceList:hover{
+        font-size: 13px;
+    }
 
     /* PROFESSIONALS */
 
@@ -263,7 +267,9 @@
     .serviceImg{
         height: 32vh;
     }
-
+    .eachServiceList:hover{
+        font-size: 14.5px;
+    }
     /* PROFESSIONALS */
 }
 
@@ -293,13 +299,13 @@
     }
     .homeSubtitles{
         letter-spacing: 1.6px;
-        font-size: 21px;
+        font-size: 23px;
         padding: 5px 0px;
     }
 
     /*  SERVICES  */
     .categoriesNames{
-        font-size: 14px;
+        font-size: 16px;
     }
     .category{
         margin: 0px auto;
@@ -311,6 +317,9 @@
     .eachServiceList{
         padding: 2px;
         margin: 8px;
+    }
+    .eachServiceList:hover{
+        font-size: 16.5px;
     }
 
     /* PROFESSIONALS */
