@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { MyAppointmentsCancelAppt, userAppt } from '../services/API';
+import { MyAppointmentsCancelAppt } from '../services/API';
 import '../styles/MyAppointments.css';
 import UseHomeContext from '../services/UseHomeContext';
 import { jsDateToHsMin, jsISODateToTextAndDate } from '../services/DateTime';
+import Modal from './Modal';
 
 
 export default function AppointmentsList({roleAppt}) {
-    console.log('AppointmentsList',AppointmentsList);
   const {home} = UseHomeContext();
-  const [myAppointmentsBooked, setMyAppointmentsBooked] = useState([])
+  const [myAppointmentsBooked, setMyAppointmentsBooked] = useState([]);
+  const [modalData, setModalData] = useState({});
 
   useEffect(() => {
     if(home.categories){
@@ -18,7 +19,6 @@ export default function AppointmentsList({roleAppt}) {
   }, [home])
   
   async function getAppt() {
-    console.log('sdfadfaweadsase')
       let apptsRaw = await roleAppt();
       let appt = apptsRaw.map(ap=>{
           const id = ap.id;
@@ -40,13 +40,37 @@ export default function AppointmentsList({roleAppt}) {
       setMyAppointmentsBooked(appt);
   }
 
-  function cancelAppt(id){
-      MyAppointmentsCancelAppt(id);
-      console.log('cancelando',id);
+  async function cancelAppt(id){
+        await MyAppointmentsCancelAppt(id);
+        getAppt();
+        //Warn falta capturar un posible error
+        let data = { 
+            msj:'Turno cancelado.',
+            showBtn:false,
+            modal:true
+        }
+        setModalData(data);
+        setTimeout(() => {
+            let data = { 
+                modal:false
+            }
+            setModalData(data);
+        }, 2500);
   }
 
+  function modalJson(id) {
+    let data = { 
+        func:cancelAppt,
+        msj:'Desea cancelar el turno?',
+        showBtn:true,
+        params:id,
+        modal:true
+    }
+    setModalData(data);
+}
+
   return(
-    <div className='masterContainer flexColumn'>
+    <>
         <h1 className='myAppointmentsTitle'>
             {
                 (myAppointmentsBooked.length>0)?
@@ -88,12 +112,13 @@ export default function AppointmentsList({roleAppt}) {
                         { appt.state?
                             appt.state===1? 'Cancelado por el usuario': 'Cancelado por el professional'
                             :
-                            <button className='cancelBtn' onClick={()=>cancelAppt(appt.id)}>Cancelar</button>
+                            <button className='cancelBtn' onClick={()=>modalJson(appt.id)}>Cancelar</button>
                         }
                     </div>
                 </div>
             )
         }
-    </div>
+        <Modal props={modalData}/>
+    </>
   )
 }

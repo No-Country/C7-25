@@ -7,6 +7,7 @@ import ModalProfessional from './BookApptProfessional';
 import UseHomeContext from '../services/UseHomeContext';
 import { useNavigate } from 'react-router-dom';
 import BookApptCalendar from './BookApptCalendar';
+import { decodeDaysAvailable } from '../services/DateTime';
 
 export default function BookAppointment() {
 
@@ -41,7 +42,7 @@ export default function BookAppointment() {
     if(settings.length===0){
       return
     }
-    const maxDays = settings.reduce((acc,cur)=>Math.max(acc.daysAhead?acc.daysAhead:acc,cur.daysAhead));//Cantidad de dias con turnos
+    const maxDays = settings.reduce((acc,cur)=>Math.max(acc.daysAhead?acc.daysAhead:acc,cur.daysAhead),0);//Cantidad de dias con turnos
     let reserved = await BookAppointmentGetReserved(maxDays);
     setApptSettings(settings);
     //setApptReserved(reserved);
@@ -81,7 +82,7 @@ export default function BookAppointment() {
       ini=time.getTime();//time es un objeto por lo que el = crea una referencia, gettime es un literal
       for (let index = 1; index <= (sett.workdayDuration/sett.apptDuration); index++) {
     
-        const disp = !reserved.some(obj=> obj.getTime()===time.getTime());//Devuelvo true si el turno no se encuentra reservado
+        const disp = !reserved.some(obj=> (obj.ini.getTime()===time.getTime() && obj.state===0));//Devuelvo true si el turno no se encuentra reservado
   
         time.setTime(time.getTime() + sett.apptDuration*60*1000);//Sumo el tiempo de un turno
         end=time.getTime();//hr min para el fin del turno
@@ -98,8 +99,7 @@ export default function BookAppointment() {
     function processApptSettings(professionalsList,daysSettings){
       return settings.map((currentSetting,index)=>{
         //Decodifico los dias habilitados
-        const prime=[2,3,5,7,11,13,17];
-        let daysAvailable = prime.map(num=>currentSetting.daysAvailable%num===0);
+        let daysAvailable = decodeDaysAvailable(currentSetting.daysAvailable);
         //Por cada setting agrego los dias con turnos
         //Matriz con los dias con turnos x los turnos de cada dia
         let appOfCurrentSetting=[];
@@ -136,7 +136,7 @@ export default function BookAppointment() {
           matrix.push([]);
         }
         //Itera entre todas las settings
-        prof.map(sett=>{
+        prof.forEach(sett=>{
           //Itera entre todos los dias 
           sett.appOfCurrentSetting.forEach((element,index) => {
             //Como element es un array de turnos necesito disperzarlo para unirlo con los otros
@@ -150,11 +150,10 @@ export default function BookAppointment() {
     function addDataForRender(rAbPaD,daysSettings,professionals){
       //Itera los profesionales
       return rAbPaD.map((prof,index0)=>{
-        const {professionalId}=prof;
         //Itera los dias
         let appointments = prof.matrix.map((day,index)=>{
           const apptAvalNumer = (day.length>0)?
-            day.reduce((count, appt, index) => 
+            day.reduce((count, appt) => 
               (appt.disp) ?
                 count + 1 
               : 
@@ -189,7 +188,7 @@ export default function BookAppointment() {
     //Agrega informacion necesaria para renderizar la vista
     let apptByProfessionalsAndDays = addDataForRender(rawApptByProfessionalsAndDays,daysSettings,professionals);
     setMasterAppt(apptByProfessionalsAndDays);
-    console.log('APP',apptByProfessionalsAndDays);
+    //console.log('APP',apptByProfessionalsAndDays);
     return apptByProfessionalsAndDays;
   }
 

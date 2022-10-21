@@ -3,9 +3,11 @@ import AppointmentsList from './AppointmentsList';
 
 function MyAppointments(){
     return(
-        <AppointmentsList 
-            roleAppt={userAppt} 
-        />
+        <div className='masterContainer flexColumn'>
+            <AppointmentsList 
+                roleAppt={userAppt} 
+            />
+        </div>
     )
 }
 export default MyAppointments;

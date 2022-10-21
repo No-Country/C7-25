@@ -17,7 +17,6 @@ export default function BookApptCalendar({appt,setApptDay,setModalWindow}) {
   },[currentView,appt])
 
   function renderCalendar (app1) {
-    console.log('En render calendar');
     let app = app1 || appt;
     let calendar = [];
 

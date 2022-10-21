@@ -112,6 +112,7 @@
 .servicesList{
     text-align: left;
     margin: 5% 0px;
+    justify-content: left;
 }
 .eachServiceList{
     font-family: 'Poppins', sans-serif;

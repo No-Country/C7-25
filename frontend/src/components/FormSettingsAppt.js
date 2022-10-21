@@ -1,8 +1,8 @@
 import '../styles/Forms.css';
 import { DeleteApptSetting, EditApptSetting, getApptSettingsByProfessionalId } from '../services/API';
-import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import UseHomeContext from '../services/UseHomeContext';
+import { decodeDaysAvailable, encodeDAToString, encodeDaysAvailable, minToHsMin } from '../services/DateTime';
 
 function FormSettingsAppt(e){
 
@@ -18,7 +18,6 @@ function FormSettingsAppt(e){
     
     const [settings, setSettings] = useState([]);
     const {home} = UseHomeContext();
-    const location = useLocation();
 
     useEffect(() => {
         existingapptSettings();
@@ -51,12 +50,6 @@ function FormSettingsAppt(e){
         ];
     }
 
-    function primeCod(days){
-        
-        const daysAvailable = checkboxArray(days);
-        const prime=[2,3,5,7,11,13,17];
-        return daysAvailable.reduce((acc,cur,index)=>(cur)?acc*prime[index]:acc,1);
-    }
     
     function edit(index){
         setApptSettingsId(settings[index].id);
@@ -65,10 +58,9 @@ function FormSettingsAppt(e){
         setApptDuration(minToStr(settings[index].apptDuration));
         setDaysAhead(settings[index].daysAhead);
         setServiceId(settings[index].serviceId);
-        const prime=[2,3,5,7,11,13,17];
-        let daysAvailable = prime.map(num=>settings[index].daysAvailable%num===0);
+        let daysAvailable = decodeDaysAvailable(settings[index].daysAvailable);
         setDaysAvailable(daysAvailable);
-        setMostrarForm(true)
+        setMostrarForm(true);
     }
     function add(){
         setApptSettingsId(null);
@@ -93,15 +85,19 @@ function FormSettingsAppt(e){
     let handleEditForm = async (e) =>{
         
         e.preventDefault();
-
-        const sId = apptSettingsId || e.target.inputService.value;
+        let sId;
+        if(serviceId===null){
+            sId = e.target.inputService.value;
+        }else{
+            sId = serviceId;
+        }
 
         const data={
             id: apptSettingsId,
             workdayInit: strToMin(e.target.inputWorkdayInit.value), 
             workdayDuration: strToMin(e.target.inputWorkdayDuration.value), 
             apptDuration: strToMin(e.target.inputApptDuration.value), 
-            daysAvailable: primeCod(e.target),
+            daysAvailable: encodeDaysAvailable(checkboxArray(e.target)),
             daysAhead: e.target.inputDaysAhead.value,
             serviceId: sId
         }
@@ -113,9 +109,21 @@ function FormSettingsAppt(e){
             alert('Los datos han sido editados');
         }
     }
+
+    function serviceName(id){
+        let name;
+        home.categories.forEach(category => {
+            category.services.forEach(service =>{
+                if(service.id===id){
+                    name=service.name;
+                }
+            })
+        });
+        return name;
+    }
  
     return(
-        <div className='masterContainer'>
+        <div>
 
             {
                 (!mostrarForm)?
@@ -128,11 +136,11 @@ function FormSettingsAppt(e){
                                 settings.map((sett,index)=>
                                     <div className='tarjetaAppt' key={index}>
                                         <div className='divItemsToEdit'>
-                                            <p>Servicio: {sett.serviceId}</p>
-                                            <p>Duración del truno: {sett.apptDuration}</p>
-                                            <p>Dias de la semana con turnos: {sett.daysAvailable}</p>
-                                            <p>Horas de atención: {sett.workdayDuration}</p>
-                                            <p>Hora de inicio de la jornada: {sett.workdayInit}</p>
+                                            <h3 style={{textAlign:'center'}}>{serviceName(sett.serviceId)}</h3>
+                                            <p>Hora de inicio de la jornada: {minToHsMin(sett.workdayInit)}</p>
+                                            <p>Horas de atención: {minToHsMin(sett.workdayDuration)}</p>
+                                            <p>Duración del turno: {minToHsMin(sett.apptDuration)}</p>
+                                            <p>Dias de la semana con turnos: {encodeDAToString(sett.daysAvailable)}</p>
                                             <p>Dias corridos con turnos disponibles: {sett.daysAhead}</p>                                            
                                         </div>
                                         <div className='flexRow'>
@@ -153,8 +161,8 @@ function FormSettingsAppt(e){
                                 (apptSettingsId)?
                                     <><div>El set tiene id:</div><br/></>
                                 :
-                                    <>
-                                        <label htmlFor="inputService">Seleccione un servicio:</label><br/>
+                                    <div className='content-select'>
+                                        <label>Seleccione un servicio:</label><br/>
                                         <select name="inputService">
                                             {home.categories.map((category)=>
                                                 <optgroup label={category.category}>
@@ -163,8 +171,9 @@ function FormSettingsAppt(e){
                                                     )}
                                                 </optgroup>                                                
                                             )}
-                                        </select><br/>
-                                    </>
+                                        </select>
+                                        <i></i>
+                                    </div>
                             }
                             <label>Hora de inicio de la jornada laboral:</label><br/>
                             <input type='time' name='inputWorkdayInit' value={WorkdayInit} onChange={e => setWorkdayInit(e.target.value)}/><br/>

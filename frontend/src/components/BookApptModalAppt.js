@@ -21,7 +21,6 @@ export default function ModalAppt({appt, apptDay, idService, setModalWindow}) {
   //Guarda el turno en la db
   async function saveAppt(apptm) {
     const idProfessional =appt.professional.id
-    console.log('idProfessional',)
 
     let resp = await BookAppointmentSaveAppt(apptm,idService,idProfessional);
     if(resp.status===201){ //Si la operacion se realizo con exito
@@ -47,8 +46,6 @@ export default function ModalAppt({appt, apptDay, idService, setModalWindow}) {
     }
     setModalData(data);
   }
-
-  console.log('apptDispapptDisp',apptDisp,apptDay);
 
   return (
     <div>

@@ -38,20 +38,21 @@ export async function BookAppointmentSaveAppt(apptm,serviceId,professionalId) {
 }
 
 export async function BookAppointmentGetReserved(maxDays) {
-  //Obtengo cuantos dias tienen turnos
-  //let daysAhead=settings.reduce((acc,cur)=>Math.max(acc.daysAhead?acc.daysAhead:acc,cur.daysAhead));//cur.daysAhead>acc?cur.daysAhead:acc)
-  //***//console.log('acc',daysAhead,settings[0].daysAhead);
   //Obtengo el periodo de turnos activos
   const day=new Date();
   day.setHours(0,0,0,0);
   const T1=day.toISOString();
-  //***//console.log('In BookAppointmentGetReserved',settings);
   day.setDate(day.getDate()+maxDays);
   const T2=day.toISOString();
   try {
     const urlAPI=`${domain}/appt/getapptday/${T1}/${T2}`;
     const resp = await axios.get(urlAPI,Config());
-    return resp.data.map(elem=>new Date(`${elem.ini}Z`));//La Z es para decirle que los datos estan en el timezone 0UTC
+    return resp.data.map(elem=>{
+      return {
+        ini:new Date(`${elem.ini}Z`),
+        state:elem.state
+      }
+    });//La Z es para decirle que los datos estan en el timezone 0UTC
   } catch (error) {
       //Tarea: en caso de error hay que evitar que salga la ventana porque van a a estar todos los turnos disponibles
       console.log('Error: '+ error);
@@ -126,26 +127,12 @@ export async function logIn(bodyAPI){
 
 export async function signUp(bodyAPI) {
   const urlAPI= `${domain}/auth/signup`;
-  
-  axios
-  .post(urlAPI, bodyAPI)
-  
-  .then( resolve =>{
-      return resolve.data;
-  })
-
-  .then( resolve =>{
-
-      if(resolve.length > 0){
-          alert('Ya existe una cuenta con este correo electrónico')
-      }
-      else{
-          //redirect('/home');
-          alert('Registrado exitosamente');
-          return 'home';
-      };     
-  })
-  .catch( error => console.log('Error: '+ error));
+  try {
+    const resp = await axios.post(urlAPI, bodyAPI);
+    return resp.data;
+  } catch (error) {
+    console.log('Error: '+ error);
+  }
 }
 
 export async function MyAppointmentsCancelAppt(id) {
@@ -176,8 +163,7 @@ export async function SignUpIsEmailNotAvailable(inputEmail) {
 export async function EditApptSetting(data){
   
   try {
-    const email = localStorage.getItem('email');
-    const urlAPI = `${domain}/appt/savesettings/${email}`;
+    const urlAPI = `${domain}/appt/savesettings`;
     const resp = await axios.post(urlAPI,data,Config());
     return resp;
   }
@@ -248,6 +234,39 @@ export async function DeleteCategory(id){
 export async function DeleteService(id){
   try{
     const urlAPI = `${domain}/home/deleteservice/${id}`;
+    const resolve = await axios.delete(urlAPI,Config());
+    return(resolve);
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
+
+export async function getUserByEmail(email){
+  try{
+    const urlAPI = `${domain}/auth/userbyemail/${email}`;
+    const resolve = await axios.get(urlAPI,Config());
+    return(resolve);
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
+
+export async function addProfessional(id){
+  try{
+    const urlAPI = `${domain}/home/addprofessional/${id}`;
+    const resolve = await axios.put(urlAPI,{},Config());
+    return(resolve);
+  }
+  catch (error){
+    console.log('Error: ' + error)
+  }
+}
+
+export async function deleteProfessional(id){
+  try{
+    const urlAPI = `${domain}/home/deleprofessional/${id}`;
     const resolve = await axios.delete(urlAPI,Config());
     return(resolve);
   }

@@ -1,16 +1,22 @@
 import '../styles/Forms.css';
 import { EditHome } from '../services/API';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import UseHomeContext from '../services/UseHomeContext';
+import Modal from './Modal';
 
 function FormHome(){
 
     const location= useLocation();
+    const redirect = useNavigate();
+    const {setHome} = UseHomeContext();
+    const[modalData, setModalData] = useState({});
 
     const[brandName, setBrandName] = useState('');
     const[adress, setAdress] = useState('');
     const[telephone, setTelephone] = useState('');
     const[description, setDescription] = useState('');
+
     
     let handleEditHome = async (e)=>{
         e.preventDefault();
@@ -21,10 +27,19 @@ function FormHome(){
             telephone: e.target.telephoneInput.value,
             description: e.target.descriptionInput.value
         }
-        const resolve= await EditHome(dataHome);
+        const resolve = await EditHome(dataHome);
 
         if( resolve.status === 201){
-            alert('Los datos han sido modificados')
+            setHome(resolve.data);
+            let data = { 
+                msj:'Los cambios se guardaron correctamente.',
+                showBtn:false,
+                modal:true
+            }
+            setModalData(data);
+            setTimeout(() => {
+                redirect('/');
+            }, 2500);
         }
     };
 
@@ -36,6 +51,7 @@ function FormHome(){
             setDescription(location.state.description);
         }
         editInfoHome();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     
@@ -59,7 +75,7 @@ function FormHome(){
                     <button type='submit'>Editar</button>
                 </div>
             </form>
-
+            <Modal props={modalData}/>
         </div>
     )
 }

@@ -43,7 +43,7 @@
     background-color: rgba(22, 22, 22, 0.348);
     border-radius: 50px;
 }
-.formForms > label{
+.formForms label{
     font-family: 'Poppins', sans-serif;
     font-weight: 300;
     color: white;
@@ -97,6 +97,79 @@
 }
 .btnNewSetting:hover{
     text-shadow: 1px 1px 1px rgba(8, 8, 8, 0.661), 1px 1px 1px rgba(0, 0, 0, 0.719);
+}
+
+/*///formProfessional//*/
+.confirmProfessional{
+    margin-top: 2rem;
+    font-size: 1.1rem;
+}
+.confirmProfessional > button{
+    background-color: rgba(22, 22, 22, 0.348);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem; 
+    margin-left: 2rem;
+    cursor: pointer;
+}
+/*//////FormApptSetting Select Option///////*/
+/*Quita las propiedades default*/
+.content-select select{
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+.content-select select::-ms-expand {
+    display: none;
+}
+	
+.content-select{
+	max-width: 100%;
+	position: relative;
+    margin: 0 0 2.8rem;
+}
+ 
+.content-select select{
+    font-family: 'Poppins', sans-serif;
+	display: inline-block;
+	width: 100%;
+	cursor: pointer;
+  	padding: 0.5rem 0.5rem;
+  	height: 3rem;
+    margin-top: 1rem;
+	background: rgba(22, 22, 22, 0.348);
+	color: white;
+	font-size: 1em;
+	font-family: 
+	'Quicksand', sans-serif;
+	border:2px solid rgba(0,0,0,0.2);
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.25s ease;
+}
+ 
+.content-select select:hover{
+	background: rgba(22, 22, 22, 0.648);
+}
+.content-select i{
+	position: absolute;
+	right: 20px;
+	top: calc(50% + 0.2rem);
+	width: 16px;
+	height: 16px;
+	display: block;
+	border-left:4px solid #ffffff;
+	border-bottom:4px solid #ffffff;
+	transform: rotate(-45deg); /* Giramos el cuadrado */
+	transition: all 0.25s ease;
+}
+ 
+.content-select:hover i{
+	scale: 1.1;
 }
 /* SMALL */
 @media (min-width:0px) and (max-width:500.99px){

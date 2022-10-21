@@ -23,9 +23,9 @@ import FormServices from './components/FormServices';
 import {getHome} from './services/API';
 import HomeContext from './services/HomeContext';
 import ClientsAppointments from './components/ClientsAppointments';
+import FormProfessional from './components/FormProfessional';
 
 document.body.classList.add('pinkPalette');
-console.log('App se esta renderizando');
 
 
 
@@ -68,6 +68,7 @@ function App() {
             <Route path='/formsettingsappt' element={<FormSettingsAppt/>}/>
             <Route path='/formhome' element={<FormHome/>}/>
             <Route path='/formservices' element={<FormServices/>}/>
+            <Route path='/formprofessional' element={<FormProfessional/>}/>
             <Route path='*' element={<NotFound/>}/>
           </Routes>
           <Footer/>

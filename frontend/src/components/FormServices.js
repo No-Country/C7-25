@@ -1,11 +1,16 @@
 import '../styles/Forms.css';
 import {EditServices} from '../services/API';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import UseHomeContext from '../services/UseHomeContext';
+import Modal from './Modal';
 
 function FormServices(){
 
+    const redirect = useNavigate();
     const location = useLocation();
+    const {setHome} = UseHomeContext();
+    const[modalData, setModalData] = useState({});
     
     const [serviceId, setServiceId] = useState('');
     const [serviceName, setServiceName] = useState('');
@@ -15,7 +20,7 @@ function FormServices(){
     const [servicePrice, setServicePrice] = useState('');
 
 
-    let handleFormServices = (e) =>{
+    let handleFormServices = async (e) =>{
         e.preventDefault();
         const dataServices={
             id: serviceId,
@@ -25,20 +30,34 @@ function FormServices(){
             duration: e.target.serviceDurationInput.value,
             price: e.target.servicePriceInput.value,
         }
-        EditServices(location.state.idCategory,dataServices);
+        const resolve = await EditServices(location.state.idCategory,dataServices);
+
+        if( resolve.status === 201){
+            setHome(resolve.data);
+            let data = { 
+                msj:'Los cambios se guardaron correctamente.',
+                showBtn:false,
+                modal:true
+            }
+            setModalData(data);
+            setTimeout(() => {
+                redirect('/');
+            }, 2500);
+        }
     };
     
     useEffect(()=>{
-    let editOrAddService = ()=>{
-        console.log(location)
-        setServiceId(location.state.id);
-        setServiceName(location.state.name);
-        setServicePhoto(location.state.photo);
-        setServiceDescription(location.state.description);
-        setServiceDuration(location.state.duration);
-        setServicePrice(location.state.price);
-    }
-    editOrAddService();
+        let editOrAddService = ()=>{
+            console.log(location)
+            setServiceId(location.state.id);
+            setServiceName(location.state.name);
+            setServicePhoto(location.state.photo);
+            setServiceDescription(location.state.description);
+            setServiceDuration(location.state.duration);
+            setServicePrice(location.state.price);
+        }
+        editOrAddService();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     
@@ -68,6 +87,7 @@ function FormServices(){
                     <button type='submit'>Editar</button>
                 </div>
             </form>
+            <Modal props={modalData}/>
         </div>
     )
 }

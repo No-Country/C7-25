@@ -1,9 +1,12 @@
 import {useNavigate } from 'react-router-dom';
 import '../styles/SignUp.css';
 import {signUp, SignUpIsEmailNotAvailable} from '../services/API';
+import { useState } from 'react';
+import Modal from './Modal';
 
 function SignUp (){
 
+    const [modalData, setModalData] = useState({});
     let redirect= useNavigate();
 
     let handleSubmit = async (e) =>{
@@ -45,13 +48,24 @@ function SignUp (){
                 email:inputEmail,
                 password:inputPassword
             }
-            let resp = signUp(bodyAPI); //Lama a la api
-            if (resp==='home') { //El redirect no funciona en la api por eso se usa esto
-                redirect('/home');
+            let resp = await signUp(bodyAPI); //Lama a la api
+            if (resp.id) {
+                let data = { 
+                    msj:'Registro exitoso, por favor inicie sesión.',
+                    showBtn:false,
+                    params:null,
+                    modal:true
+                }
+                setModalData(data);
+                setTimeout(() => {
+                    data = { 
+                        modal:false
+                    }
+                    redirect('/login');
+                }, 3000);
             }
         };
     }
-
 
     return(
         <div className='divContainer'>
@@ -77,6 +91,7 @@ function SignUp (){
                         <button type='submit' className='btnSignUp'>Registrarse</button>
                     </div>
                 </form>
+                <Modal props={modalData}/>
         </div>
     )
 }

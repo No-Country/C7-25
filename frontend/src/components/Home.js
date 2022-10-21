@@ -9,11 +9,11 @@ import { MdLocationOn } from 'react-icons/md';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
 import { useState } from 'react';
 import Modal from './Modal';
-import { DeleteCategory, DeleteService } from '../services/API';
+import { DeleteCategory, deleteProfessional, DeleteService } from '../services/API';
 
 export default function Home() {
     const navigate = useNavigate();
-    const {home,roles} = UseHomeContext();
+    const {home,setHome,roles} = UseHomeContext();
     const [adminEdit, setAdminEdit] = useState(false);
     const [modalData, setModalData] = useState({});
 
@@ -40,8 +40,8 @@ export default function Home() {
             }else{
                 data={
                     id:null,
-                    category:null,
-                    photo:null
+                    category:'',
+                    photo:''
                 }
             }
         }
@@ -52,16 +52,18 @@ export default function Home() {
             }else{
                 data={
                     id:null,
-                    name:null,
-                    description:null,
-                    photo:null,
-                    price:null,
-                    duration:null
+                    name:'',
+                    description:'',
+                    photo:'',
+                    price:'',
+                    duration:''
                 }
             }
             data.idCategory=categoriesArray[indexCategory].id;
         }
-        console.log(data);
+        if (type==='professional'){
+            rute='/formprofessional';
+        }
         navigate(rute,{state:data})
     } 
 
@@ -71,27 +73,48 @@ export default function Home() {
         }
     }
 
-    function del({idCategory,idService}){
+    async function del({idCategory,idService,idProfessional}){
+        let resolve;
         if(idService){
-            DeleteService(idService);
-        }else{
-            DeleteCategory(idCategory);
+            resolve = await DeleteService(idService);
+        }else if(idCategory){
+            resolve = await DeleteCategory(idCategory);
+        }else if(idProfessional){
+            resolve = await deleteProfessional(idProfessional);
+        }
+
+        if( resolve.status === 201){
+            setHome(resolve.data);
+            let data = { 
+                msj:'Los cambios se guardaron correctamente.',
+                showBtn:false,
+                modal:true
+            }
+            setModalData(data);
+            setTimeout(() => {
+                let data = { 
+                    modal:false
+                }
+                setModalData(data);
+            }, 2500);
         }
     }
 
-    function modalJson(idCategory,idService) {
+    function modalJson(idCategory,idService,idProfessional) {
         const msj = (idService)? 
                 'Esta accion eliminará el servicio de forma permanente. Desea eliminar el servicio?'
             :
-                'Esta accion eliminará la categoria y sus servicios de forma permanente. Desea eliminar la categoria?'
+                (idService)?
+                    'Esta accion eliminará la categoria y sus servicios de forma permanente. Desea eliminar la categoria?'
+                :
+                    'Desea eliminar al profesional?'
         let data = { 
           func:del,
           msj,
           showBtn:true,
-          params:{idCategory,idService},
+          params:{idCategory,idService,idProfessional},
           modal:true
         }
-        console.log('data',data)
         setModalData(data);
     }  
 
@@ -136,7 +159,17 @@ export default function Home() {
         
         <p className='description'>{home.description}</p>
 
-        <hr/><h2 className='homeSubtitles'>Nuestros servicios</h2><hr/>
+        <hr/>
+            {
+                (adminEdit)?
+                    <h2 onClick={()=>form('category')} className='homeSubtitles' style={{cursor:'pointer'}}>
+                        <VscAdd/>
+                        Agregar categoria
+                    </h2>
+                :
+                    <h2 className='homeSubtitles'>Nuestros servicios</h2>
+            }
+        <hr/>
 
         <div  className='categoriesNames'>
             
@@ -198,21 +231,35 @@ export default function Home() {
                     </div>
                 )
             })}
-            {
-                (adminEdit)?
-                    <VscAdd onClick={()=>form('category')} />
-                :
-                    <></>
-            }
+
         </div>
         
-        <hr/><h2 className='homeSubtitles'>Nuestros profesionales</h2><hr/>
+        <hr/>
+            {
+                (adminEdit)?
+                    <h2 onClick={()=>form('professional')} className='homeSubtitles' style={{cursor:'pointer'}}>
+                        <VscAdd/>
+                        Agregar profesional
+                    </h2>
+                :
+                    <h2 className='homeSubtitles'>Nuestros profesionales</h2>
+            }
+            
+        <hr/>
         
         <div className='flexRow'>
             
             {professionalsArray.map( (eachProfessional, indexProfessionals)=>{
                 return(
                     <div key={indexProfessionals} className='divProfessionals'>
+                        {
+                            (adminEdit)?
+                                <div className='iconsEdit'>
+                                    <VscChromeClose onClick={()=>modalJson(undefined,undefined,eachProfessional.id)} />
+                                </div>
+                            :
+                                <></>
+                        }
                         <aside className='profilePhoto'>
                             <img src={ eachProfessional.photo? eachProfessional.photo : perfilDefault } alt=""/>   
                         </aside>
