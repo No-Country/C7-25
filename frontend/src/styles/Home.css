@@ -135,7 +135,7 @@
         margin: 20px;
     }
     .divProfessionals{
-        margin-top: 40px;
+        margin: 40px 2%;
     }
     .profilePhoto{
         width: 90%;
@@ -146,15 +146,21 @@
         justify-content: center;
     }
     .profilePhoto>img{
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
         object-fit: cover;
     }
     .divProfessionals > p{
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
-        color: rgba(128, 92, 78, 1);
+        color: rgb(101, 73, 61);
         text-align: center;
+        margin-top: 10px;
+        margin-bottom: 0px;
+    }
+    #lastNameProfessional{
+        margin-top: 0px;
+        color: rgb(77, 55, 45);
     }
 
 
@@ -207,22 +213,13 @@
 
     /* PROFESSIONALS */
 
-    .profCard{
-        margin: 20px;
-    }
-    .profilePhoto{
-        width: 90%;
-        height: 100%;
-        border-radius: 50%;
-        overflow: hidden;
-        display: grid;
-        justify-content: center;
-        
-    }
     .profilePhoto>img{
-        width: 80px;
-        height: 80px;
-        object-fit: cover;
+        width: 90px;
+        height: 90px;
+    }
+    .divProfessionals > p{
+        letter-spacing: 0px;
+        font-size: 14px;
     }
 }
 
@@ -271,6 +268,11 @@
         font-size: 14.5px;
     }
     /* PROFESSIONALS */
+
+    .divProfessionals > p{
+        letter-spacing: 1px;
+        font-size: 16px;
+    }
 }
 
 /* LARGE */
@@ -323,5 +325,10 @@
     }
 
     /* PROFESSIONALS */
+
+    .divProfessionals > p{
+        letter-spacing: 2px;
+        font-size: 17px;
+    }
 }
 

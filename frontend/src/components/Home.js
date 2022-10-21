@@ -258,7 +258,7 @@ export default function Home() {
             
             {professionalsArray.map( (eachProfessional, indexProfessionals)=>{
                 return(
-                    <div key={indexProfessionals} className='divProfessionals'>
+                    <div key={indexProfessionals} className='divProfessionals flexColumn'>
                         {
                             (adminEdit)?
                                 <div className='iconsEdit'>
@@ -271,7 +271,7 @@ export default function Home() {
                             <img src={ eachProfessional.photo? eachProfessional.photo : perfilDefault } alt=""/>   
                         </aside>
                         <p>{eachProfessional.name}</p>
-                        <p>{eachProfessional.lastname}</p>
+                        <p id='lastNameProfessional'>{eachProfessional.lastname}</p>
                     </div>
                 )
             })}
