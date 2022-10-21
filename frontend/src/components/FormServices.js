@@ -42,7 +42,7 @@ function FormServices(){
             setModalData(data);
             setTimeout(() => {
                 redirect('/');
-            }, 2500);
+            }, 2000);
         }
     };
     
@@ -65,7 +65,14 @@ function FormServices(){
     
     return(
         <div className='divContainerForms'>
-            <h1 className='FormsTitle'>Editar</h1>
+            <h1 className='FormsTitle'>
+                {
+                    (serviceId)?
+                        'Editar'
+                    :
+                        'Agregar'
+                }
+            </h1>
             
             <form className='formForms' onSubmit={handleFormServices}>
                 <label>Nombre del Servicio:</label><br/>
@@ -84,7 +91,14 @@ function FormServices(){
                 <input type='number' name='servicePriceInput' value={servicePrice}  onChange={ (e) => setServicePrice(e.target.value)}/><br/>
 
                 <div className='divEditBtn'>
-                    <button type='submit'>Editar</button>
+                    <button type='submit'>
+                        {
+                            (serviceId)?
+                                'Editar'
+                            :
+                                'Agregar'
+                        }
+                    </button>
                 </div>
             </form>
             <Modal props={modalData}/>

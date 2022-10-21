@@ -75,6 +75,9 @@
 .divEditBtn{
     text-align: center;
 }
+.divEditBtn > button:first-child{
+    margin-right: 1rem;
+}
 .divEditBtn > button:hover{
     cursor: pointer;
     font-weight: bold;

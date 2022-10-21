@@ -35,7 +35,7 @@ function FormCategory(){
             setModalData(data);
             setTimeout(() => {
                 redirect('/');
-            }, 2500);
+            }, 2000);
         }
     };
 
@@ -52,7 +52,15 @@ function FormCategory(){
     return(
         <div className='divContainerForms'>
 
-            <h1 className='FormsTitle'>Editar</h1>
+            <h1 className='FormsTitle'>
+                {
+                    (categoryId)?
+                        'Editar'
+                    :
+                        'Agregar'
+                }
+                
+            </h1>
 
             <form  onSubmit={handleFormCategory} className='formForms'>
                 <label>Nombre de categoria:</label><br/>
@@ -62,7 +70,14 @@ function FormCategory(){
                 <input type='text' name='categoryImgInput' value={categoryPhoto} onChange={ (e) => setCategoryPhoto(e.target.value)}/><br/>
 
                 <div className='divEditBtn'>
-                    <button type='submit'>Editar</button>
+                    <button type='submit'>
+                        {
+                            (categoryId)?
+                                'Editar'
+                            :
+                                'Agregar'
+                        }
+                    </button>
                 </div>           
             
             </form>

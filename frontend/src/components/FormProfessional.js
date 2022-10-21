@@ -55,7 +55,7 @@ export default function FormProfessional() {
       setModalData(data);
       setTimeout(() => {
           redirect('/');
-      }, 2500);
+      }, 2000);
     }
   }
   return (
@@ -69,7 +69,7 @@ export default function FormProfessional() {
           <label>{msj}</label><br/><br/>
           <div className='divEditBtn'>
               <button type='submit'>Buscar</button>
-          </div>           
+          </div>
       </form>
       {
         (profesional)?
@@ -78,7 +78,7 @@ export default function FormProfessional() {
             <button onClick={()=>add(profesional.id)}>Agregar</button>
           </div>   
         :
-          <></>   
+          <></>
       }
       <Modal props={modalData}/>
     </div>

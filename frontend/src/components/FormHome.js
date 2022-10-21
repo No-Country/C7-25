@@ -39,7 +39,7 @@ function FormHome(){
             setModalData(data);
             setTimeout(() => {
                 redirect('/');
-            }, 2500);
+            }, 2000);
         }
     };
 

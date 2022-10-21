@@ -3,6 +3,7 @@ import { DeleteApptSetting, EditApptSetting, getApptSettingsByProfessionalId } f
 import { useEffect, useState } from 'react';
 import UseHomeContext from '../services/UseHomeContext';
 import { decodeDaysAvailable, encodeDAToString, encodeDaysAvailable, minToHsMin } from '../services/DateTime';
+import Modal from './Modal';
 
 function FormSettingsAppt(e){
 
@@ -15,7 +16,7 @@ function FormSettingsAppt(e){
     const [apptSettingsId, setApptSettingsId] = useState();
     const [serviceId, setServiceId] = useState();
 
-    
+    const [modalData, setModalData] = useState({});
     const [settings, setSettings] = useState([]);
     const {home} = UseHomeContext();
 
@@ -77,8 +78,19 @@ function FormSettingsAppt(e){
         let resolve = await DeleteApptSetting(id);
 
         if( resolve.status === 201){
-            alert('Los datos han sido modificados')
-            existingapptSettings()
+            let data = { 
+                msj:'Los cambios se guardaron correctamente.',
+                showBtn:false,
+                modal:true
+            }
+            setModalData(data);
+            setTimeout(() => {
+                let data = { 
+                    modal:false
+                }
+                setModalData(data);
+            }, 2000);
+            existingapptSettings();
         }
     }
     
@@ -106,7 +118,19 @@ function FormSettingsAppt(e){
 
         if(response.status===201){ //Si la operacion se realizo con exito
             setMostrarForm(false);
-            alert('Los datos han sido editados');
+            let data = { 
+                msj:'Los cambios se guardaron correctamente.',
+                showBtn:false,
+                modal:true
+            }
+            setModalData(data);
+            setTimeout(() => {
+                let data = { 
+                    modal:false
+                }
+                setModalData(data);
+            }, 2000);
+            existingapptSettings();
         }
     }
 
@@ -122,6 +146,17 @@ function FormSettingsAppt(e){
         return name;
     }
  
+    function modalJson(idApptSettings) {
+        const msj = 'Desea eliminar esta configuracion de turnos?';
+        let data = { 
+          func:del,
+          msj,
+          showBtn:true,
+          params:idApptSettings,
+          modal:true
+        }
+        setModalData(data);
+    }  
     return(
         <div>
 
@@ -145,7 +180,7 @@ function FormSettingsAppt(e){
                                         </div>
                                         <div className='flexRow'>
                                             <div className='btnFrente' onClick={()=>edit(index)}>Editar</div>
-                                            <div className='btnFrente' onClick={()=>del(sett.id)}>Eliminar</div>                                            
+                                            <div className='btnFrente' onClick={()=>modalJson(sett.id)}>Eliminar</div>                                            
                                         </div>
                                     </div>
                                 )
@@ -154,7 +189,14 @@ function FormSettingsAppt(e){
                     </div>                
                 :
                     <div className='divContainerForms'>
-                        <h1 className='FormsTitle'>Editar</h1>
+                        <h1 className='FormsTitle'>
+                            {
+                                (apptSettingsId)?
+                                    'Editar'
+                                :
+                                    'Agregar'
+                            }
+                        </h1>
                         <form className='formForms' onSubmit={handleEditForm}>
 
                             {
@@ -199,13 +241,20 @@ function FormSettingsAppt(e){
                             <input type='number' name='inputDaysAhead' value={DaysAhead} onChange={e => setDaysAhead(e.target.value)}/><br/>
 
                             <div className='divEditBtn'>
-                                <button type='submit'>Editar</button>
+                                <button type='submit'>
+                                    {
+                                        (apptSettingsId)?
+                                            'Editar'
+                                        :
+                                            'Agregar'
+                                    }
+                                </button>
                                 <button onClick={()=>setMostrarForm(false)}>Cancelar</button>
                             </div>
                         </form>
                     </div>
             }
-            
+            <Modal props={modalData}/>
         </div>
 
     )

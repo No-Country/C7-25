@@ -14,7 +14,7 @@ import { DeleteCategory, deleteProfessional, DeleteService } from '../services/A
 export default function Home() {
     const navigate = useNavigate();
     const {home,setHome,roles} = UseHomeContext();
-    const [adminEdit, setAdminEdit] = useState(false);
+    const [adminEdit, setAdminEdit] = useState(true);
     const [modalData, setModalData] = useState({});
 
     let categoriesArray=home.categories || [];
@@ -96,7 +96,7 @@ export default function Home() {
                     modal:false
                 }
                 setModalData(data);
-            }, 2500);
+            }, 2000);
         }
     }
 

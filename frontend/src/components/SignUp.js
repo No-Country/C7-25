@@ -62,7 +62,7 @@ function SignUp (){
                         modal:false
                     }
                     redirect('/login');
-                }, 3000);
+                }, 2000);
             }
         };
     }

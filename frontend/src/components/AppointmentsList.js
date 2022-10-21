@@ -55,7 +55,7 @@ export default function AppointmentsList({roleAppt}) {
                 modal:false
             }
             setModalData(data);
-        }, 2500);
+        }, 2000);
   }
 
   function modalJson(id) {
