@@ -14,10 +14,10 @@ La aplicación cuenta con tres roles, teniendo cada uno de ellos acceso a funcio
   1. Rol de Administrador  
     Es el rol de la persona que nos solicitó la creación de esta aplicación. El administrador puede agregar, editar y eliminar las distintas secciones con las que cuenta la página, así como también agregar y eliminar profesionales de la empresa. 
 
-  2. Rol de Managers 
+  2. Rol de Managers  
     Es el rol de los profesionales que trabajan en la empresa. Ellos pueden agregar, editar y eliminar la configuración de los turnos que agendan los clientes, y también pueden acomodarlos como prefieran (eligiendo la hora de jornada laboral, horas de atención durante el día, duración del turno, y días que desean atender durante la semana).
 
-  3. Rol de Usuarios
+  3. Rol de Usuarios  
     Es el rol de las personas que desean registrarse en el sistema como clientes. 
 
 Tanto el administrador, los managers y los usuarios tienen acceso a seleccionar un servicio para agendar un turno el día que prefieran y esté disponible, pudiendo elegir también el profesional que prefieran siempre y cuando esté disponible. También cualquier rol puede cancelar un turno que haya agendado si así lo desea.
