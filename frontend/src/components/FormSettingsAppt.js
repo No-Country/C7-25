@@ -135,9 +135,11 @@ function FormSettingsAppt(e){
     }
 
     function serviceName(id){
+        console.log('serviceName',id);
         let name;
         home.categories.forEach(category => {
             category.services.forEach(service =>{
+                console.log('service',service);
                 if(service.id===id){
                     name=service.name;
                 }
@@ -201,7 +203,7 @@ function FormSettingsAppt(e){
 
                             {
                                 (apptSettingsId)?
-                                    <><div>El set tiene id:</div><br/></>
+                                    <h3 style={{textAlign:'center'}}>{serviceName(apptSettingsId)}</h3>
                                 :
                                     <div className='content-select'>
                                         <label>Seleccione un servicio:</label><br/>

@@ -7,15 +7,22 @@ import { VscAdd, VscEdit, VscChromeClose } from 'react-icons/vsc';
 
 import { MdLocationOn } from 'react-icons/md';
 import { AiOutlineWhatsApp } from 'react-icons/ai';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from './Modal';
 import { DeleteCategory, deleteProfessional, DeleteService } from '../services/API';
 
 export default function Home() {
     const navigate = useNavigate();
     const {home,setHome,roles} = UseHomeContext();
-    const [adminEdit, setAdminEdit] = useState(true);
+    const [adminEdit, setAdminEdit] = useState(false);
     const [modalData, setModalData] = useState({});
+
+    useEffect(() => {
+        if(roles.includes('ROLE_ADMIN')){
+            setAdminEdit(true);
+        }
+    }, [roles])
+    
 
     let categoriesArray=home.categories || [];
     let professionalsArray=home.professionals || [];
