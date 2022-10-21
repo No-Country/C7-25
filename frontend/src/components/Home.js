@@ -261,8 +261,8 @@ export default function Home() {
                     <div key={indexProfessionals} className='divProfessionals flexColumn'>
                         {
                             (adminEdit)?
-                                <div className='iconsEdit'>
-                                    <VscChromeClose onClick={()=>modalJson(undefined,undefined,eachProfessional.id)} />
+                                <div className='iconsEdit' id='iconDeleteProf'>
+                                    <VscChromeClose onClick={()=>modalJson(undefined,undefined,eachProfessional.id)}/>
                                 </div>
                             :
                                 <></>

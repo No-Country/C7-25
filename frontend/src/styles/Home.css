@@ -81,6 +81,15 @@
     object-fit: cover;
 }
 
+#iconDeleteProf{
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 3px;
+    margin: 0px;
+    margin-bottom: 2px;
+}
+
 /*  SERVICES  */
 .categoriesNames{
     display: flex;
