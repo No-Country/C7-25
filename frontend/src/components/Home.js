@@ -212,12 +212,12 @@ export default function Home() {
             
             {professionalsArray.map( (eachProfessional, indexProfessionals)=>{
                 return(
-                    <div key={indexProfessionals} className='divProfessionals'>
+                    <div key={indexProfessionals} className='divProfessionals flexColumn'>
                         <aside className='profilePhoto'>
                             <img src={ eachProfessional.photo? eachProfessional.photo : perfilDefault } alt=""/>   
                         </aside>
                         <p>{eachProfessional.name}</p>
-                        <p>{eachProfessional.lastname}</p>
+                        <p id='lastNameProfessional'>{eachProfessional.lastname}</p>
                     </div>
                 )
             })}
