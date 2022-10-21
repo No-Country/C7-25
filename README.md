@@ -6,7 +6,6 @@ Este sistema de turnos es una aplicación que desarrollamos con el fin de permit
 
 
 ## Funcionalidad de la aplicación
-
 La funcionalidad principal de la aplicación es facilitar la reserva y la cancelación de turnos.
 
 La aplicación cuenta con tres roles, teniendo cada uno de ellos acceso a funcionalidades específicas según cuál rol sea: 
@@ -24,7 +23,6 @@ Tanto el administrador, los managers y los usuarios tienen acceso a seleccionar 
 
 
 ## Tecnologías utilizadas
-
 Para desarrollar esta aplicación se utilizaron las siguientes tecnologías:
 
 * Html 5,Css, JAVASCRIPT, React JS
@@ -33,18 +31,17 @@ Para desarrollar esta aplicación se utilizaron las siguientes tecnologías:
 * Jira
 * Heroku
 
-## Roles
-
-* Full Stack: Cristian Maximiliano Rocabado https://github.com/Maxidvp
-* Front-End- UX-UI: Sol Moyano https://github.com/SolMoyano1
-* QA- Tester: Hernán Reyes https://github.com/hernanereyes 
+## Equipo de desarrolladores
+* Cristian Maximiliano Rocabado (Desarrollo Full-Stack). Repositorio de GitHub: https://github.com/Maxidvp
+* Sol Moyano (Desarrollo Frontend y Diseño UX-UI). Repositorio de GitHub: https://github.com/SolMoyano1
+* Hernán Reyes (QA- Tester). Repositorio de GitHub: https://github.com/hernanereyes 
 
 Acceso a Jira: https://hernan-reyes.atlassian.net/jira/software/projects/CE/boards/5/roadmap
 
-## Arquitectura distribuida utilizada
+## Arquitectura distribuida utilizad
 * Heroku
 * Firebase
 * AWS
 
-**Link del Deploy**
+## Deploy
 https://carola-turnos.web.app/
