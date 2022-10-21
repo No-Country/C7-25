@@ -101,7 +101,7 @@
         list-style: none;
         font-family: 'Poppins', sans-serif;
         font-weight: 300;
-        font-size: 13.5px;
+        font-size: 14px;
         text-align: center;
         height: 100%;
         padding: 0 1rem;
@@ -121,6 +121,6 @@
         font-size: 3.2em;
     }
     .liHeader{
-        font-size: 15px;
+        font-size: 16px;
     }
 }
