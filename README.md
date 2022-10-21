@@ -23,8 +23,6 @@ Tanto el administrador, los managers y los usuarios tienen acceso a seleccionar 
 
 
 ## Tecnologías utilizadas
-Para desarrollar esta aplicación se utilizaron las siguientes tecnologías:
-
 * Html 5,Css, JAVASCRIPT, React JS
 * Java, Spring Boot, JWT
 * MySql 
@@ -38,7 +36,7 @@ Para desarrollar esta aplicación se utilizaron las siguientes tecnologías:
 
 Acceso a Jira: https://hernan-reyes.atlassian.net/jira/software/projects/CE/boards/5/roadmap
 
-## Arquitectura distribuida utilizad
+## Arquitectura distribuida utilizada
 * Heroku
 * Firebase
 * AWS
